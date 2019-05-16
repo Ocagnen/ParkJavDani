@@ -8,14 +8,14 @@ public class TicketVO {
    
     private int codticket;
     private int tipovehi;
-    private int matricula;
+    private String matricula;
     private int codplaza;
     private LocalDate fecingreso;
     private LocalDate fecsalida;
     private int pin;
     private double costeEstancia;
 
-    public TicketVO(int codticket, int tipovehi, int matricula, int codplaza, LocalDate fecingreso, LocalDate fecsalida, int pin, double costeEstancia) {
+    public TicketVO(int codticket, int tipovehi,String matricula, int codplaza, LocalDate fecingreso, LocalDate fecsalida, int pin, double costeEstancia) {
         this.codticket = codticket;
         this.tipovehi = tipovehi;
         this.matricula = matricula;
@@ -42,11 +42,11 @@ public class TicketVO {
         this.tipovehi = tipovehi;
     }
 
-    public int getMatricula() {
+    public String getMatricula() {
         return matricula;
     }
 
-    public void setMatricula(int matricula) {
+    public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
 
