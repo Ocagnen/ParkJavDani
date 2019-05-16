@@ -6,40 +6,40 @@ import java.time.LocalDate;
 
 public class TicketVO {
    
-    private int codticket;
-    private int tipovehi;
+    private int codTicket;
+    private int tipoVehi;
     private String matricula;
-    private int codplaza;
-    private LocalDate fecingreso;
-    private LocalDate fecsalida;
+    private int codPlaza;
+    private LocalDate fecIngreso;
+    private LocalDate fecSalida;
     private int pin;
     private double costeEstancia;
 
     public TicketVO(int codticket, int tipovehi,String matricula, int codplaza, LocalDate fecingreso, LocalDate fecsalida, int pin, double costeEstancia) {
-        this.codticket = codticket;
-        this.tipovehi = tipovehi;
+        this.codTicket = codticket;
+        this.tipoVehi = tipovehi;
         this.matricula = matricula;
-        this.codplaza = codplaza;
-        this.fecingreso = fecingreso;
-        this.fecsalida = fecsalida;
+        this.codPlaza = codplaza;
+        this.fecIngreso = fecingreso;
+        this.fecSalida = fecsalida;
         this.pin = pin;
         this.costeEstancia = costeEstancia;
     }
 
     public int getCodticket() {
-        return codticket;
+        return codTicket;
     }
 
     public void setCodticket(int codticket) {
-        this.codticket = codticket;
+        this.codTicket = codticket;
     }
 
     public int getTipovehi() {
-        return tipovehi;
+        return tipoVehi;
     }
 
     public void setTipovehi(int tipovehi) {
-        this.tipovehi = tipovehi;
+        this.tipoVehi = tipovehi;
     }
 
     public String getMatricula() {
@@ -51,27 +51,27 @@ public class TicketVO {
     }
 
     public int getCodplaza() {
-        return codplaza;
+        return codPlaza;
     }
 
     public void setCodplaza(int codplaza) {
-        this.codplaza = codplaza;
+        this.codPlaza = codplaza;
     }
 
     public LocalDate getFecingreso() {
-        return fecingreso;
+        return fecIngreso;
     }
 
     public void setFecingreso(LocalDate fecingreso) {
-        this.fecingreso = fecingreso;
+        this.fecIngreso = fecingreso;
     }
 
     public LocalDate getFecsalida() {
-        return fecsalida;
+        return fecSalida;
     }
 
     public void setFecsalida(LocalDate fecsalida) {
-        this.fecsalida = fecsalida;
+        this.fecSalida = fecsalida;
     }
 
     public int getPin() {
@@ -92,7 +92,7 @@ public class TicketVO {
 
     @Override
     public String toString() {
-        return "TicketVO{" + "codticket=" + codticket + ", tipovehi=" + tipovehi + ", matricula=" + matricula + ", codplaza=" + codplaza + ", fecingreso=" + fecingreso + ", fecsalida=" + fecsalida + ", pin=" + pin + ", costeEstancia=" + costeEstancia + '}';
+        return "TicketVO{" + "codticket=" + codTicket + ", tipovehi=" + tipoVehi + ", matricula=" + matricula + ", codplaza=" + codPlaza + ", fecingreso=" + fecIngreso + ", fecsalida=" + fecSalida + ", pin=" + pin + ", costeEstancia=" + costeEstancia + '}';
     }
     
     
