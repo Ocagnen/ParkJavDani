@@ -7,17 +7,17 @@ import java.time.LocalDate;
 public class DetalleAbonadoVO {
    
     private String matricula;
-    private int codplaza;
+    private int codPlaza;
     private int tipoAbono;
-    private LocalDate feciniabono;
-    private LocalDate fecfinabono;
+    private LocalDate fecIniabono;
+    private LocalDate fecFinabono;
 
     public DetalleAbonadoVO(String matricula, int codplaza, int tipoAbono, LocalDate feciniabono, LocalDate fecfinabono) {
         this.matricula = matricula;
-        this.codplaza = codplaza;
+        this.codPlaza = codplaza;
         this.tipoAbono = tipoAbono;
-        this.feciniabono = feciniabono;
-        this.fecfinabono = fecfinabono;
+        this.fecIniabono = feciniabono;
+        this.fecFinabono = fecfinabono;
     }
 
     public String getMatricula() {
@@ -29,11 +29,11 @@ public class DetalleAbonadoVO {
     }
 
     public int getCodplaza() {
-        return codplaza;
+        return codPlaza;
     }
 
     public void setCodplaza(int codplaza) {
-        this.codplaza = codplaza;
+        this.codPlaza = codplaza;
     }
 
     public int getTipoAbono() {
@@ -45,24 +45,24 @@ public class DetalleAbonadoVO {
     }
 
     public LocalDate getFeciniabono() {
-        return feciniabono;
+        return fecIniabono;
     }
 
     public void setFeciniabono(LocalDate feciniabono) {
-        this.feciniabono = feciniabono;
+        this.fecIniabono = feciniabono;
     }
 
     public LocalDate getFecfinabono() {
-        return fecfinabono;
+        return fecFinabono;
     }
 
     public void setFecfinabono(LocalDate fecfinabono) {
-        this.fecfinabono = fecfinabono;
+        this.fecFinabono = fecfinabono;
     }
 
     @Override
     public String toString() {
-        return "detallesAbonadosVO{" + "matricula=" + matricula + ", codplaza=" + codplaza + ", tipoAbono=" + tipoAbono + ", feciniabono=" + feciniabono + ", fecfinabono=" + fecfinabono + '}';
+        return "detallesAbonadosVO{" + "matricula=" + matricula + ", codplaza=" + codPlaza + ", tipoAbono=" + tipoAbono + ", feciniabono=" + fecIniabono + ", fecfinabono=" + fecFinabono + '}';
     }
     
     
