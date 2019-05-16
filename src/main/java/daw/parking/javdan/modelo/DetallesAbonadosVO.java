@@ -6,13 +6,13 @@ import java.time.LocalDate;
 
 public class DetallesAbonadosVO {
    
-    private int matricula;
+    private String matricula;
     private int codplaza;
     private int tipoAbono;
     private LocalDate feciniabono;
     private LocalDate fecfinabono;
 
-    public DetallesAbonadosVO(int matricula, int codplaza, int tipoAbono, LocalDate feciniabono, LocalDate fecfinabono) {
+    public DetallesAbonadosVO(String matricula, int codplaza, int tipoAbono, LocalDate feciniabono, LocalDate fecfinabono) {
         this.matricula = matricula;
         this.codplaza = codplaza;
         this.tipoAbono = tipoAbono;
@@ -20,11 +20,11 @@ public class DetallesAbonadosVO {
         this.fecfinabono = fecfinabono;
     }
 
-    public int getMatricula() {
+    public String getMatricula() {
         return matricula;
     }
 
-    public void setMatricula(int matricula) {
+    public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
 
