@@ -4,7 +4,7 @@ package daw.parking.javdan.modelo;
 import java.time.LocalDate;
 
 
-public class detallesAbonadosVO {
+public class DetallesAbonadosVO {
    
     private int matricula;
     private int codplaza;
@@ -12,7 +12,7 @@ public class detallesAbonadosVO {
     private LocalDate feciniabono;
     private LocalDate fecfinabono;
 
-    public detallesAbonadosVO(int matricula, int codplaza, int tipoAbono, LocalDate feciniabono, LocalDate fecfinabono) {
+    public DetallesAbonadosVO(int matricula, int codplaza, int tipoAbono, LocalDate feciniabono, LocalDate fecfinabono) {
         this.matricula = matricula;
         this.codplaza = codplaza;
         this.tipoAbono = tipoAbono;
