@@ -1,0 +1,89 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package daw.parking.javdan.modelo;
+
+/**
+ *
+ * @author javier
+ */
+public class PlazaVO {
+    
+    private int codPlaza;
+    private int tipoPlaza;
+    private boolean estado;
+
+    public PlazaVO(int codPlaza, int tipoPlaza, boolean estado) {
+        this.codPlaza = codPlaza;
+        this.tipoPlaza = tipoPlaza;
+        this.estado = estado;
+    }
+
+    public int getCodPlaza() {
+        return codPlaza;
+    }
+
+    public void setCodPlaza(int codPlaza) {
+        this.codPlaza = codPlaza;
+    }
+
+    public int getTipoPlaza() {
+        return tipoPlaza;
+    }
+
+    public void setTipoPlaza(int tipoPlaza) {
+        this.tipoPlaza = tipoPlaza;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    @Override
+    public String toString() {
+        return "PlazaVO{" + "codPlaza=" + codPlaza + ", tipoPlaza=" + tipoPlaza + ", estado=" + estado + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 47 * hash + this.codPlaza;
+        hash = 47 * hash + this.tipoPlaza;
+        hash = 47 * hash + (this.estado ? 1 : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PlazaVO other = (PlazaVO) obj;
+        if (this.codPlaza != other.codPlaza) {
+            return false;
+        }
+        if (this.tipoPlaza != other.tipoPlaza) {
+            return false;
+        }
+        if (this.estado != other.estado) {
+            return false;
+        }
+        return true;
+    }
+    
+    
+           
+    
+}
