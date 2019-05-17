@@ -25,6 +25,28 @@ public class TicketVO {
         this.pin = pin;
         this.costeEstancia = costeEstancia;
     }
+    
+    public double calcularEstancia(){
+        
+        if(this.fecSalida != null){
+            
+            
+            
+        }
+        
+    }
+    
+    public double costePorPlaza(){
+        
+        switch(this.tipoVehi){
+            case 0:
+                return 0.12;
+            case 1:
+                return 0.08;
+            default:
+                return 0.45;
+        }
+    }
 
     public int getCodticket() {
         return codTicket;
