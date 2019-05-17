@@ -34,6 +34,21 @@ public class PlazaVO {
         } 
         
     }
+    
+    public String mostrarEstado(){
+        
+        switch(this.estado){
+            case 0:
+                return "Libre";
+            case 1:
+                return "Ocupada";
+            case 2:
+                return "Abono ocupada";
+            default:
+                return "Abono libre";
+        }
+        
+    }
 
     public int getCodPlaza() {
         return codPlaza;
