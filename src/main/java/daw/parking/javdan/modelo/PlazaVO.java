@@ -13,12 +13,26 @@ public class PlazaVO {
     
     private int codPlaza;
     private int tipoPlaza;
-    private boolean estado;
+    private int estado;
 
-    public PlazaVO(int codPlaza, int tipoPlaza, boolean estado) {
+    public PlazaVO(int codPlaza, int tipoPlaza, int estado) {
         this.codPlaza = codPlaza;
         this.tipoPlaza = tipoPlaza;
         this.estado = estado;
+    }
+    
+    public String getNombreTipo(){
+        
+        switch(this.tipoPlaza){
+            case 0:
+                return "Turismos";
+            case 1:
+                return "Motocicleta";
+            
+            
+            
+        }
+        
     }
 
     public int getCodPlaza() {
@@ -37,11 +51,11 @@ public class PlazaVO {
         this.tipoPlaza = tipoPlaza;
     }
 
-    public boolean isEstado() {
+    public int getEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
 
@@ -52,10 +66,10 @@ public class PlazaVO {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 47 * hash + this.codPlaza;
-        hash = 47 * hash + this.tipoPlaza;
-        hash = 47 * hash + (this.estado ? 1 : 0);
+        int hash = 5;
+        hash = 67 * hash + this.codPlaza;
+        hash = 67 * hash + this.tipoPlaza;
+        hash = 67 * hash + this.estado;
         return hash;
     }
 
@@ -82,6 +96,8 @@ public class PlazaVO {
         }
         return true;
     }
+
+    
     
     
            
