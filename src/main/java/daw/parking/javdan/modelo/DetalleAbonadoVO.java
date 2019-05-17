@@ -65,6 +65,40 @@ public class DetalleAbonadoVO {
         return "detallesAbonadosVO{" + "matricula=" + matricula + ", codplaza=" + codPlaza + ", tipoAbono=" + tipoAbono + ", feciniabono=" + fecIniabono + ", fecfinabono=" + fecFinabono + '}';
     }
     
+    public void mostrarTipAb(){
+        
+        System.out.println("Seleccione el tipo de abono deseado");
+        System.out.println("0--->mensual");
+        System.out.println("1--->trimestral");
+        System.out.println("2--->semestral");
+        System.out.println("3--->anual");
+        System.out.println("");
+        
+        switch (tipoAbono) {
+            case 0:
+                
+                System.out.println("Mensual:25€");
+                break;
+            
+            case 1:
+                
+                System.out.println("Trimestral:70€");
+                break;
+                
+             case 2:
+                
+                System.out.println("Semestral:130€");
+                break;
+                
+            case 3:
+                
+                System.out.println("Anual:200€");
+                break;
+            
+        }
+        
+        System.out.println("----------------------------------");
     
+}
     
 }
