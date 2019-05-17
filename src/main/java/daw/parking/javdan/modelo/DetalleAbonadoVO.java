@@ -1,11 +1,9 @@
-
 package daw.parking.javdan.modelo;
 
 import java.time.LocalDate;
 
-
 public class DetalleAbonadoVO {
-   
+
     private String matricula;
     private int codPlaza;
     private int tipoAbono;
@@ -64,41 +62,28 @@ public class DetalleAbonadoVO {
     public String toString() {
         return "detallesAbonadosVO{" + "matricula=" + matricula + ", codplaza=" + codPlaza + ", tipoAbono=" + tipoAbono + ", feciniabono=" + fecIniabono + ", fecfinabono=" + fecFinabono + '}';
     }
-    
-    public void mostrarTipAb(){
-        
-        System.out.println("Seleccione el tipo de abono deseado");
-        System.out.println("0--->mensual");
-        System.out.println("1--->trimestral");
-        System.out.println("2--->semestral");
-        System.out.println("3--->anual");
-        System.out.println("");
-        
-        switch (tipoAbono) {
+
+    public String mostrarTipAb() {
+
+        switch (this.tipoAbono) {
             case 0:
-                
-                System.out.println("Mensual:25€");
-                break;
-            
+
+                return "Mensual:25€";
+
             case 1:
-                
-                System.out.println("Trimestral:70€");
-                break;
-                
-             case 2:
-                
-                System.out.println("Semestral:130€");
-                break;
-                
-            case 3:
-                
-                System.out.println("Anual:200€");
-                break;
-            
+
+                return "Trimestral:70€";
+
+            case 2:
+
+                return "Semestral:130€";
+
+            default:
+
+                return "Anual:200€";
+
         }
-        
-        System.out.println("----------------------------------");
-    
-}
-    
+
+    }
+
 }
