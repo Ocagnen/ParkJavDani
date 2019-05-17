@@ -14,11 +14,13 @@ public class PlazaVO {
     private int codPlaza;
     private int tipoPlaza;
     private int estado;
+    private double coste;
 
-    public PlazaVO(int codPlaza, int tipoPlaza, int estado) {
+    public PlazaVO(int codPlaza, int tipoPlaza, int estado,double coste) {
         this.codPlaza = codPlaza;
         this.tipoPlaza = tipoPlaza;
         this.estado = estado;
+        this.coste=coste;
     }
     
     public String getNombreTipo(){
@@ -74,17 +76,26 @@ public class PlazaVO {
         this.estado = estado;
     }
 
+    public double getCoste() {
+        return coste;
+    }
+
+    public void setCoste(double coste) {
+        this.coste = coste;
+    }
+
     @Override
     public String toString() {
-        return "PlazaVO{" + "codPlaza=" + codPlaza + ", tipoPlaza=" + tipoPlaza + ", estado=" + estado + '}';
+        return "PlazaVO{" + "codPlaza=" + codPlaza + ", tipoPlaza=" + tipoPlaza + ", estado=" + estado + ", coste=" + coste + '}';
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 67 * hash + this.codPlaza;
-        hash = 67 * hash + this.tipoPlaza;
-        hash = 67 * hash + this.estado;
+        int hash = 3;
+        hash = 71 * hash + this.codPlaza;
+        hash = 71 * hash + this.tipoPlaza;
+        hash = 71 * hash + this.estado;
+        hash = 71 * hash + (int) (Double.doubleToLongBits(this.coste) ^ (Double.doubleToLongBits(this.coste) >>> 32));
         return hash;
     }
 
@@ -109,10 +120,13 @@ public class PlazaVO {
         if (this.estado != other.estado) {
             return false;
         }
+        if (Double.doubleToLongBits(this.coste) != Double.doubleToLongBits(other.coste)) {
+            return false;
+        }
         return true;
     }
 
-    
+   
     
     
            
