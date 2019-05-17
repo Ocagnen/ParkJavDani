@@ -27,11 +27,11 @@ public class PlazaVO {
             case 0:
                 return "Turismos";
             case 1:
-                return "Motocicleta";
-            
-            
-            
-        }
+                return "Motocicleta";     
+            default:
+                return "Caravana"; 
+          
+        } 
         
     }
 
