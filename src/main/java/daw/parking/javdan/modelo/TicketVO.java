@@ -27,6 +27,8 @@ public class TicketVO {
         this.costeEstancia = costeEstancia;
     }
     
+    /*
+    
     public double calcularEstancia(){
         
         if(this.fecSalida != null){
@@ -37,7 +39,7 @@ public class TicketVO {
         
     }
     
- 
+ */
 
     public int getCodticket() {
         return codTicket;
