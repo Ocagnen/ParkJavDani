@@ -169,8 +169,32 @@ public class AbonadoDAO implements IAbonado {
     }
 
     @Override
-    public int updateAbonado(int codabo, AbonadoVO nuevosDatos) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int updateAbonado(String codabo, AbonadoVO nuevosDatos) throws SQLException {
+        
+        int numFilas = 0;
+        String sql = "update abonados set dni = ?, nombre = ?, apellidos = ?, "
+                + "numerotarjeta = ?, email = ?, pin = ? where matricula=?";
+
+        if (findByCod(codabo) == null) {
+            // La persona a actualizar no existe
+            return numFilas;
+        } else {
+            // Instanciamos el objeto PreparedStatement para inserción
+            // de datos. Sentencia parametrizada
+            try (PreparedStatement prest = con.prepareStatement(sql)) {
+
+                // Establecemos los parámetros de la sentencia
+                prest.setString(1, nuevosDatos.getDni());
+                prest.setString(2, nuevosDatos.getNombre());
+                prest.setString(3, nuevosDatos.getApellidos());
+                prest.setString(4, nuevosDatos.getNumeroTarjeta());
+                prest.setString(5, nuevosDatos.getEmail());
+                prest.setInt(6, nuevosDatos.getPin());                            
+
+                numFilas = prest.executeUpdate();
+            }
+            return numFilas;
+        }
     }
 
 }
