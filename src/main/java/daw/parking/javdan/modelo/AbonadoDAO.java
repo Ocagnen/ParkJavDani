@@ -88,8 +88,34 @@ public class AbonadoDAO implements IAbonado {
     }
 
     @Override
-    public int insertAbonado(AbonadoVO abonado) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int insertAbonado(AbonadoVO abonado) throws SQLException {       
+        
+        int numFilas = 0;
+        String sql = "insert into abonados values (?,?,?,?,?,?,?)";
+
+        if (findByCod(abonado.getMatricula()) != null) {
+            // Existe un registro con esa pk
+            // No se hace la inserción
+            return numFilas;
+        } else {
+            // Instanciamos el objeto PreparedStatement para inserción
+            // de datos. Sentencia parametrizada
+            try (PreparedStatement prest = con.prepareStatement(sql)) {
+
+                // Establecemos los parámetros de la sentencia
+                prest.setString(1, abonado.getMatricula());
+                prest.setString(2, abonado.getDni());
+                prest.setString(3, abonado.getNombre());
+                prest.setString(4, abonado.getApellidos());
+                prest.setString(5, abonado.getNumeroTarjeta());
+                prest.setString(6, abonado.getEmail());
+                prest.setInt(7, abonado.getPin());                
+
+                numFilas = prest.executeUpdate();
+            }
+            return numFilas;
+        }
+
     }
 
     @Override
