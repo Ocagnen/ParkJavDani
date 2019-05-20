@@ -43,7 +43,7 @@ public class AbonadoDAO implements IAbonado {
                 a.setNumeroTarjeta(res.getString("numerotarjeta"));
                 a.setEmail(res.getString("email"));
                 a.setPin(res.getInt("pin"));
-                
+
                 //Añadimos el objeto a la lista
                 lista.add(a);
             }
@@ -54,7 +54,7 @@ public class AbonadoDAO implements IAbonado {
 
     @Override
     public AbonadoVO findByCod(String codabo) throws SQLException {
-        
+
         ResultSet res = null;
         AbonadoVO abonado = new AbonadoVO();
 
@@ -62,7 +62,7 @@ public class AbonadoDAO implements IAbonado {
 
         try (PreparedStatement prest = con.prepareStatement(sql)) {
             // Preparamos la sentencia parametrizada
-            prest.setString(1, codabo);            
+            prest.setString(1, codabo);
 
             // Ejecutamos la sentencia y obtenemos las filas en el objeto ResultSet
             res = prest.executeQuery();
@@ -71,20 +71,20 @@ public class AbonadoDAO implements IAbonado {
             // si existe esa pk
             if (res.first()) {
                 // Recogemos los datos de la persona, guardamos en un objeto
-                
+
                 abonado.setDni(res.getString("dni"));
                 abonado.setNombre(res.getString("nombre"));
                 abonado.setApellidos(res.getString("apellidos"));
                 abonado.setNumeroTarjeta(res.getString("numerotarjeta"));
                 abonado.setEmail(res.getString("email"));
                 abonado.setPin(res.getInt("pin"));
-                
+
                 return abonado;
             }
 
             return null;
         }
-        
+
     }
 
     @Override
@@ -99,26 +99,27 @@ public class AbonadoDAO implements IAbonado {
 
     @Override
     public int deleteAbonado(AbonadoVO abonado) throws SQLException {
-        
-        String sql = "delete from abonados";
 
-        int nfilas = 0;
+        int numFilas = 0;
 
-        // Preparamos el borrado de datos  mediante un Statement
-        // No hay parámetros en la sentencia SQL
-        try (Statement st = con.createStatement()) {
-            // Ejecución de la sentencia
-            nfilas = st.executeUpdate(sql);
+        String sql = "delete from abonados where matricula = ?";
+
+        // Sentencia parametrizada
+        try (PreparedStatement prest = con.prepareStatement(sql)) {
+
+            // Establecemos los parámetros de la sentencia
+            prest.setString(1, abonado.getMatricula());
+
+            // Ejecutamos la sentencia
+            numFilas = prest.executeUpdate();
         }
+        return numFilas;
 
-        // El borrado se realizó con éxito, devolvemos filas afectadas
-        return nfilas;
-        
     }
 
     @Override
     public int deleteAbonado() throws SQLException {
-        
+
         String sql = "delete from abonados";
 
         int nfilas = 0;
@@ -132,7 +133,7 @@ public class AbonadoDAO implements IAbonado {
 
         // El borrado se realizó con éxito, devolvemos filas afectadas
         return nfilas;
-        
+
     }
 
     @Override
@@ -141,4 +142,3 @@ public class AbonadoDAO implements IAbonado {
     }
 
 }
-
