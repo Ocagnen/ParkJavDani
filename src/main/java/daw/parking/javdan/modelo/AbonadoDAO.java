@@ -43,7 +43,7 @@ public class AbonadoDAO implements IAbonado {
                 a.setNumeroTarjeta(res.getString("numerotarjeta"));
                 a.setEmail(res.getString("email"));
                 a.setPin(res.getInt("pin"));
-
+                
                 //Añadimos el objeto a la lista
                 lista.add(a);
             }
@@ -98,8 +98,22 @@ public class AbonadoDAO implements IAbonado {
     }
 
     @Override
-    public int deleteAbonado(AbonadoVO p) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int deleteAbonado(AbonadoVO abonado) throws SQLException {
+        
+        String sql = "delete from abonados";
+
+        int nfilas = 0;
+
+        // Preparamos el borrado de datos  mediante un Statement
+        // No hay parámetros en la sentencia SQL
+        try (Statement st = con.createStatement()) {
+            // Ejecución de la sentencia
+            nfilas = st.executeUpdate(sql);
+        }
+
+        // El borrado se realizó con éxito, devolvemos filas afectadas
+        return nfilas;
+        
     }
 
     @Override
