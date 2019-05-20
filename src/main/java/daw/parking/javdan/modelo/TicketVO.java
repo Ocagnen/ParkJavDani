@@ -1,7 +1,7 @@
 
 package daw.parking.javdan.modelo;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 
@@ -11,50 +11,36 @@ public class TicketVO {
     private int tipoVehi;
     private String matricula;
     private int codPlaza;
-    private LocalDate fecIngreso;
-    private LocalDate fecSalida;
+    private LocalDateTime fecIngreso;
+    private LocalDateTime fecSalida;
     private int pin;
     private double costeEstancia;
 
-    public TicketVO(int codticket, int tipovehi,String matricula, int codplaza, LocalDate fecingreso, LocalDate fecsalida, int pin, double costeEstancia) {
-        this.codTicket = codticket;
-        this.tipoVehi = tipovehi;
+    public TicketVO(int codTicket, int tipoVehi, String matricula, int codPlaza, LocalDateTime fecIngreso, LocalDateTime fecSalida, int pin, double costeEstancia) {
+        this.codTicket = codTicket;
+        this.tipoVehi = tipoVehi;
         this.matricula = matricula;
-        this.codPlaza = codplaza;
-        this.fecIngreso = fecingreso;
-        this.fecSalida = fecsalida;
+        this.codPlaza = codPlaza;
+        this.fecIngreso = fecIngreso;
+        this.fecSalida = fecSalida;
         this.pin = pin;
         this.costeEstancia = costeEstancia;
     }
-    
-    /*
-    
-    public double calcularEstancia(){
-        
-        if(this.fecSalida != null){
-            
-            
-            
-        }
-        
-    }
-    
- */
 
-    public int getCodticket() {
+    public int getCodTicket() {
         return codTicket;
     }
 
-    public void setCodticket(int codticket) {
-        this.codTicket = codticket;
+    public void setCodTicket(int codTicket) {
+        this.codTicket = codTicket;
     }
 
-    public int getTipovehi() {
+    public int getTipoVehi() {
         return tipoVehi;
     }
 
-    public void setTipovehi(int tipovehi) {
-        this.tipoVehi = tipovehi;
+    public void setTipoVehi(int tipoVehi) {
+        this.tipoVehi = tipoVehi;
     }
 
     public String getMatricula() {
@@ -65,28 +51,28 @@ public class TicketVO {
         this.matricula = matricula;
     }
 
-    public int getCodplaza() {
+    public int getCodPlaza() {
         return codPlaza;
     }
 
-    public void setCodplaza(int codplaza) {
-        this.codPlaza = codplaza;
+    public void setCodPlaza(int codPlaza) {
+        this.codPlaza = codPlaza;
     }
 
-    public LocalDate getFecingreso() {
+    public LocalDateTime getFecIngreso() {
         return fecIngreso;
     }
 
-    public void setFecingreso(LocalDate fecingreso) {
-        this.fecIngreso = fecingreso;
+    public void setFecIngreso(LocalDateTime fecIngreso) {
+        this.fecIngreso = fecIngreso;
     }
 
-    public LocalDate getFecsalida() {
+    public LocalDateTime getFecSalida() {
         return fecSalida;
     }
 
-    public void setFecsalida(LocalDate fecsalida) {
-        this.fecSalida = fecsalida;
+    public void setFecSalida(LocalDateTime fecSalida) {
+        this.fecSalida = fecSalida;
     }
 
     public int getPin() {
@@ -106,21 +92,16 @@ public class TicketVO {
     }
 
     @Override
-    public String toString() {
-        return "TicketVO{" + "codticket=" + codTicket + ", tipovehi=" + tipoVehi + ", matricula=" + matricula + ", codplaza=" + codPlaza + ", fecingreso=" + fecIngreso + ", fecsalida=" + fecSalida + ", pin=" + pin + ", costeEstancia=" + costeEstancia + '}';
-    }
-
-    @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 29 * hash + this.codTicket;
-        hash = 29 * hash + this.tipoVehi;
-        hash = 29 * hash + Objects.hashCode(this.matricula);
-        hash = 29 * hash + this.codPlaza;
-        hash = 29 * hash + Objects.hashCode(this.fecIngreso);
-        hash = 29 * hash + Objects.hashCode(this.fecSalida);
-        hash = 29 * hash + this.pin;
-        hash = 29 * hash + (int) (Double.doubleToLongBits(this.costeEstancia) ^ (Double.doubleToLongBits(this.costeEstancia) >>> 32));
+        int hash = 5;
+        hash = 17 * hash + this.codTicket;
+        hash = 17 * hash + this.tipoVehi;
+        hash = 17 * hash + Objects.hashCode(this.matricula);
+        hash = 17 * hash + this.codPlaza;
+        hash = 17 * hash + Objects.hashCode(this.fecIngreso);
+        hash = 17 * hash + Objects.hashCode(this.fecSalida);
+        hash = 17 * hash + this.pin;
+        hash = 17 * hash + (int) (Double.doubleToLongBits(this.costeEstancia) ^ (Double.doubleToLongBits(this.costeEstancia) >>> 32));
         return hash;
     }
 
@@ -162,9 +143,12 @@ public class TicketVO {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "TicketVO{" + "codTicket=" + codTicket + ", tipoVehi=" + tipoVehi + ", matricula=" + matricula + ", codPlaza=" + codPlaza + ", fecIngreso=" + fecIngreso + ", fecSalida=" + fecSalida + ", pin=" + pin + ", costeEstancia=" + costeEstancia + '}';
+    }
     
     
-    
-    
-    
+
 }
