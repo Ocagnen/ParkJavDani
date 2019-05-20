@@ -27,6 +27,10 @@ public class TicketVO {
         this.costeEstancia = costeEstancia;
     }
 
+    public TicketVO() {
+    }
+    
+
     public int getCodTicket() {
         return codTicket;
     }
