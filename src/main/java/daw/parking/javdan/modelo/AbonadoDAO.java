@@ -6,6 +6,7 @@
 package daw.parking.javdan.modelo;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -51,36 +52,65 @@ public class AbonadoDAO implements IAbonado {
         return lista;
     }
 
+    @Override
+    public AbonadoVO findByCod(String codabo) throws SQLException {
+        
+        ResultSet res = null;
+        AbonadoVO abonado = new AbonadoVO();
+
+        String sql = "select * from abonados where matricula=?";
+
+        try (PreparedStatement prest = con.prepareStatement(sql)) {
+            // Preparamos la sentencia parametrizada
+            prest.setString(1, codabo);            
+
+            // Ejecutamos la sentencia y obtenemos las filas en el objeto ResultSet
+            res = prest.executeQuery();
+
+            // Nos posicionamos en el primer registro del Resultset. Sólo debe haber una fila
+            // si existe esa pk
+            if (res.first()) {
+                // Recogemos los datos de la persona, guardamos en un objeto
+                
+                abonado.setDni(res.getString("dni"));
+                abonado.setNombre(res.getString("nombre"));
+                abonado.setApellidos(res.getString("apellidos"));
+                abonado.setNumeroTarjeta(res.getString("numerotarjeta"));
+                abonado.setEmail(res.getString("email"));
+                abonado.setPin(res.getInt("pin"));
+                
+                return abonado;
+            }
+
+            return null;
+        }
+        
+    }
+
+    @Override
+    public int insertAbonado(AbonadoVO abonado) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int insertAbonado(List<AbonadoVO> lista) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int deleteAbonado(AbonadoVO p) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int deleteAbonado() throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int updateAbonado(int codabo, AbonadoVO nuevosDatos) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
 
-@Override
-        public AbonadoVO findByCod(int codabo) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-        public int insertAbonado(AbonadoVO abonado) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-        public int insertAbonado(List<AbonadoVO> lista) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-        public int deleteAbonado(AbonadoVO p) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-        public int deleteAbonado() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-        public int updateAbonado(int codabo, AbonadoVO nuevosDatos) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-}
