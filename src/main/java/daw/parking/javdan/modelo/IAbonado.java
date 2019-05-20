@@ -18,7 +18,7 @@ public interface IAbonado {
     List<AbonadoVO> getAll() throws SQLException;
     
     // Méodo para obtener un registro a partir de la PK
-    AbonadoVO findByCod(int codabo) throws SQLException;
+    AbonadoVO findByCod(String codabo) throws SQLException;
     
     // Método para insertar un registro
     int insertAbonado (AbonadoVO abonado) throws SQLException;
