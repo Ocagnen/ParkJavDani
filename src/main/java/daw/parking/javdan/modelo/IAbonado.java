@@ -33,6 +33,6 @@ public interface IAbonado {
     int deleteAbonado() throws SQLException;
     
     // Método para modificar un abonado
-    int updateAbonado (int codabo, AbonadoVO nuevosDatos) throws SQLException;
+    int updateAbonado (String codabo, AbonadoVO nuevosDatos) throws SQLException;
     
 }
