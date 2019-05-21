@@ -36,8 +36,8 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
                 d.setMatricula(res.getString("matricula"));
                 d.setCodPlaza(res.getInt("codplaza"));
                 d.setTipoAbono(res.getInt("tipoabono"));
-                d.setFecFinAbono(res.getDate(""));
-                d.getFeciniabono(res.);
+                d.setFecFinAbono(res.getDate("fecfinabono"));
+                d.setFecIniAbono(res.getDate("feciniabono"));
                
                 //Añadimos el objeto a la lista
                 lista.add(d);
@@ -68,10 +68,10 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
             if (res.first()) {
                 // Recogemos los datos de la persona, guardamos en un objeto
                 d.setMatricula(res.getString("matricula"));
-                d.setCodplaza(res.getInt("codplaza"));
+                d.setCodPlaza(res.getInt("codplaza"));
                 d.setTipoAbono(res.getInt("tipoabono"));
-                d.getFecfinabono(res.);
-                d.getFeciniabono(res.);
+                d.setFecIniAbono(res.getDate("feciniabono"));
+                d.setFecFinAbono(res.getDate("fecfinabono"));
                 return d;
             }
 
@@ -87,7 +87,7 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
         int numFilas = 0;
         String sql = "insert into detallesAbonados values (?,?,?,?,?,?,?,?)";
 
-        if (findByCod(DetalleAbonado.getMatricula(),DetalleAbonado.getFeciniabono(),DetalleAbonado.getCodplaza()) != null ) {
+        if (findByCod(DetalleAbonado.getMatricula(),DetalleAbonado.getFecFinAbono(),DetalleAbonado.getCodPlaza()) != null ) {
             // Existe un registro con esa pk
             // No se hace la inserción
             return numFilas;
@@ -97,11 +97,11 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
             try (PreparedStatement prest = con.prepareStatement(sql)) {
 
                 // Establecemos los parámetros de la sentencia
-                prest.setInt(1,DetalleAbonado.getCodplaza());
+                prest.setInt(1,DetalleAbonado.getCodPlaza());
                 prest.setString(2,DetalleAbonado.getMatricula());
                 prest.setInt(3,DetalleAbonado.getTipoAbono());
-                prest.setDate(4,DetalleAbonado.getFeciniabono());
-                prest.setDate(5, DetalleAbonado.getFecfinabono());
+                prest.setDate(4,DetalleAbonado.getFecIniabono());
+                prest.setDate(5, DetalleAbonado.getFecFinabono());
             
 
                 numFilas = prest.executeUpdate();
@@ -135,8 +135,8 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
         try (PreparedStatement prest = con.prepareStatement(sql)) {
 
             // Establecemos los parámetros de la sentencia
-            prest.setInt(1, d.getCodplaza());
-            prest.setDate(2,d.getFeciniabono());
+            prest.setInt(1, d.getCodPlaza());
+            prest.setDate(2,d.getFecIniabono());
             prest.setString(1,d.getMatricula());
 
             // Ejecutamos la sentencia
@@ -173,7 +173,7 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
         String sql = "update tickets set fecfinabono=?, tipoabono=? "
                 + " where matricula = codplaza = ? and feciniabono=?";
 
-        if (findByCod(codplaz,  matricula, fecIniabono) == null) {
+        if (findByCod(codplaz,matricula,fecIniabono) == null) {
             // La persona a actualizar no existe
             return numFilas;
         } else {
@@ -182,11 +182,11 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
             try (PreparedStatement prest = con.prepareStatement(sql)) {
 
                 // Establecemos los parámetros de la sentencia
-                prest.setInt(1,nuevosDatos.getCodplaza());
+                prest.setInt(1,nuevosDatos.getCodPlaza());
                 prest.setInt(2,nuevosDatos.getTipoAbono());
                 prest.setString(3,nuevosDatos.getMatricula());
-                prest.setDate(4,nuevosDatos.getFecfinabono());
-                prest.setDate(5,nuevosDatos.getFeciniabono());
+                prest.setDate(4,nuevosDatos.getFecIniAbono());
+                prest.setDate(5,nuevosDatos.getFecFinAbono());
                                        
 
                 numFilas = prest.executeUpdate();
