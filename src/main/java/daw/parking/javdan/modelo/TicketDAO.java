@@ -30,7 +30,7 @@ public class TicketDAO implements ITicket {
         // ya que no necesitamos parametrizar la sentencia SQL
         try (Statement st = con.createStatement()) {
             // Ejecutamos la sentencia y obtenemos las filas en el objeto ResultSet
-            ResultSet res = st.executeQuery("select * from Ticket");
+            ResultSet res = st.executeQuery("select * from tickets");
             // Ahora construimos la lista, recorriendo el ResultSet y mapeando los datos
             while (res.next()) {
                 TicketVO t= new TicketVO();
@@ -42,8 +42,7 @@ public class TicketDAO implements ITicket {
                 t.setFecSalida(res.);
                 t.setMatricula(res.getString("matricula"));
                 t.setPin(res.getInt("pin"));
-                t.setTipoVehi(res.getInt("tipovehiculo"));
-                t.setMatricula(res.getString("matricula"));
+                t.setTipoVehi(res.getInt("tipovehi"));
 
                 //Añadimos el objeto a la lista
                 lista.add(t);
@@ -59,7 +58,7 @@ public class TicketDAO implements ITicket {
         ResultSet res = null;
         TicketVO t = new TicketVO();
 
-        String sql = "select * from Ticket where pk=?";
+        String sql = "select * from tickets where codticket=?";
 
         try (PreparedStatement prest = con.prepareStatement(sql)) {
             // Preparamos la sentencia parametrizada
@@ -79,7 +78,7 @@ public class TicketDAO implements ITicket {
                   t.setFecSalida(res.);
                   t.setMatricula(res.getString("matricula"));
                   t.setPin(res.getInt("pin"));
-                  t.setTipoVehi(res.getInt("tipovehiculo"));
+                  t.setTipoVehi(res.getInt("tipovehi"));
                   t.setMatricula(res.getString("matricula"));
                 return t;
             }
@@ -91,29 +90,117 @@ public class TicketDAO implements ITicket {
 
     @Override
     public int insertTicket(TicketVO ticket) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
+        int numFilas = 0;
+        String sql = "insert into tickets values (?,?,?,?,?,?,?,?)";
+
+        if (findByCod(ticket.getCodTicket()) != null) {
+            // Existe un registro con esa pk
+            // No se hace la inserción
+            return numFilas;
+        } else {
+            // Instanciamos el objeto PreparedStatement para inserción
+            // de datos. Sentencia parametrizada
+            try (PreparedStatement prest = con.prepareStatement(sql)) {
+
+                // Establecemos los parámetros de la sentencia
+                prest.setInt(1,ticket.getCodPlaza());
+                prest.setInt(2,ticket.getCodTicket() );
+                prest.setDouble(3,ticket.getCosteEstancia());
+                prest.setInt(4,ticket.getPin());
+                prest.setString(5,ticket.getFecIngreso());
+                prest.setDate(6,ticket.getFecSalida() );
+                prest.setString(7,ticket.getMatricula());  
+                prest.setInt(8,ticket.getTipoVehi() ); 
+
+                numFilas = prest.executeUpdate();
+            }
+            return numFilas;
+        }
+        
     }
 
     @Override
     public int insertTicket(List<TicketVO> lista) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+           
+        int numFilas = 0;
+
+        for (TicketVO tmp : lista) {
+            numFilas += insertTicket(tmp);
+        }
+
+        return numFilas;
     }
 
     @Override
     public int deleteTicket(TicketVO t) throws SQLException {
        
+        int numFilas = 0;
+
+        String sql = "delete from tickets where codticket = ?";
+
         
+        try (PreparedStatement prest = con.prepareStatement(sql)) {
+
+            // Establecemos los parámetros de la sentencia
+            prest.setInt(1, t.getCodTicket());
+
+            // Ejecutamos la sentencia
+            numFilas = prest.executeUpdate();
+        }
+        return numFilas;
         
     }
 
     @Override
     public int deleteTicket() throws SQLException {
        
+          String sql = "delete from tickets";
+
+        int nfilas = 0;
+
+        // Preparamos el borrado de datos  mediante un Statement
+        // No hay parámetros en la sentencia SQL
+        try (Statement st = con.createStatement()) {
+            // Ejecución de la sentencia
+            nfilas = st.executeUpdate(sql);
+        }
+
+        // El borrado se realizó con éxito, devolvemos filas afectadas
+        return nfilas;
+        
     }
 
     @Override
-    public int updateTicket(int codticket, TicketVO nuevosDatos) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int updateTicket(int codTicket, TicketVO nuevosDatos) throws SQLException {
+       
+        int numFilas = 0;
+        String sql = "update tickets set matricula = ?,codplaza = ?, costeEstancia = ?, "
+                + "pin = ?, fecIngreso = ?, fecSalida = ?, tipovehi = ? where codticket=?";
+
+        if (findByCod(codTicket) == null) {
+            // La persona a actualizar no existe
+            return numFilas;
+        } else {
+            // Instanciamos el objeto PreparedStatement para inserción
+            // de datos. Sentencia parametrizada
+            try (PreparedStatement prest = con.prepareStatement(sql)) {
+
+                // Establecemos los parámetros de la sentencia
+                prest.setInt(1,nuevosDatos.getCodPlaza());
+                prest.setInt(2,nuevosDatos.getCodTicket() );
+                prest.setDouble(3,nuevosDatos.getCosteEstancia());
+                prest.setInt(4,nuevosDatos.getPin());
+                prest.setString(5,nuevosDatos.getFecIngreso());
+                prest.setDate(6,nuevosDatos.getFecSalida() );
+                prest.setString(7,nuevosDatos.getMatricula());  
+                prest.setInt(8,nuevosDatos.getTipoVehi() );                         
+
+                numFilas = prest.executeUpdate();
+            }
+            return numFilas;
+        }
+        
     }
    
     

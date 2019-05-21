@@ -8,10 +8,10 @@ import java.util.List;
 public interface ITicket {
     
     // Método para obtener todos los registros de la tabla
-    List<PlazaVO> getAll() throws SQLException;
+    List<TicketVO> getAll() throws SQLException;
     
     // Méodo para obtener un registro a partir de la PK
-    PlazaVO findByCod(int codticket) throws SQLException;
+    TicketVO findByCod(int codticket) throws SQLException;
     
     // Método para insertar un registro
     int insertTicket (TicketVO ticket) throws SQLException;
