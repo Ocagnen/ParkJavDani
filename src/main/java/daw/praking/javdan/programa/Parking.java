@@ -72,6 +72,7 @@ public class Parking {
         }
         
         */
+        
         PlazaDAO daoPlaza = new PlazaDAO();
         ArrayList<PlazaVO> listaPlaza= new ArrayList<>();
         

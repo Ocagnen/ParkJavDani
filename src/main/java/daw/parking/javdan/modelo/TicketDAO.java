@@ -187,13 +187,12 @@ public class TicketDAO implements ITicket {
 
                 // Establecemos los parámetros de la sentencia
                 prest.setInt(1, nuevosDatos.getCodPlaza());
-                prest.setInt(2, nuevosDatos.getCodTicket());
-                prest.setDouble(3, nuevosDatos.getCosteEstancia());
-                prest.setInt(4, nuevosDatos.getPin());
-                prest.setString(5, nuevosDatos.getFecIngreso());
-                prest.setDate(6, nuevosDatos.getFecSalida());
-                prest.setString(7, nuevosDatos.getMatricula());
-                prest.setInt(8, nuevosDatos.getTipoVehi());
+                prest.setDouble(2, nuevosDatos.getCosteEstancia());
+                prest.setInt(3, nuevosDatos.getPin());
+                prest.setString(4, nuevosDatos.getFecIngreso());
+                prest.setDate(5, nuevosDatos.getFecSalida());
+                prest.setString(6, nuevosDatos.getMatricula());
+                prest.setInt(7, nuevosDatos.getTipoVehi());
 
                 numFilas = prest.executeUpdate();
             }
