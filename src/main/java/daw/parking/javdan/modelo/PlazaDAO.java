@@ -34,9 +34,9 @@ public class PlazaDAO implements IPlaza{
                 PlazaVO p= new PlazaVO();
                 // Recogemos los datos de la persona, guardamos en un objeto
                 p.setCodPlaza(res.getInt("codplaza"));
-                p.setCoste(res.getDouble("coste"));
-                p.setEstado(res.getInt("estado"));
                 p.setTipoPlaza(res.getInt("tipoplaza"));
+                p.setEstado(res.getInt("estado"));
+                p.setCoste(res.getDouble("coste"));
 
                 //Añadimos el objeto a la lista
                 lista.add(p);
@@ -66,9 +66,11 @@ public class PlazaDAO implements IPlaza{
             if (res.first()) {
                 // Recogemos los datos de la persona, guardamos en un objeto
                 p.setCodPlaza(res.getInt("codplaza"));
-                p.setCoste(res.getDouble("coste"));
-                p.setEstado(res.getInt("estado"));
                 p.setTipoPlaza(res.getInt("tipoplaza"));
+                p.setEstado(res.getInt("estado"));
+                p.setCoste(res.getDouble("coste"));
+               
+                
                 
                 return p;
             }
@@ -95,9 +97,9 @@ public class PlazaDAO implements IPlaza{
 
                 // Establecemos los parámetros de la sentencia
                 prest.setInt(1,plaza.getCodPlaza());
-                prest.setDouble(2,plaza.getCoste());
-                prest.setInt(3,plaza.getTipoPlaza());
-                prest.setInt(4,plaza.getEstado());
+                prest.setInt(2,plaza.getTipoPlaza());
+                prest.setInt(3,plaza.getEstado());
+                prest.setDouble(4,plaza.getCoste());
 
                 numFilas = prest.executeUpdate();
             }
@@ -162,7 +164,7 @@ public class PlazaDAO implements IPlaza{
     public int updatePlaza(int codpla, PlazaVO nuevosDatos) throws SQLException {
         
          int numFilas = 0;
-        String sql = "update plazas set coste = ?,tipoplaza = ?, estado = ?, "
+        String sql = "update plazas tipoplaza = ?, estado = ?,set coste = ? "
                 + " where codplaza=?";
 
         if (findByCod(codpla) == null) {
@@ -175,8 +177,8 @@ public class PlazaDAO implements IPlaza{
 
                 // Establecemos los parámetros de la sentencia
                 prest.setInt(1,nuevosDatos.getCodPlaza());
-                prest.setInt(2,nuevosDatos.getEstado());
                 prest.setInt(2,nuevosDatos.getTipoPlaza());
+                prest.setInt(3,nuevosDatos.getEstado());
                 prest.setDouble(4,nuevosDatos.getCoste());
 
                 numFilas = prest.executeUpdate();
