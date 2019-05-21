@@ -1,7 +1,9 @@
 
 package daw.parking.javdan.modelo;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Objects;
 
 
@@ -11,25 +13,28 @@ public class TicketVO {
     private int tipoVehi;
     private String matricula;
     private int codPlaza;
-    private LocalDateTime fecIngreso;
-    private LocalDateTime fecSalida;
+    private LocalDate fecIngreso;
+    private LocalDate fecSalida;
+    private LocalTime horaIngreso;
+    private LocalTime horaSalida;
     private int pin;
     private double costeEstancia;
 
-    public TicketVO(int codTicket, int tipoVehi, String matricula, int codPlaza, LocalDateTime fecIngreso, LocalDateTime fecSalida, int pin, double costeEstancia) {
+    public TicketVO(int codTicket, int tipoVehi, String matricula, int codPlaza, LocalDate fecIngreso, LocalDate fecSalida, LocalTime horaIngreso, LocalTime horaSalida, int pin, double costeEstancia) {
         this.codTicket = codTicket;
         this.tipoVehi = tipoVehi;
         this.matricula = matricula;
         this.codPlaza = codPlaza;
         this.fecIngreso = fecIngreso;
         this.fecSalida = fecSalida;
+        this.horaIngreso = horaIngreso;
+        this.horaSalida = horaSalida;
         this.pin = pin;
         this.costeEstancia = costeEstancia;
     }
 
     public TicketVO() {
     }
-    
 
     public int getCodTicket() {
         return codTicket;
@@ -63,20 +68,36 @@ public class TicketVO {
         this.codPlaza = codPlaza;
     }
 
-    public LocalDateTime getFecIngreso() {
+    public LocalDate getFecIngreso() {
         return fecIngreso;
     }
 
-    public void setFecIngreso(LocalDateTime fecIngreso) {
+    public void setFecIngreso(LocalDate fecIngreso) {
         this.fecIngreso = fecIngreso;
     }
 
-    public LocalDateTime getFecSalida() {
+    public LocalDate getFecSalida() {
         return fecSalida;
     }
 
-    public void setFecSalida(LocalDateTime fecSalida) {
+    public void setFecSalida(LocalDate fecSalida) {
         this.fecSalida = fecSalida;
+    }
+
+    public LocalTime getHoraIngreso() {
+        return horaIngreso;
+    }
+
+    public void setHoraIngreso(LocalTime horaIngreso) {
+        this.horaIngreso = horaIngreso;
+    }
+
+    public LocalTime getHoraSalida() {
+        return horaSalida;
+    }
+
+    public void setHoraSalida(LocalTime horaSalida) {
+        this.horaSalida = horaSalida;
     }
 
     public int getPin() {
@@ -97,15 +118,17 @@ public class TicketVO {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 17 * hash + this.codTicket;
-        hash = 17 * hash + this.tipoVehi;
-        hash = 17 * hash + Objects.hashCode(this.matricula);
-        hash = 17 * hash + this.codPlaza;
-        hash = 17 * hash + Objects.hashCode(this.fecIngreso);
-        hash = 17 * hash + Objects.hashCode(this.fecSalida);
-        hash = 17 * hash + this.pin;
-        hash = 17 * hash + (int) (Double.doubleToLongBits(this.costeEstancia) ^ (Double.doubleToLongBits(this.costeEstancia) >>> 32));
+        int hash = 7;
+        hash = 31 * hash + this.codTicket;
+        hash = 31 * hash + this.tipoVehi;
+        hash = 31 * hash + Objects.hashCode(this.matricula);
+        hash = 31 * hash + this.codPlaza;
+        hash = 31 * hash + Objects.hashCode(this.fecIngreso);
+        hash = 31 * hash + Objects.hashCode(this.fecSalida);
+        hash = 31 * hash + Objects.hashCode(this.horaIngreso);
+        hash = 31 * hash + Objects.hashCode(this.horaSalida);
+        hash = 31 * hash + this.pin;
+        hash = 31 * hash + (int) (Double.doubleToLongBits(this.costeEstancia) ^ (Double.doubleToLongBits(this.costeEstancia) >>> 32));
         return hash;
     }
 
@@ -145,14 +168,20 @@ public class TicketVO {
         if (!Objects.equals(this.fecSalida, other.fecSalida)) {
             return false;
         }
+        if (!Objects.equals(this.horaIngreso, other.horaIngreso)) {
+            return false;
+        }
+        if (!Objects.equals(this.horaSalida, other.horaSalida)) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "TicketVO{" + "codTicket=" + codTicket + ", tipoVehi=" + tipoVehi + ", matricula=" + matricula + ", codPlaza=" + codPlaza + ", fecIngreso=" + fecIngreso + ", fecSalida=" + fecSalida + ", pin=" + pin + ", costeEstancia=" + costeEstancia + '}';
+        return "TicketVO{" + "codTicket=" + codTicket + ", tipoVehi=" + tipoVehi + ", matricula=" + matricula + ", codPlaza=" + codPlaza + ", fecIngreso=" + fecIngreso + ", fecSalida=" + fecSalida + ", horaIngreso=" + horaIngreso + ", horaSalida=" + horaSalida + ", pin=" + pin + ", costeEstancia=" + costeEstancia + '}';
     }
     
     
-
+    
 }
