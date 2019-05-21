@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,7 +67,6 @@ public class TicketDAO implements ITicket {
 
             if (res.first()) {
 
-                
                 t.setTipoVehi(res.getInt("tipovehi"));
                 t.setMatricula(res.getString("matricula"));
                 t.setCodPlaza(res.getInt("codplaza"));
@@ -76,7 +76,7 @@ public class TicketDAO implements ITicket {
                 t.setHoraSalida(res.getTime("horasalida").toLocalTime());
                 t.setPin(res.getInt("pin"));
                 t.setCosteEstancia(res.getDouble("costeestancia"));
-                
+
                 return t;
             }
 
@@ -89,26 +89,28 @@ public class TicketDAO implements ITicket {
     public int insertTicket(TicketVO ticket) throws SQLException {
 
         int numFilas = 0;
-        String sql = "insert into tickets values (?,?,?,?,?,?,?,?)";
+        String sql = "insert into tickets values (?,?,?,?,?,?,?,?,?,?)";
 
         if (findByCod(ticket.getCodTicket()) != null) {
-            // Existe un registro con esa pk
-            // No se hace la inserción
+
             return numFilas;
+
         } else {
             // Instanciamos el objeto PreparedStatement para inserción
             // de datos. Sentencia parametrizada
             try (PreparedStatement prest = con.prepareStatement(sql)) {
 
                 // Establecemos los parámetros de la sentencia
-                prest.setInt(1, ticket.getCodPlaza());
-                prest.setInt(2, ticket.getCodTicket());
-                prest.setDouble(3, ticket.getCosteEstancia());
-                prest.setInt(4, ticket.getPin());
-                prest.setString(5, ticket.getFecIngreso());
-                prest.setDate(6, ticket.getFecSalida());
-                prest.setString(7, ticket.getMatricula());
-                prest.setInt(8, ticket.getTipoVehi());
+                prest.setInt(1,ticket.getCodTicket());
+                prest.setInt(2, ticket.getTipoVehi());
+                prest.setString(3, ticket.getMatricula());
+                prest.setInt(4, ticket.getCodPlaza());
+                prest.setDate(5,Date.valueOf(ticket.getFecIngreso()));
+                prest.setDate(6,Date.valueOf(ticket.getFecSalida()));
+                prest.setTime(7, Time.valueOf(ticket.getHoraIngreso()));
+                prest.setTime(8, Time.valueOf(ticket.getHoraSalida()));
+                prest.setInt(9, ticket.getPin());
+                prest.setDouble(10, ticket.getCosteEstancia());              
 
                 numFilas = prest.executeUpdate();
             }

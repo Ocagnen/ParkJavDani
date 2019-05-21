@@ -20,7 +20,7 @@ import java.util.List;
 public class Parking {
     
     public static void main(String[] args) {
-        
+        /*
         AbonadoDAO daoAbonado = new AbonadoDAO();
         ArrayList<AbonadoVO> listaAbonado = new ArrayList<>();
         listaAbonado.add(new AbonadoVO("4356-LPK", "36573621B", "Javier", "Oca infa", 
@@ -71,7 +71,7 @@ public class Parking {
             System.out.println(sqle.getMessage());
         }
         
-        
+        */
         PlazaDAO daoPlaza = new PlazaDAO();
         ArrayList<PlazaVO> listaPlaza= new ArrayList<>();
         
