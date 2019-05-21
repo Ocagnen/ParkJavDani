@@ -28,7 +28,7 @@ public class PlazaDAO implements IPlaza{
         // ya que no necesitamos parametrizar la sentencia SQL
         try (Statement st = con.createStatement()) {
             // Ejecutamos la sentencia y obtenemos las filas en el objeto ResultSet
-            ResultSet res = st.executeQuery("select * from tickets");
+            ResultSet res = st.executeQuery("select * from plazas");
             // Ahora construimos la lista, recorriendo el ResultSet y mapeando los datos
             while (res.next()) {
                 PlazaVO p= new PlazaVO();
