@@ -22,6 +22,11 @@ public class PlazaVO {
         this.estado = estado;
         this.coste=coste;
     }
+
+    public PlazaVO() {
+    }
+    
+    
     
     public String getNombreTipo(){
         

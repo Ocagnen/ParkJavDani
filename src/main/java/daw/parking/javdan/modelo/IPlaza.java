@@ -15,7 +15,7 @@ import java.util.List;
 public interface IPlaza {
     
      // Método para obtener todos los registros de la tabla
-    List<TicketVO> getAll() throws SQLException;
+    List<PlazaVO> getAll() throws SQLException;
     
     // Méodo para obtener un registro a partir de la PK
     PlazaVO findByCod(int codplaz) throws SQLException;
