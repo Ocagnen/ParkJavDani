@@ -8,15 +8,18 @@ public class DetalleAbonadoVO {
     private String matricula;
     private int codPlaza;
     private int tipoAbono;
-    private LocalDate fecIniabono;
-    private LocalDate fecFinabono;
+    private LocalDate fecIniAbono;
+    private LocalDate fecFinAbono;
 
-    public DetalleAbonadoVO(String matricula, int codplaza, int tipoAbono, LocalDate feciniabono, LocalDate fecfinabono) {
+    public DetalleAbonadoVO(String matricula, int codPlaza, int tipoAbono, LocalDate fecIniAbono, LocalDate fecFinAbono) {
         this.matricula = matricula;
-        this.codPlaza = codplaza;
+        this.codPlaza = codPlaza;
         this.tipoAbono = tipoAbono;
-        this.fecIniabono = feciniabono;
-        this.fecFinabono = fecfinabono;
+        this.fecIniAbono = fecIniAbono;
+        this.fecFinAbono = fecFinAbono;
+    }
+
+    public DetalleAbonadoVO() {
     }
 
     public String getMatricula() {
@@ -27,12 +30,12 @@ public class DetalleAbonadoVO {
         this.matricula = matricula;
     }
 
-    public int getCodplaza() {
+    public int getCodPlaza() {
         return codPlaza;
     }
 
-    public void setCodplaza(int codplaza) {
-        this.codPlaza = codplaza;
+    public void setCodPlaza(int codPlaza) {
+        this.codPlaza = codPlaza;
     }
 
     public int getTipoAbono() {
@@ -43,58 +46,30 @@ public class DetalleAbonadoVO {
         this.tipoAbono = tipoAbono;
     }
 
-    public LocalDate getFeciniabono() {
-        return fecIniabono;
+    public LocalDate getFecIniAbono() {
+        return fecIniAbono;
     }
 
-    public void setFeciniabono(LocalDate feciniabono) {
-        this.fecIniabono = feciniabono;
+    public void setFecIniAbono(LocalDate fecIniAbono) {
+        this.fecIniAbono = fecIniAbono;
     }
 
-    public LocalDate getFecfinabono() {
-        return fecFinabono;
+    public LocalDate getFecFinAbono() {
+        return fecFinAbono;
     }
 
-    public void setFecfinabono(LocalDate fecfinabono) {
-        this.fecFinabono = fecfinabono;
-    }
-
-    @Override
-    public String toString() {
-        return "detallesAbonadosVO{" + "matricula=" + matricula + ", codplaza=" + codPlaza + ", tipoAbono=" + tipoAbono + ", feciniabono=" + fecIniabono + ", fecfinabono=" + fecFinabono + '}';
-    }
-
-    public String mostrarTipAb() {
-
-        switch (this.tipoAbono) {
-            case 0:
-
-                return "Mensual:25€";
-
-            case 1:
-
-                return "Trimestral:70€";
-
-            case 2:
-
-                return "Semestral:130€";
-
-            default:
-
-                return "Anual:200€";
-
-        }
-
+    public void setFecFinAbono(LocalDate fecFinAbono) {
+        this.fecFinAbono = fecFinAbono;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 47 * hash + Objects.hashCode(this.matricula);
-        hash = 47 * hash + this.codPlaza;
-        hash = 47 * hash + this.tipoAbono;
-        hash = 47 * hash + Objects.hashCode(this.fecIniabono);
-        hash = 47 * hash + Objects.hashCode(this.fecFinabono);
+        int hash = 3;
+        hash = 61 * hash + Objects.hashCode(this.matricula);
+        hash = 61 * hash + this.codPlaza;
+        hash = 61 * hash + this.tipoAbono;
+        hash = 61 * hash + Objects.hashCode(this.fecIniAbono);
+        hash = 61 * hash + Objects.hashCode(this.fecFinAbono);
         return hash;
     }
 
@@ -119,13 +94,20 @@ public class DetalleAbonadoVO {
         if (!Objects.equals(this.matricula, other.matricula)) {
             return false;
         }
-        if (!Objects.equals(this.fecIniabono, other.fecIniabono)) {
+        if (!Objects.equals(this.fecIniAbono, other.fecIniAbono)) {
             return false;
         }
-        if (!Objects.equals(this.fecFinabono, other.fecFinabono)) {
+        if (!Objects.equals(this.fecFinAbono, other.fecFinAbono)) {
             return false;
         }
         return true;
+    }
+    
+    
+
+    @Override
+    public String toString() {
+        return "DetalleAbonadoVO{" + "matricula=" + matricula + ", codPlaza=" + codPlaza + ", tipoAbono=" + tipoAbono + ", fecIniAbono=" + fecIniAbono + ", fecFinAbono=" + fecFinAbono + '}';
     }
     
     

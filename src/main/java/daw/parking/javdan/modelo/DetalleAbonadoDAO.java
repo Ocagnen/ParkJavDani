@@ -34,9 +34,9 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
                 DetalleAbonadoVO d= new DetalleAbonadoVO();
 
                 d.setMatricula(res.getString("matricula"));
-                d.setCodplaza(res.getInt("codplaza"));
+                d.setCodPlaza(res.getInt("codplaza"));
                 d.setTipoAbono(res.getInt("tipoabono"));
-                d.getFecfinabono(res.);
+                d.setFecFinAbono(res.getDate(""));
                 d.getFeciniabono(res.);
                
                 //Añadimos el objeto a la lista
@@ -48,7 +48,7 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
     }
 
     @Override
-    public DetalleAbonadoVO findByCod(int matricula, LocalDate fecIniabono, int codplaz) throws SQLException {
+    public DetalleAbonadoVO findByCod(String matricula, LocalDate fecIniabono, int codplaz) throws SQLException {
         
           ResultSet res = null;
         DetalleAbonadoVO d = new DetalleAbonadoVO();
@@ -171,9 +171,9 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
       
          int numFilas = 0;
         String sql = "update tickets set fecfinabono=?, tipoabono=? "
-                + " where matricula = ?,codplaza = ?, feciniabono=?";
+                + " where matricula = codplaza = ? and feciniabono=?";
 
-        if (findByCod(codplaz,matricula,fecIniabono) == null) {
+        if (findByCod(codplaz,  matricula, fecIniabono) == null) {
             // La persona a actualizar no existe
             return numFilas;
         } else {
@@ -195,6 +195,8 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
         }
         
     }
+
+   
 
     
     

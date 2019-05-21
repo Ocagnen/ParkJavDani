@@ -15,7 +15,7 @@ public interface IDetalleAbonado {
     DetalleAbonadoVO findByCod(int matricula,LocalDate fecIniabono,int codplaz) throws SQLException;
     
     // Método para insertar un registro
-    int insertDetAb (DetalleAbonadoVO DetalleAbonado) throws SQLException;
+    int insertDetAb (DetalleAbonadoVO detalleAbonado) throws SQLException;
     
     // Método para insertar varios registros
     int insertDetAb (List<DetalleAbonadoVO> lista) throws SQLException;
