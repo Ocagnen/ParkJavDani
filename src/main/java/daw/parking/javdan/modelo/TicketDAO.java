@@ -184,6 +184,8 @@ public class TicketDAO implements ITicket {
             // Instanciamos el objeto PreparedStatement para inserción
             // de datos. Sentencia parametrizada
             try (PreparedStatement prest = con.prepareStatement(sql)) {
+                
+                prest.setInt(1, nuevosDatos.getTipoVehi());
 
                 // Establecemos los parámetros de la sentencia
                 prest.setInt(1, nuevosDatos.getCodPlaza());
