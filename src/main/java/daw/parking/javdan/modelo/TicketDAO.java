@@ -22,26 +22,26 @@ public class TicketDAO implements ITicket {
     public List<TicketVO> getAll() throws SQLException {
 
         List<TicketVO> lista = new ArrayList<>();
-        
+
         try (Statement st = con.createStatement()) {
-            
+
             ResultSet res = st.executeQuery("select * from tickets");
-            
+
             while (res.next()) {
-                
-                TicketVO t = new TicketVO();         
-               
+
+                TicketVO t = new TicketVO();
+
                 t.setCodTicket(res.getInt("codticket"));
                 t.setTipoVehi(res.getInt("tipovehi"));
                 t.setMatricula(res.getString("matricula"));
-                t.setCodPlaza(res.getInt("codplaza"));               
+                t.setCodPlaza(res.getInt("codplaza"));
                 t.setFecIngreso(res.getDate("fecingreso").toLocalDate());
                 t.setFecSalida(res.getDate("fecsalida").toLocalDate());
                 t.setHoraIngreso(res.getTime("horaingreso").toLocalTime());
                 t.setHoraSalida(res.getTime("horasalida").toLocalTime());
                 t.setPin(res.getInt("pin"));
                 t.setCosteEstancia(res.getDouble("costeestancia"));
-                
+
                 //Añadimos el objeto a la lista
                 lista.add(t);
             }
@@ -59,25 +59,24 @@ public class TicketDAO implements ITicket {
         String sql = "select * from tickets where codticket=?";
 
         try (PreparedStatement prest = con.prepareStatement(sql)) {
-            // Preparamos la sentencia parametrizada
+
             prest.setInt(1, codticket);
 
-            // Ejecutamos la sentencia y obtenemos las filas en el objeto ResultSet
             res = prest.executeQuery();
 
-            // Nos posicionamos en el primer registro del Resultset. Sólo debe haber una fila
-            // si existe esa pk
             if (res.first()) {
-                // Recogemos los datos de la persona, guardamos en un objeto
-                t.setCodPlaza(res.getInt("codplaza"));
-                t.setCodTicket(res.getInt("codticket"));
-                t.setFecIngreso(res.);
-                t.setCosteEstancia(res.getInt("costeestancia"));
-                t.setFecSalida(res.);
-                t.setMatricula(res.getString("matricula"));
-                t.setPin(res.getInt("pin"));
+
+                
                 t.setTipoVehi(res.getInt("tipovehi"));
                 t.setMatricula(res.getString("matricula"));
+                t.setCodPlaza(res.getInt("codplaza"));
+                t.setFecIngreso(res.getDate("fecingreso").toLocalDate());
+                t.setFecSalida(res.getDate("fecsalida").toLocalDate());
+                t.setHoraIngreso(res.getTime("horaingreso").toLocalTime());
+                t.setHoraSalida(res.getTime("horasalida").toLocalTime());
+                t.setPin(res.getInt("pin"));
+                t.setCosteEstancia(res.getDouble("costeestancia"));
+                
                 return t;
             }
 
