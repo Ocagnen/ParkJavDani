@@ -136,7 +136,7 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
 
             // Establecemos los parámetros de la sentencia
             prest.setInt(1, d.getCodPlaza());
-            prest.setDate(2,Date.valueOf(d.getFecIniabono()));
+            prest.setDate(2,Date.valueOf(d.getFecIniAbono()));
             prest.setString(1,d.getMatricula());
 
             // Ejecutamos la sentencia
