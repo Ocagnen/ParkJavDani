@@ -71,7 +71,7 @@ public class AbonadoDAO implements IAbonado {
             // si existe esa pk
             if (res.first()) {
                 // Recogemos los datos de la persona, guardamos en un objeto
-
+                abonado.setMatricula(res.getString("matricula"));
                 abonado.setDni(res.getString("dni"));
                 abonado.setNombre(res.getString("nombre"));
                 abonado.setApellidos(res.getString("apellidos"));

@@ -66,7 +66,7 @@ public class TicketDAO implements ITicket {
             res = prest.executeQuery();
 
             if (res.first()) {
-
+                t.setCodTicket(res.getInt("codticket"));
                 t.setTipoVehi(res.getInt("tipovehi"));
                 t.setMatricula(res.getString("matricula"));
                 t.setCodPlaza(res.getInt("codplaza"));
