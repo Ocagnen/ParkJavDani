@@ -136,7 +136,7 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
 
             // Establecemos los parámetros de la sentencia
             prest.setInt(1, d.getCodPlaza());
-            prest.setDate(2,d.getFecIniabono());
+            prest.setDate(2,Date.valueOf(d.getFecIniabono()));
             prest.setString(1,d.getMatricula());
 
             // Ejecutamos la sentencia
@@ -185,8 +185,8 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
                 prest.setInt(1,nuevosDatos.getCodPlaza());
                 prest.setInt(2,nuevosDatos.getTipoAbono());
                 prest.setString(3,nuevosDatos.getMatricula());
-                prest.setDate(4,nuevosDatos.getFecIniAbono());
-                prest.setDate(5,nuevosDatos.getFecFinAbono());
+                prest.setDate(4,Date.valueOf(nuevosDatos.getFecIniAbono()));
+                prest.setDate(5,Date.valueOf(nuevosDatos.getFecFinAbono()));
                                        
 
                 numFilas = prest.executeUpdate();
