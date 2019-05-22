@@ -128,15 +128,16 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
         
         int numFilas = 0;
 
-        String sql = "delete from tickets where codticket = ?";
+        String sql = "delete from detallesAbonados where matricula = ? and "
+                + "codplaza = ? and feciniabono = ?";
 
         
         try (PreparedStatement prest = con.prepareStatement(sql)) {
 
             // Establecemos los parámetros de la sentencia
-            prest.setInt(1, d.getCodPlaza());
-            prest.setDate(2,d.getFecIniabono());
-            prest.setString(3,d.getMatricula());
+            prest.setString(1, d.getMatricula());
+            prest.setInt(2,d.getCodPlaza());
+            prest.setDate(3,Date.valueOf(d.getFecIniAbono()));
 
             // Ejecutamos la sentencia
             numFilas = prest.executeUpdate();
