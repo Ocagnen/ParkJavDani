@@ -61,7 +61,7 @@ public class Parking {
             System.out.println("-----------------------------------------");
             System.out.println("Modificación de la pelicula con pk 5");
             System.out.println("Nº Personas modificadas "
-            Plaza        + daoAbonado.updateAbonado("6985-LPK", new AbonadoVO("1111-LPK", "36573621B", "Javier", "Oca infa", 
+                    + daoAbonado.updateAbonado("1123-LPK", new AbonadoVO("1111-LPK", "36573621B", "Javier", "Oca infa", 
         "3644236541236541", "blabla@gmail.com", 123456)));
             System.out.println("-----------------------------------------");
             nuevaLista = daoAbonado.getAll();
@@ -69,13 +69,13 @@ public class Parking {
             nuevaLista.forEach(System.out::println);
         
             System.out.println("-----------------------------------------");
-            // daoPelicula.deletePelicula();
+            //daoAbonado.deleteAbonado();
         } catch (SQLException sqle) {
             System.out.println("No se ha podido realizar la operación:");
             System.out.println(sqle.getMessage());
         }
         
-        */
+        
         /*
         PlazaDAO daoPlaza = new PlazaDAO();
         ArrayList<PlazaVO> listaPlaza= new ArrayList<>();
