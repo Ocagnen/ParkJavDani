@@ -9,7 +9,11 @@ import daw.parking.javdan.modelo.AbonadoDAO;
 import daw.parking.javdan.modelo.AbonadoVO;
 import daw.parking.javdan.modelo.PlazaDAO;
 import daw.parking.javdan.modelo.PlazaVO;
+import daw.parking.javdan.modelo.TicketDAO;
+import daw.parking.javdan.modelo.TicketVO;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +23,7 @@ import java.util.List;
  */
 public class Parking {
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         /*
         AbonadoDAO daoAbonado = new AbonadoDAO();
         ArrayList<AbonadoVO> listaAbonado = new ArrayList<>();
@@ -57,7 +61,7 @@ public class Parking {
             System.out.println("-----------------------------------------");
             System.out.println("Modificación de la pelicula con pk 5");
             System.out.println("Nº Personas modificadas "
-                    + daoAbonado.updateAbonado("6985-LPK", new AbonadoVO("1111-LPK", "36573621B", "Javier", "Oca infa", 
+            Plaza        + daoAbonado.updateAbonado("6985-LPK", new AbonadoVO("1111-LPK", "36573621B", "Javier", "Oca infa", 
         "3644236541236541", "blabla@gmail.com", 123456)));
             System.out.println("-----------------------------------------");
             nuevaLista = daoAbonado.getAll();
@@ -72,7 +76,7 @@ public class Parking {
         }
         
         */
-        
+        /*
         PlazaDAO daoPlaza = new PlazaDAO();
         ArrayList<PlazaVO> listaPlaza= new ArrayList<>();
         
@@ -115,9 +119,64 @@ public class Parking {
         } catch (SQLException sqle) {
             System.out.println("No se ha podido realizar la operación:");
             System.out.println(sqle.getMessage());
-        }
+        }*/
         
+        TicketDAO daoticket= new TicketDAO();
+        ArrayList<TicketVO> listaticket = new ArrayList<>();
+        
+   listaticket.add(new TicketVO(1,2,"wer234",5,LocalDate.of(1999, 3, 8),
+    LocalDate.of(1999, 4, 8), LocalTime.of(14, 45, 01),LocalTime.of(19, 45, 01),111,23.3));
+   
+   listaticket.add(new TicketVO(4,5,"wer224",7,LocalDate.of(1998, 3, 8),
+    LocalDate.of(1999, 4, 8), LocalTime.of(14, 45, 01),LocalTime.of(19, 45, 01),111,23.3));
+   
+   listaticket.add(new TicketVO(5,3,"wer244",9,LocalDate.of(1997, 3, 8),
+    LocalDate.of(1999, 4, 8), LocalTime.of(14, 45, 01),LocalTime.of(19, 45, 01),111,23.3));
+   
+   listaticket.add(new TicketVO(6,9,"wer254",78,LocalDate.of(1996, 3, 8),
+    LocalDate.of(1999, 4, 8), LocalTime.of(14, 45, 01),LocalTime.of(19, 45, 01),111,23.3));
+   
+   listaticket.add(new TicketVO(7,8,"wer264",65,LocalDate.of(1995, 3, 8),
+    LocalDate.of(1999, 4, 8), LocalTime.of(14, 45, 01),LocalTime.of(19, 45, 01),111,23.3));
+        
+    try{
+   
+     System.out.println("Nº tickets insertados " + daoticket.insertTicket(listaticket));
+            System.out.println("-----------------------------------------");
+            System.out.println("Comprobamos en una nueva lista que se recogen los datos desde la tabla.");
+            List<TicketVO> nuevaLista = daoticket.getAll();
+            System.out.println("-------- Lista con datos recogidos desde la B.D -------------");
+            nuevaLista.forEach(System.out::println);
+            System.out.println("-----------------------------------------");
+            System.out.println("ticket con primary key 1: ");
+            System.out.println(daoticket.findByCod(1));
+            System.out.println("-----------------------------------------");
+            System.out.println("Se va a borrar el ticket con pk 6");
+            System.out.println("Nº tickets borrados "
+                    + daoticket.deleteTicket(new TicketVO(6,9,"wer254",78,LocalDate.of(1996, 3, 8),
+    LocalDate.of(1999, 4, 8), LocalTime.of(14, 45, 01),LocalTime.of(19, 45, 01),111,23.3)));
+            System.out.println("-----------------------------------------");
+            nuevaLista = daoticket.getAll();
+            System.out.println("-------- Lista con datos recogidos desde la B.D despues de borrar un ticket -------------");
+            nuevaLista.forEach(System.out::println);
+            System.out.println("-----------------------------------------");
+            System.out.println("Modificación de el ticket con pk 7");
+            System.out.println("Nº Tickets modificadas "
+                    + daoticket.updateTicket(7, new TicketVO(1,2,"wer234",5,LocalDate.of(1999, 3, 8),
+    LocalDate.of(1999, 4, 8), LocalTime.of(14, 45, 01),LocalTime.of(19, 45, 01),111,23.3)));
+            System.out.println("-----------------------------------------");
+            nuevaLista = daoticket.getAll();
+            System.out.println("-------- Lista con datos recogidos desde la B.D despues de modificar un ticket -------------");
+            nuevaLista.forEach(System.out::println);
+        
+            System.out.println("-----------------------------------------");
+            // daoPlaza.deletePlaza();
+        } catch (SQLException sqle) {
+            System.out.println("No se ha podido realizar la operación:");
+            System.out.println(sqle.getMessage());
+        }
+    }
         
     }
     
-}
+
