@@ -186,15 +186,14 @@ public class TicketDAO implements ITicket {
             try (PreparedStatement prest = con.prepareStatement(sql)) {
                 
                 prest.setInt(1, nuevosDatos.getTipoVehi());
-
-                // Establecemos los parámetros de la sentencia
-                prest.setInt(1, nuevosDatos.getCodPlaza());
-                prest.setDouble(2, nuevosDatos.getCosteEstancia());
-                prest.setInt(3, nuevosDatos.getPin());
-                prest.setString(4, nuevosDatos.getFecIngreso());
-                prest.setDate(5, nuevosDatos.getFecSalida());
-                prest.setString(6, nuevosDatos.getMatricula());
-                prest.setInt(7, nuevosDatos.getTipoVehi());
+                prest.setString(2, nuevosDatos.getMatricula());
+                prest.setInt(3, nuevosDatos.getCodPlaza());
+                prest.setDate(4, Date.valueOf(nuevosDatos.getFecIngreso()));
+                prest.setDate(5, Date.valueOf(nuevosDatos.getFecSalida()));
+                prest.setTime(6, Time.valueOf(nuevosDatos.getHoraIngreso()));
+                prest.setTime(7, Time.valueOf(nuevosDatos.getHoraSalida()));
+                prest.setInt(8, nuevosDatos.getPin());
+                prest.setDouble(9, nuevosDatos.getCosteEstancia());
 
                 numFilas = prest.executeUpdate();
             }
