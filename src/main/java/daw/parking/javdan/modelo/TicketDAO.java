@@ -1,6 +1,6 @@
 package daw.parking.javdan.modelo;
 
-import java.sql.CallableStatement;
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
