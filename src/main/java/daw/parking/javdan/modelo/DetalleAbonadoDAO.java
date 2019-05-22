@@ -50,10 +50,10 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
     @Override
     public DetalleAbonadoVO findByCod(int matricula, int codplaz, LocalDate fecIniabono) throws SQLException {
         
-          ResultSet res = null;
+        ResultSet res = null;
         DetalleAbonadoVO d = new DetalleAbonadoVO();
 
-        String sql = "select * from detallesAbonados where matricula=?, feciniabono=?, codplaza=?";
+        String sql = "select * from detallesAbonados where matricula=? and feciniabono=? and codplaza=?";
 
         try (PreparedStatement prest = con.prepareStatement(sql)) {
             // Preparamos la sentencia parametrizada
@@ -70,8 +70,8 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
                 d.setMatricula(res.getString("matricula"));
                 d.setCodPlaza(res.getInt("codplaza"));
                 d.setTipoAbono(res.getInt("tipoabono"));
-                d.setFecIniAbono(res.getDate("feciniabono"));
-                d.setFecFinAbono(res.getDate("fecfinabono"));
+                d.setFecIniAbono(res.getDate("fecfinabono").toLocalDate());
+                d.setFecFinAbono(res.getDate("feciniabono").toLocalDate());                
                 return d;
             }
 
