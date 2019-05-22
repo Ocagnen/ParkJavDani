@@ -12,7 +12,7 @@ public interface IDetalleAbonado {
     List<DetalleAbonadoVO> getAll() throws SQLException;
     
     // Méodo para obtener un registro a partir de la PK
-    DetalleAbonadoVO findByCod(int matricula, int codplaz, LocalDate fecIniabono) throws SQLException;
+    DetalleAbonadoVO findByCod(String matricula, int codplaz, LocalDate fecIniabono) throws SQLException;
     
     // Método para insertar un registro
     int insertDetAb (DetalleAbonadoVO detalleAbonado) throws SQLException;

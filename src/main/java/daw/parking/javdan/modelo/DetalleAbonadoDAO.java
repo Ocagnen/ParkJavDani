@@ -48,7 +48,7 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
     }
 
     @Override
-    public DetalleAbonadoVO findByCod(int matricula, int codplaz, LocalDate fecIniabono) throws SQLException {
+    public DetalleAbonadoVO findByCod(String matricula, int codplaz, LocalDate fecIniabono) throws SQLException {
         
         ResultSet res = null;
         DetalleAbonadoVO d = new DetalleAbonadoVO();
@@ -85,9 +85,9 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
         
          
         int numFilas = 0;
-        String sql = "insert into detallesAbonados values (?,?,?,?,?,?,?,?)";
+        String sql = "insert into detallesAbonados values (?,?,?,?,?)";
 
-        if (findByCod(DetalleAbonado.getMatricula(),DetalleAbonado.getFecFinAbono(),DetalleAbonado.getCodPlaza()) != null ) {
+        if (findByCod(DetalleAbonado.getMatricula(),DetalleAbonado.getCodPlaza(),DetalleAbonado.getFecFinAbono()) != null ) {
             // Existe un registro con esa pk
             // No se hace la inserción
             return numFilas;
@@ -97,11 +97,11 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
             try (PreparedStatement prest = con.prepareStatement(sql)) {
 
                 // Establecemos los parámetros de la sentencia
-                prest.setInt(1,DetalleAbonado.getCodPlaza());
-                prest.setString(2,DetalleAbonado.getMatricula());
+                prest.setString(1,DetalleAbonado.getMatricula());
+                prest.setInt(2,DetalleAbonado.getCodPlaza());                
                 prest.setInt(3,DetalleAbonado.getTipoAbono());
-                prest.setDate(4,DetalleAbonado.getFecIniabono());
-                prest.setDate(5, DetalleAbonado.getFecFinabono());
+                prest.setDate(4,Date.valueOf(DetalleAbonado.getFecIniAbono()));
+                prest.setDate(5, Date.valueOf(DetalleAbonado.getFecFinAbono()));
             
 
                 numFilas = prest.executeUpdate();
