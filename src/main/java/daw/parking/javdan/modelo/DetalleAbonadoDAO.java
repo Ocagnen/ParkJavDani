@@ -167,13 +167,13 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
     }
 
     @Override
-    public int updateDetAb(int matricula, int codplaz, LocalDate fecIniabono, DetalleAbonadoVO nuevosDatos) throws SQLException {
+    public int updateDetAb(String matricula, int codplaz, LocalDate fecIniabono, DetalleAbonadoVO nuevosDatos) throws SQLException {
       
          int numFilas = 0;
-        String sql = "update tickets set fecfinabono=?, tipoabono=? "
+        String sql = "update detallesAbonados set tipoabono=?, fecfinabono=? "
                 + " where matricula = codplaza = ? and feciniabono=?";
 
-        if (findByCod(codplaz,matricula,fecIniabono) == null) {
+        if (findByCod(matricula,codplaz,fecIniabono) == null) {
             // La persona a actualizar no existe
             return numFilas;
         } else {
@@ -182,12 +182,11 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
             try (PreparedStatement prest = con.prepareStatement(sql)) {
 
                 // Establecemos los parámetros de la sentencia
-                prest.setInt(1,nuevosDatos.getCodPlaza());
-                prest.setInt(2,nuevosDatos.getTipoAbono());
-                prest.setString(3,nuevosDatos.getMatricula());
-                prest.setDate(4,nuevosDatos.getFecIniAbono());
-                prest.setDate(5,nuevosDatos.getFecFinAbono());
-                                       
+                prest.setInt(1, nuevosDatos.getTipoAbono());
+                prest.setDate(2, Date.valueOf(nuevosDatos.getFecFinAbono()));
+                prest.setString(3, nuevosDatos.getMatricula());
+                prest.setInt(4, nuevosDatos.getCodPlaza());
+                prest.setDate(5, Date.valueOf(nuevosDatos.getFecIniAbono()));                                      
 
                 numFilas = prest.executeUpdate();
             }
