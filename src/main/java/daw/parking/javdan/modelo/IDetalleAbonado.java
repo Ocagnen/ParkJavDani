@@ -8,11 +8,11 @@ import java.util.List;
 
 public interface IDetalleAbonado {
     
-         // Método para obtener todos los registros de la tabla
+     // Método para obtener todos los registros de la tabla
     List<DetalleAbonadoVO> getAll() throws SQLException;
     
     // Méodo para obtener un registro a partir de la PK
-    DetalleAbonadoVO findByCod(int matricula,LocalDate fecIniabono,int codplaz) throws SQLException;
+    DetalleAbonadoVO findByCod(int matricula, int codplaz, LocalDate fecIniabono) throws SQLException;
     
     // Método para insertar un registro
     int insertDetAb (DetalleAbonadoVO detalleAbonado) throws SQLException;
@@ -27,7 +27,7 @@ public interface IDetalleAbonado {
     int deleteDetAb() throws SQLException;
     
     // Método para modificar un abonado
-    int updateDetAb (int matricula,LocalDate fecIniabono,int codplaz, DetalleAbonadoVO nuevosDatos) throws SQLException;
+    int updateDetAb (int matricula, int codplaz, LocalDate fecIniabono, DetalleAbonadoVO nuevosDatos) throws SQLException;
     
 }
 

@@ -48,7 +48,7 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
     }
 
     @Override
-    public DetalleAbonadoVO findByCod(String matricula, LocalDate fecIniabono, int codplaz) throws SQLException {
+    public DetalleAbonadoVO findByCod(int matricula, int codplaz, LocalDate fecIniabono) throws SQLException {
         
           ResultSet res = null;
         DetalleAbonadoVO d = new DetalleAbonadoVO();
@@ -167,7 +167,7 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
     }
 
     @Override
-    public int updateDetAb(String matricula, LocalDate fecIniabono, int codplaz, DetalleAbonadoVO nuevosDatos) throws SQLException {
+    public int updateDetAb(int matricula, int codplaz, LocalDate fecIniabono, DetalleAbonadoVO nuevosDatos) throws SQLException {
       
          int numFilas = 0;
         String sql = "update tickets set fecfinabono=?, tipoabono=? "
@@ -195,10 +195,7 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
         }
         
     }
-
-   
-
-    
+ 
     
 }
 
