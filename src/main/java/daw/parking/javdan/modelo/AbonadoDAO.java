@@ -189,7 +189,8 @@ public class AbonadoDAO implements IAbonado {
                 prest.setString(3, nuevosDatos.getApellidos());
                 prest.setString(4, nuevosDatos.getNumeroTarjeta());
                 prest.setString(5, nuevosDatos.getEmail());
-                prest.setInt(6, nuevosDatos.getPin());                            
+                prest.setInt(6, nuevosDatos.getPin());
+                prest.setString(7, nuevosDatos.getMatricula());
 
                 numFilas = prest.executeUpdate();
             }

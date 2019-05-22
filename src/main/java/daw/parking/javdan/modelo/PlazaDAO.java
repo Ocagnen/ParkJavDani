@@ -180,6 +180,7 @@ public class PlazaDAO implements IPlaza{
                 prest.setInt(1,nuevosDatos.getTipoPlaza());
                 prest.setInt(2,nuevosDatos.getEstado());
                 prest.setDouble(3,nuevosDatos.getCoste());
+                prest.setInt(4, nuevosDatos.getCodPlaza());
 
                 numFilas = prest.executeUpdate();
             }

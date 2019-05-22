@@ -194,6 +194,7 @@ public class TicketDAO implements ITicket {
                 prest.setTime(7, Time.valueOf(nuevosDatos.getHoraSalida()));
                 prest.setInt(8, nuevosDatos.getPin());
                 prest.setDouble(9, nuevosDatos.getCosteEstancia());
+                prest.setInt(10, nuevosDatos.getCodTicket());
 
                 numFilas = prest.executeUpdate();
             }
