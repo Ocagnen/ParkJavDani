@@ -164,7 +164,7 @@ public class PlazaDAO implements IPlaza{
     public int updatePlaza(int codpla, PlazaVO nuevosDatos) throws SQLException {
         
          int numFilas = 0;
-        String sql = "update plazas tipoplaza = ?, estado = ?, coste = ? "
+        String sql = "update plazas set tipoplaza = ?, estado = ?, coste = ? "
                 + " where codplaza=?";
 
         if (findByCod(codpla) == null) {
