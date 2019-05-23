@@ -22,6 +22,8 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
 
     @Override
     public List<DetalleAbonadoVO> getAll() throws SQLException {
+        
+        System.out.println("Estoy 1");
           
         List<DetalleAbonadoVO> lista = new ArrayList<>();
 
@@ -49,7 +51,7 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
 
     @Override
     public DetalleAbonadoVO findByCod(String matricula, int codplaz, LocalDate fecIniabono) throws SQLException {
-        
+        System.out.println("Estoy 2");
         ResultSet res = null;
         DetalleAbonadoVO d = new DetalleAbonadoVO();
 
@@ -57,7 +59,9 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
 
         try (PreparedStatement prest = con.prepareStatement(sql)) {
             // Preparamos la sentencia parametrizada
-            prest.setInt(1, codplaz);
+            prest.setString(1, matricula);
+            prest.setDate(2, Date.valueOf(fecIniabono));
+            prest.setInt(3, codplaz);
             
 
             // Ejecutamos la sentencia y obtenemos las filas en el objeto ResultSet
@@ -83,7 +87,7 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
     @Override
     public int insertDetAb(DetalleAbonadoVO DetalleAbonado) throws SQLException {
         
-         
+         System.out.println("Estoy 3");
         int numFilas = 0;
         String sql = "insert into detallesAbonados values (?,?,?,?,?)";
 
@@ -112,7 +116,7 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
 
     @Override
     public int insertDetAb(List<DetalleAbonadoVO> lista) throws SQLException {
-        
+        System.out.println("Estoy 4");
          int numFilas = 0;
 
         for (DetalleAbonadoVO tmp : lista) {
@@ -125,7 +129,7 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
 
     @Override
     public int deleteDetAb(DetalleAbonadoVO d) throws SQLException {
-        
+        System.out.println("Estoy 5");
         int numFilas = 0;
 
         String sql = "delete from detallesAbonados where matricula = ? and "
@@ -149,7 +153,7 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
 
     @Override
     public int deleteDetAb() throws SQLException {
-        
+        System.out.println("Estoy 6");
         String sql = "delete from detallesAbonados";
 
         int nfilas = 0;
@@ -168,7 +172,7 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
 
     @Override
     public int updateDetAb(String matricula, int codplaz, LocalDate fecIniabono, DetalleAbonadoVO nuevosDatos) throws SQLException {
-      
+      System.out.println("Estoy 7");
          int numFilas = 0;
         String sql = "update detallesAbonados set tipoabono=?, fecfinabono=? "
                 + " where matricula = codplaza = ? and feciniabono=?";
