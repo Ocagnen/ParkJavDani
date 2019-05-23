@@ -14,7 +14,7 @@ public class Vista {
         System.out.println("Escoja una opción de las siguientes");
         System.out.println("1-->Zona administrador");
         System.out.println("2-->Zona cliente");
-        
+        // Cambialo por un while
         int eleccionZona= teclado.nextInt();
         
         do{
