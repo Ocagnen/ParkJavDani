@@ -38,8 +38,8 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
                 d.setMatricula(res.getString("matricula"));
                 d.setCodPlaza(res.getInt("codplaza"));
                 d.setTipoAbono(res.getInt("tipoabono"));
-                d.setFecIniAbono(res.getDate("fecfinabono").toLocalDate());
-                d.setFecFinAbono(res.getDate("feciniabono").toLocalDate());
+                d.setFecIniAbono(res.getDate("feciniabono").toLocalDate());
+                d.setFecFinAbono(res.getDate("fecfinabono").toLocalDate());
                
                 //Añadimos el objeto a la lista
                 lista.add(d);
