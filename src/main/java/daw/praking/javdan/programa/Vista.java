@@ -60,12 +60,18 @@ public class Vista {
 
         switch (seleccionAccion) {
             case 1:
-                
+
                 System.out.println("Seleccione una opción: ");
                 System.out.println("1-->Depositar vehículo");
                 System.out.println("2-->Retirar vehículo");
                 System.out.println("3-->Retirar abono");
                 seleccionAccion = teclado.nextInt();
+                
+                while (!(seleccionAccion == 1 || seleccionAccion == 2)) {
+                    System.out.println("ERROR, seleccione una de las opciones mostradas");
+                    seleccionAccion = teclado.nextInt();
+                }
+              
                 break;
 
             case 2:
@@ -82,81 +88,87 @@ public class Vista {
 
                 switch (seleccionAccion) {
                     case 1:
-                        
-                        System.out.println("Introduzca su DNI");
-                        //se introducirá el DNI
-                        
-                        System.out.println("Introduzca la matrícula");
-                        //
-                        
-                        System.out.println("Introduzca su nombre");
-                        //
-                        
-                        System.out.println("Introduzca su apellidos");
-                        //
-                        
-                        System.out.println("Introduzca su número de tarjeta");
-                        //
-                        
-                        System.out.println("Introduzca su email");
-                        //
-                        
-                        System.out.println("¿Que tipo de abono desea?");
-                        //
-                        
-                        //Se actualizarán las plazas
-                        
-                        System.out.println("Aquí tiene su pin");
-                        //
-                        
-                        
-      
+                       
+                        //depositarAb()
                         break;
 
                     case 2:
-                        
+
                         System.out.println("Elija una opción: ");
                         System.out.println("1-->Depositar vehículo");
-                        System.out.println("2-->Retirar vehículo");    
+                        System.out.println("2-->Retirar vehículo");
                         seleccionAccion = teclado.nextInt();
+                        
+                        while (!(seleccionAccion == 1 || seleccionAccion == 2)) {
+                              System.out.println("ERROR, seleccione una de las opciones mostradas");
+                              seleccionAccion = teclado.nextInt();
+                        }
                         break;
                 }
                 break;
         }
-         
+
     }
-    
-    
-     public void depositarVehi(){
-         
-         System.out.println("Escoja una de las plazas libres");
-         //aquí se mostrarán todas las plazas disponibles
-              
-         System.out.println("Introduzca matrícula");
-         //aquí introduciremos la matrícula
-         
-         System.out.println("Introduzca el tipo de vehícula");
-         //aquí introduciremos tipo de vehículo
-         
-         System.out.println("Aquí tiene su ticket: ");
-         //se generará un ticket 
-         
+
+    public void depositarVehi() {
+
+        System.out.println("Escoja una de las plazas libres");
+        //aquí se mostrarán todas las plazas disponibles
+
+        System.out.println("Introduzca matrícula");
+        //aquí introduciremos la matrícula
+
+        System.out.println("Introduzca el tipo de vehícula");
+        //aquí introduciremos tipo de vehículo
+
+        System.out.println("Aquí tiene su ticket: ");
+        //se generará un ticket 
+
     }
-     
-    public void retirarVehi(){
-        
+
+    public void retirarVehi() {
+
         System.out.println("Introduzca matrícula");
         //se introduce la matrícula del vehículo depositado
-       
+
         System.out.println("Introduzca el identificador de la plaza");
         //se introduce el codplaza de la plaza donde se ubica el coche   
-        
+
         System.out.println("Introduzca el pin");
         //se introduce el pin del ticket
-        
-        System.out.println("El coste total es: "+ "" /*Aqui se introducirá el coste*/);
-        
+
+        System.out.println("El coste total es: " + "" /*Aqui se introducirá el coste*/);
+
         //Después actualizamos toda la información
+    }
+
+    public void depositarAb() {
+
+        System.out.println("Introduzca su DNI");
+        //se introducirá el DNI
+
+        System.out.println("Introduzca la matrícula");
+        //
+
+        System.out.println("Introduzca su nombre");
+        //
+
+        System.out.println("Introduzca su apellidos");
+        //
+
+        System.out.println("Introduzca su número de tarjeta");
+        //
+
+        System.out.println("Introduzca su email");
+        //
+
+        System.out.println("¿Que tipo de abono desea?");
+        //
+
+        //Se actualizarán las plazas
+        
+        System.out.println("Aquí tiene su pin");
+        //
     }
 
 }
