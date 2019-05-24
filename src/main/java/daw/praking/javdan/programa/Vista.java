@@ -96,6 +96,40 @@ public class Vista {
                 }
                 break;
         }
-
+         
     }
+    
+    
+     public void depositarVehi(){
+         
+         System.out.println("Escoja una de las plazas libres");
+         //aquí se mostrarán todas las plazas disponibles
+              
+         System.out.println("Introduzca matrícula");
+         //aquí introduciremos la matrícula
+         
+         System.out.println("Introduzca el tipo de vehícula");
+         //aquí introduciremos tipo de vehículo
+         
+         System.out.println("Aquí tiene su ticket: ");
+         //se generará un ticket 
+         
+    }
+     
+    public void retirarVehi(){
+        
+        System.out.println("Introduzca matrícula");
+        //se introduce la matrícula del vehículo depositado
+       
+        System.out.println("Introduzca el identificador de la plaza");
+        //se introduce el codplaza de la plaza donde se ubica el coche   
+        
+        System.out.println("Introduzca el pin");
+        //se introduce el pin del ticket
+        
+        System.out.println("El coste total es: "+ "" /*Aqui se introducirá el coste*/);
+        
+        //Después actualizamos toda la información
+    }
+
 }
