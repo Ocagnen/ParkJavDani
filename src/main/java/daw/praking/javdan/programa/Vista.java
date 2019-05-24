@@ -83,7 +83,34 @@ public class Vista {
                 switch (seleccionAccion) {
                     case 1:
                         
-                        System.out.println("Ha entrado en el menú de Depositar Abonado");
+                        System.out.println("Introduzca su DNI");
+                        //se introducirá el DNI
+                        
+                        System.out.println("Introduzca la matrícula");
+                        //
+                        
+                        System.out.println("Introduzca su nombre");
+                        //
+                        
+                        System.out.println("Introduzca su apellidos");
+                        //
+                        
+                        System.out.println("Introduzca su número de tarjeta");
+                        //
+                        
+                        System.out.println("Introduzca su email");
+                        //
+                        
+                        System.out.println("¿Que tipo de abono desea?");
+                        //
+                        
+                        //Se actualizarán las plazas
+                        
+                        System.out.println("Aquí tiene su pin");
+                        //
+                        
+                        
+      
                         break;
 
                     case 2:
