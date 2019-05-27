@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Objects;
+import java.util.Random;
 
 
 public class TicketVO {
@@ -34,6 +35,14 @@ public class TicketVO {
     }
 
     public TicketVO() {
+    }
+    
+    public int generarPin(){
+        
+        Random alt = new Random();
+        
+        return alt.nextInt(999998-100000+1)+100000;
+        
     }
 
     public int getCodTicket() {
