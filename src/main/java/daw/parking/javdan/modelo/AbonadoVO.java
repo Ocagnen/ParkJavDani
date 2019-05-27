@@ -33,7 +33,7 @@ public class AbonadoVO {
         this.pin = pin;
     }
     
-    public boolean comprobarPin(int pin){
+    public static boolean comprobarPin(int pin, String matricula){
         
         AbonadoDAO daoAbonado = new AbonadoDAO();
         
@@ -43,7 +43,7 @@ public class AbonadoVO {
             
             if (abonado.getPin()==pin){
                 
-                return this.matricula.equals(abonado.matricula);
+                return matricula.equals(abonado.matricula);
                 
             }
             
