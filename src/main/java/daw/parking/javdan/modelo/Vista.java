@@ -2,6 +2,7 @@ package daw.parking.javdan.modelo;
 
 import daw.parking.javdan.modelo.AbonadoVO;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Vista {
@@ -205,15 +206,16 @@ public class Vista {
     }//FIN DE RAMA DE ZONA CLIENTE 
 
 //RAMA DE ZONA ADMINITRADOR
-    public static void seleccionAdmin() {
+    public static void seleccionAdmin() throws SQLException {
 
         Scanner teclado = new Scanner(System.in);
-        int seleccionAccion = teclado.nextInt();
+        
 
         System.out.println("¿Que desea ver?");
         System.out.println("1-->Estado de Parking");
         System.out.println("2-->Facturación");
         System.out.println("3-->Abonos");
+        int seleccionAccion = teclado.nextInt();
 
         while (!(seleccionAccion == 1 || seleccionAccion == 2 || seleccionAccion == 3)) {
             System.out.println("ERROR, seleccione una de las opciones mostradas");
@@ -222,14 +224,30 @@ public class Vista {
 
         switch (seleccionAccion) {
             case 1:
-
-                System.out.println("Se le mostrará el estado del parking");
-                //estadoParking();
+                System.out.println("---------- ESTADO DEL PARKING -----------");
+                PlazaDAO daoPlaza = new PlazaDAO();
+                ArrayList<PlazaVO> lista = (ArrayList<PlazaVO>) daoPlaza.getAll();
+                
+                for (PlazaVO plazaVO : lista) {
+                    plazaVO.toStringAdmin();
+                }
+                
+                System.out.println("");
+                
                 break;
 
             case 2:
-
-                //mostarFacturación()
+                System.out.println("Introduzca el tipo de facturación a consultar");
+                System.out.println("1 - Entre fechas");
+                System.out.println("2 - Abonos");
+                seleccionAccion = teclado.nextInt();
+                
+                switch(seleccionAccion){
+                    case 1:
+                        
+                    
+                }
+                
                 break;
 
             case 3:
@@ -238,70 +256,6 @@ public class Vista {
                 break;
         }
 
-    }
-
-    //FIN DE RAMA DE ZONA ADMINISTRADOR
-    //Métodos para implementar en las ramas anteriores
-    public void depositarVehi() {
-
-        System.out.println("Plazas libres totales ");
-
-        System.out.println("Escoja una de las plazas libres");
-
-        //aquí se mostrarán todas las plazas disponibles
-        System.out.println("Introduzca matrícula");
-        //aquí introduciremos la matrícula
-
-        System.out.println("Introduzca el tipo de vehícula");
-        //aquí introduciremos tipo de vehículo
-
-        System.out.println("Aquí tiene su ticket: ");
-        //se generará un ticket 
-
-    }
-
-    public void retirarVehi() {
-
-        System.out.println("Introduzca matrícula");
-        //se introduce la matrícula del vehículo depositado
-
-        System.out.println("Introduzca el identificador de la plaza");
-        //se introduce el codplaza de la plaza donde se ubica el coche   
-
-        System.out.println("Introduzca el pin");
-        //se introduce el pin del ticket
-
-        System.out.println("El coste total es: " + "" /*Aqui se introducirá el coste*/);
-
-        //Después actualizamos toda la información
-    }
-
-    public void depositarAb() {
-
-        System.out.println("Introduzca su DNI");
-        //se introducirá el DNI
-
-        System.out.println("Introduzca la matrícula");
-        //
-
-        System.out.println("Introduzca su nombre");
-        //
-
-        System.out.println("Introduzca su apellidos");
-        //
-
-        System.out.println("Introduzca su número de tarjeta");
-        //
-
-        System.out.println("Introduzca su email");
-        //
-
-        System.out.println("¿Que tipo de abono desea?");
-        //
-
-        //Se actualizarán las plazas
-        System.out.println("Aquí tiene su pin");
-        //
-    }
+    }    
 
 }
