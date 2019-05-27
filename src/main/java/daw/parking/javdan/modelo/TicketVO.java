@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Random;
 
 public class TicketVO {
+    private static int contadorTickets;
 
     private int codTicket;
     private int tipoVehi;
@@ -21,7 +22,8 @@ public class TicketVO {
     private double costeEstancia;
 
     public TicketVO(int codTicket, int tipoVehi, String matricula, int codPlaza, LocalDate fecIngreso, LocalDate fecSalida, LocalTime horaIngreso, LocalTime horaSalida, int pin, double costeEstancia) {
-        this.codTicket = codTicket;
+        contadorTickets++;
+        this.codTicket = contadorTickets;
         this.tipoVehi = tipoVehi;
         this.matricula = matricula;
         this.codPlaza = codPlaza;
@@ -34,9 +36,29 @@ public class TicketVO {
     }
 
     public TicketVO() {
+        contadorTickets++;
+        this.codTicket = contadorTickets;
+    }
+    
+    public static TicketVO generarTicket(String matricula, int tipoVehi, int codPlaz){
+        
+        TicketVO tick = new TicketVO();
+        
+        tick.setCodPlaza(codPlaz);
+        tick.setCosteEstancia(0);
+        tick.setFecIngreso(LocalDate.now());
+        tick.setFecSalida(LocalDate.now().plusYears(600));
+        tick.setHoraIngreso(LocalTime.now());
+        tick.setHoraSalida(LocalTime.MIDNIGHT);
+        tick.setMatricula(matricula);
+        tick.setPin(generarPin());
+        tick.setTipoVehi(tipoVehi);
+        
+        return tick;       
+        
     }
 
-    public int generarPin() {
+    public static int generarPin() {
 
         Random alt = new Random();
 
