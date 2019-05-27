@@ -265,5 +265,10 @@ public class TicketVO {
     public String toString() {
         return "TicketVO{" + "codTicket=" + codTicket + ", tipoVehi=" + tipoVehi + ", matricula=" + matricula + ", codPlaza=" + codPlaza + ", fecIngreso=" + fecIngreso + ", fecSalida=" + fecSalida + ", horaIngreso=" + horaIngreso + ", horaSalida=" + horaSalida + ", pin=" + pin + ", costeEstancia=" + costeEstancia + '}';
     }
+    
+    public String toStringParaClientes(){
+        return "TicketVO{" +  " matricula=" + matricula + ", codPlaza=" + codPlaza + ", fecIngreso=" + fecIngreso  + ", horaIngreso=" + horaIngreso+ ", pin=" + pin +  '}';
+        
+    }
 
 }
