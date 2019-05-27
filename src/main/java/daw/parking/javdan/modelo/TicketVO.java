@@ -5,10 +5,12 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
 
 public class TicketVO {
+
     private static int contadorTickets;
 
     private int codTicket;
@@ -40,11 +42,11 @@ public class TicketVO {
         contadorTickets++;
         this.codTicket = contadorTickets;
     }
-    
-    public static TicketVO generarTicket(String matricula, int tipoVehi, int codPlaz){
-        
+
+    public static TicketVO generarTicket(String matricula, int tipoVehi, int codPlaz) {
+
         TicketVO tick = new TicketVO();
-        
+
         tick.setCodPlaza(codPlaz);
         tick.setCosteEstancia(0);
         tick.setFecIngreso(LocalDate.now());
@@ -52,23 +54,22 @@ public class TicketVO {
         tick.setHoraIngreso(LocalTime.now());
         tick.setHoraSalida(LocalTime.MIDNIGHT);
         tick.setMatricula(matricula);
-        tick.setPin(generarPin());        
+        tick.setPin(generarPin());
         tick.setTipoVehi(tipoVehi);
-        
+
         try {
-            
+
             TicketDAO daoTicket = new TicketDAO();
-            
-            daoTicket.insertTicket(tick);           
-            
+
+            daoTicket.insertTicket(tick);
+
         } catch (SQLException sqle) {
             System.out.println("No se ha podido realizar la operación:");
             System.out.println(sqle.getMessage());
         }
-        
-        
-        return tick;       
-        
+
+        return tick;
+
     }
 
     public static int generarPin() {
@@ -77,6 +78,31 @@ public class TicketVO {
 
         return alt.nextInt(999998 - 100000 + 1) + 100000;
 
+    }
+
+    public static int obtenerCodTickSalida(String matricula, int plaza, int pin) {
+
+        TicketDAO daoTicket = new TicketDAO();
+
+        try {
+            ArrayList<TicketVO> lista = (ArrayList<TicketVO>) daoTicket.getAll();
+            for (TicketVO ticket : lista) {
+
+                if (ticket.getMatricula().equals(matricula) && ticket.getCodPlaza() == plaza
+                        && ticket.getPin() == pin) {                 
+
+                   return ticket.codTicket;
+
+                }
+
+            }
+
+        } catch (SQLException sqle) {
+            System.out.println("No se ha podido realizar la operación:");
+            System.out.println(sqle.getMessage());
+        }
+        
+        return -1;
     }
 
     public int calcularDias() {
@@ -101,23 +127,23 @@ public class TicketVO {
             case 1:
                 minutosEnMismoDia = ChronoUnit.MINUTES.between(this.horaIngreso, LocalTime.MIDNIGHT);
                 minutosDiaDespues = ChronoUnit.MINUTES.between(LocalTime.MIDNIGHT, this.horaSalida);
-                numMin = (int)minutosEnMismoDia + (int)minutosDiaDespues;
+                numMin = (int) minutosEnMismoDia + (int) minutosDiaDespues;
                 break;
             default:
                 minutosEnMismoDia = ChronoUnit.MINUTES.between(this.horaIngreso, LocalTime.MIDNIGHT);
                 minutosDiaDespues = ChronoUnit.MINUTES.between(LocalTime.MIDNIGHT, this.horaSalida);
-                numMin = (int)minutosEnMismoDia + (int)minutosDiaDespues + ((dias-1)*1440);
+                numMin = (int) minutosEnMismoDia + (int) minutosDiaDespues + ((dias - 1) * 1440);
                 break;
         }
-        
+
         return numMin;
 
     }
 
     public double calcularTarifa() {
-        
-        return calcularMinutos(calcularDias())*this.costeEstancia;
-        
+
+        return calcularMinutos(calcularDias()) * this.costeEstancia;
+
     }
 
     public int getCodTicket() {
@@ -265,10 +291,10 @@ public class TicketVO {
     public String toString() {
         return "TicketVO{" + "codTicket=" + codTicket + ", tipoVehi=" + tipoVehi + ", matricula=" + matricula + ", codPlaza=" + codPlaza + ", fecIngreso=" + fecIngreso + ", fecSalida=" + fecSalida + ", horaIngreso=" + horaIngreso + ", horaSalida=" + horaSalida + ", pin=" + pin + ", costeEstancia=" + costeEstancia + '}';
     }
-    
-    public String toStringParaClientes(){
-        return "TicketVO{" +  " matricula=" + matricula + ", codPlaza=" + codPlaza + ", fecIngreso=" + fecIngreso  + ", horaIngreso=" + horaIngreso+ ", pin=" + pin +  '}';
-        
+
+    public String toStringParaClientes() {
+        return "TicketVO{" + " matricula=" + matricula + ", codPlaza=" + codPlaza + ", fecIngreso=" + fecIngreso + ", horaIngreso=" + horaIngreso + ", pin=" + pin + '}';
+
     }
 
 }
