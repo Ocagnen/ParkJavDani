@@ -123,6 +123,7 @@ public class PlazaVO {
         return 0;
 
     }
+    
 
     public int getCodPlaza() {
         return codPlaza;
@@ -159,6 +160,10 @@ public class PlazaVO {
     @Override
     public String toString() {
         return "PlazaVO{" + "codPlaza=" + codPlaza + ", tipoPlaza=" + tipoPlaza + ", estado=" + estado + ", coste=" + coste + '}';
+    }
+    
+    public String toStringAdmin() {
+        return "PlazaVO{" + "codPlaza=" + codPlaza + ", tipoPlaza=" + this.getNombreTipo() + ", estado=" + this.mostrarEstado() +'}';
     }
 
     @Override
