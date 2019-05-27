@@ -104,6 +104,13 @@ public class TicketVO {
         
         return -1;
     }
+    
+    public void actualizarTicketSalida(){
+        
+        this.fecSalida = LocalDate.now();
+        this.horaSalida = LocalTime.now();     
+        
+    }
 
     public int calcularDias() {
 
