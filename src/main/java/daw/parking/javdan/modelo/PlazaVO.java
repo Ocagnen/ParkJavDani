@@ -5,6 +5,7 @@
  */
 package daw.parking.javdan.modelo;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -70,8 +71,32 @@ public class PlazaVO {
             }
         }
         
-        return plazLib;
+        return plazLib;       
         
+    }
+    
+    public int obtenerPlazaLibre(int tipoVehi){
+        
+        PlazaDAO daoPlaza = new PlazaDAO();
+        
+        try{
+        ArrayList<PlazaVO> lista = (ArrayList<PlazaVO>) daoPlaza.getAll();
+        for (PlazaVO plaza : lista) {
+            
+            if(plaza.getEstado() == 0 && plaza.getTipoPlaza()== tipoVehi){
+                
+                return plaza.getCodPlaza();
+               
+            }
+            
+        }
+        
+        } catch (SQLException sqle) {
+            System.out.println("No se ha podido realizar la operación:");
+            System.out.println(sqle.getMessage());
+        }
+        
+        return 0;
         
     }
 
