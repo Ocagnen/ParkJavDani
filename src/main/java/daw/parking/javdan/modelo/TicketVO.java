@@ -141,8 +141,19 @@ public class TicketVO {
     }
 
     public double calcularTarifa() {
+        
+        PlazaDAO daoPlaza = new PlazaDAO();
+        PlazaVO plazaAux = new PlazaVO();
+        
+        try {
+            plazaAux = daoPlaza.findByCod(this.codPlaza);            
+            
+        } catch (SQLException sqle) {
+            System.out.println("No se ha podido realizar la operación:");
+            System.out.println(sqle.getMessage());
+        }
 
-        return calcularMinutos(calcularDias()) * this.costeEstancia;
+        return calcularMinutos(calcularDias()) * plazaAux.getCoste();
 
     }
 
