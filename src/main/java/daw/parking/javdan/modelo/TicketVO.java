@@ -4,6 +4,7 @@ package daw.parking.javdan.modelo;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 import java.util.Random;
 
@@ -42,6 +43,24 @@ public class TicketVO {
         Random alt = new Random();
         
         return alt.nextInt(999998-100000+1)+100000;
+        
+    }
+    
+    
+    public double calcularDias(){
+        
+        long diferenciaDias = ChronoUnit.DAYS.between(this.fecIngreso, this.fecSalida);
+        
+        return (double)diferenciaDias;
+        
+    }
+    
+    
+    
+    public double calcularTarifa(){
+        
+        
+        
         
     }
 
