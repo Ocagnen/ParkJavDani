@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Vista {
 
-    public static void menu() {
+    public static void menu() throws SQLException {
 
         Scanner teclado = new Scanner(System.in);
 
@@ -40,7 +40,7 @@ public class Vista {
     }
 
     //RAMA DE ZONA CLIENTE
-    public static void seleccionCliente(){
+    public static void seleccionCliente() throws SQLException{
 
         Scanner teclado = new Scanner(System.in);
 
