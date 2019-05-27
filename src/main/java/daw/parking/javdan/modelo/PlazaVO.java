@@ -13,42 +13,40 @@ import java.util.ArrayList;
  * @author javier
  */
 public class PlazaVO {
-    
+
     private int codPlaza;
     private int tipoPlaza;
     private int estado;
     private double coste;
 
-    public PlazaVO(int codPlaza, int tipoPlaza, int estado,double coste) {
+    public PlazaVO(int codPlaza, int tipoPlaza, int estado, double coste) {
         this.codPlaza = codPlaza;
         this.tipoPlaza = tipoPlaza;
         this.estado = estado;
-        this.coste=coste;
+        this.coste = coste;
     }
 
     public PlazaVO() {
-        
+
     }
-    
-    
-    
-    public String getNombreTipo(){
-        
-        switch(this.tipoPlaza){
+
+    public String getNombreTipo() {
+
+        switch (this.tipoPlaza) {
             case 0:
                 return "Turismos";
             case 1:
-                return "Motocicleta";     
+                return "Motocicleta";
             default:
-                return "Caravana"; 
-          
-        } 
-        
+                return "Caravana";
+
+        }
+
     }
-    
-    public String mostrarEstado(){
-        
-        switch(this.estado){
+
+    public String mostrarEstado() {
+
+        switch (this.estado) {
             case 0:
                 return "Libre";
             case 1:
@@ -58,59 +56,72 @@ public class PlazaVO {
             default:
                 return "Abono libre";
         }
-        
+
     }
-    
-    public int mostrarPlazasLibres(){
-        
+
+    public static void mostrarPlazasLibres() {
+
         PlazaDAO daoPlaza = new PlazaDAO();
-        
-        try{
-        ArrayList<PlazaVO> lista = (ArrayList<PlazaVO>) daoPlaza.getAll();
-        for (PlazaVO plaza : lista) {
-            
-            if(plaza.getEstado() == 0 && plaza.getTipoPlaza()== tipoVehi){
-                
-                plaza.setEstado(1);
-                return plaza.getCodPlaza();
-               
+        int contadorTuris = 0;
+        int contadorMoto = 0;
+        int contadorCarav = 0;
+
+        try {
+            ArrayList<PlazaVO> lista = (ArrayList<PlazaVO>) daoPlaza.getAll();
+            for (PlazaVO plaza : lista) {
+
+                if (plaza.getEstado() == 0 && plaza.getTipoPlaza() == 0) {
+
+                    contadorTuris++;
+
+                } else if (plaza.getEstado() == 0 && plaza.getTipoPlaza() == 1) {
+
+                    contadorMoto++;
+
+                } else if (plaza.getEstado() == 0 && plaza.getTipoPlaza() == 2) {
+
+                    contadorCarav++;
+                }
+
             }
-            
-        }
-        
+
         } catch (SQLException sqle) {
             System.out.println("No se ha podido realizar la operación:");
             System.out.println(sqle.getMessage());
         }
-        
-        return 0;     
-        
+
+        System.out.println("Hay un total de "+
+                (contadorTuris+contadorMoto+contadorCarav)+" plazas libres");
+        System.out.println(contadorTuris+" plazas de turismos");
+        System.out.println(contadorMoto+ " plazas de motos");
+        System.out.println(contadorCarav+ " plazas de caravanas");
+
     }
-    
-    public int obtenerPlazaLibre(int tipoVehi){
-        
+
+    public int obtenerPlazaLibre(int tipoVehi) {
+
         PlazaDAO daoPlaza = new PlazaDAO();
-        
-        try{
-        ArrayList<PlazaVO> lista = (ArrayList<PlazaVO>) daoPlaza.getAll();
-        for (PlazaVO plaza : lista) {
-            
-            if(plaza.getEstado() == 0 && plaza.getTipoPlaza()== tipoVehi){
-                
-                plaza.setEstado(1);
-                return plaza.getCodPlaza();
-               
+
+        try {
+            ArrayList<PlazaVO> lista = (ArrayList<PlazaVO>) daoPlaza.getAll();
+            for (PlazaVO plaza : lista) {
+
+                if (plaza.getEstado() == 0 && plaza.getTipoPlaza() == tipoVehi) {
+
+                    plaza.setEstado(1);
+                    return plaza.getCodPlaza();
+
+                }
+
             }
-            
-        }
-        
+
         } catch (SQLException sqle) {
             System.out.println("No se ha podido realizar la operación:");
             System.out.println(sqle.getMessage());
         }
-        
+
         return 0;
-        
+
     }
 
     public int getCodPlaza() {
@@ -187,9 +198,4 @@ public class PlazaVO {
         return true;
     }
 
-   
-    
-    
-           
-    
 }
