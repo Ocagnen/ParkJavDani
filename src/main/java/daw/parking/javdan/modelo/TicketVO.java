@@ -1,5 +1,6 @@
 package daw.parking.javdan.modelo;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -51,8 +52,20 @@ public class TicketVO {
         tick.setHoraIngreso(LocalTime.now());
         tick.setHoraSalida(LocalTime.MIDNIGHT);
         tick.setMatricula(matricula);
-        tick.setPin(generarPin());
+        tick.setPin(generarPin());        
         tick.setTipoVehi(tipoVehi);
+        
+        try {
+            
+            TicketDAO daoTicket = new TicketDAO();
+            
+            daoTicket.insertTicket(tick);           
+            
+        } catch (SQLException sqle) {
+            System.out.println("No se ha podido realizar la operación:");
+            System.out.println(sqle.getMessage());
+        }
+        
         
         return tick;       
         
