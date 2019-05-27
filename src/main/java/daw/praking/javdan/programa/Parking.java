@@ -16,6 +16,8 @@ import daw.parking.javdan.modelo.TicketVO;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Month;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +28,8 @@ import java.util.List;
 public class Parking {
 
     public static void main(String[] args) throws SQLException {
+        
+       Vista.menu();
 
         /*
         AbonadoDAO daoAbonado = new AbonadoDAO();
@@ -227,6 +231,7 @@ public class Parking {
         }
         */
         
+        /*
         TicketDAO daoTicket = new TicketDAO();
         ArrayList<TicketVO> listaTicket= new ArrayList<>();
         
@@ -278,7 +283,7 @@ public class Parking {
             System.out.println(sqle.getMessage());
         }
         
-        
+        */
         
     }
 

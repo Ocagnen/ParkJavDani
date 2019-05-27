@@ -32,7 +32,7 @@ public class AbonadoVO {
     }
 
     public AbonadoVO() {
-    }
+    }   
 
     public String getMatricula() {
         return matricula;

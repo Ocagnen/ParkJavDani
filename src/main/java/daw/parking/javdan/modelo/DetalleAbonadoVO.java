@@ -17,7 +17,7 @@ public class DetalleAbonadoVO {
         this.tipoAbono = tipoAbono;
         this.fecIniAbono = fecIniAbono;
         this.fecFinAbono = fecFinAbono;
-    }
+    }   
 
     public DetalleAbonadoVO() {
     }

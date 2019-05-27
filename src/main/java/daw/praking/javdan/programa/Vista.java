@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Vista {
 
-    public void menu() {
+    public static void menu() {
 
         Scanner teclado = new Scanner(System.in);
 
