@@ -1,6 +1,9 @@
 package daw.parking.javdan.modelo;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class DetalleAbonadoVO {
@@ -20,6 +23,30 @@ public class DetalleAbonadoVO {
     }   
 
     public DetalleAbonadoVO() {
+    }
+    
+    public static int obtenerPlaza(String matricula){
+        
+        DetalleAbonadoDAO daoDetalleAbonado = new DetalleAbonadoDAO();
+        
+        try{
+        ArrayList<DetalleAbonadoVO> lista = (ArrayList<DetalleAbonadoVO>) daoDetalleAbonado.getAll();
+        for (DetalleAbonadoVO detAbonado : lista) {
+            
+           if (matricula.equals(detAbonado.matricula) && detAbonado.fecFinAbono.isAfter(LocalDate.now())){
+               
+               return detAbonado.codPlaza;
+               
+           }
+            
+        }
+        
+        } catch (SQLException sqle) {
+            System.out.println("No se ha podido realizar la operación:");
+            System.out.println(sqle.getMessage());
+        }
+        
+        return 0;
     }
 
     public String getMatricula() {
