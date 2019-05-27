@@ -30,17 +30,21 @@ public class Vista {
 
                 System.out.println("Ha elegido zona administrador");
                 System.out.println("-----------------");
+                System.out.println();
                 break;
 
             case 2:
 
                 System.out.println("Ha elegido zona cliente");
                 System.out.println("-----------------");
+                System.out.println();
                 break;
 
         }
     }
 
+    
+    //RAMA DE ZONA CLIENTE
     public void seleccionCliente() {
 
         Scanner teclado = new Scanner(System.in);
@@ -67,7 +71,7 @@ public class Vista {
                 System.out.println("3-->Retirar abono");
                 seleccionAccion = teclado.nextInt();
                 
-                while (!(seleccionAccion == 1 || seleccionAccion == 2)) {
+                while (!(seleccionAccion == 1 || seleccionAccion == 2 || seleccionAccion==3)) {
                     System.out.println("ERROR, seleccione una de las opciones mostradas");
                     seleccionAccion = teclado.nextInt();
                 }
@@ -108,8 +112,50 @@ public class Vista {
                 break;
         }
 
+    }//FIN DE RAMA DE ZONA CLIENTE 
+    
+    
+    //RAMA DE ZONA ADMINITRADOR
+    
+    public void seleccionAdmin(){
+        
+        Scanner teclado= new Scanner(System.in);
+        int seleccionAccion = teclado.nextInt();
+        
+        System.out.println("¿Que desea ver?");
+        System.out.println("1-->Estado de Parking");
+        System.out.println("2-->Facturación");
+        System.out.println("3-->Abonos");
+        
+        while (!(seleccionAccion == 1 || seleccionAccion == 2 || seleccionAccion==3)) {
+                    System.out.println("ERROR, seleccione una de las opciones mostradas");
+                    seleccionAccion = teclado.nextInt();
+                }
+        
+        switch (seleccionAccion) {
+            case 1:
+                
+                System.out.println("Se le mostrará el estado del parking");
+                //estadoParking();
+                break;
+            
+            case 2:
+                
+                //mostarFacturación()
+                break;
+            
+            case 3:
+                
+                //Abonos()
+                break;
+        }
+        
     }
-
+    
+    //FIN DE RAMA DE ZONA ADMINISTRADOR
+    
+    
+    //Métodos para implementar en las ramas anteriores
     public void depositarVehi() {
 
         System.out.println("Escoja una de las plazas libres");
