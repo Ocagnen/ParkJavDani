@@ -5,6 +5,8 @@
  */
 package daw.parking.javdan.modelo;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -29,6 +31,32 @@ public class AbonadoVO {
         this.numeroTarjeta = numeroTarjeta;
         this.email = email;
         this.pin = pin;
+    }
+    
+    public boolean comprobarPin(int pin){
+        
+        AbonadoDAO daoAbonado = new AbonadoDAO();
+        
+        try{
+        ArrayList<AbonadoVO> lista = (ArrayList<AbonadoVO>) daoAbonado.getAll();
+        for (AbonadoVO abonado : lista) {
+            
+            if (abonado.getPin()==pin){
+                
+                return this.matricula.equals(abonado.matricula);
+                
+            }
+            
+        }
+        
+        } catch (SQLException sqle) {
+            System.out.println("No se ha podido realizar la operación:");
+            System.out.println(sqle.getMessage());
+        }
+        
+        
+        return false;
+        
     }
 
     public AbonadoVO() {
