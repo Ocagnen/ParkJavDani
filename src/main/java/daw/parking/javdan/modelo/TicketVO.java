@@ -1,4 +1,3 @@
-
 package daw.parking.javdan.modelo;
 
 import java.time.LocalDate;
@@ -8,9 +7,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 import java.util.Random;
 
-
 public class TicketVO {
-   
+
     private int codTicket;
     private int tipoVehi;
     private String matricula;
@@ -37,31 +35,52 @@ public class TicketVO {
 
     public TicketVO() {
     }
-    
-    public int generarPin(){
-        
+
+    public int generarPin() {
+
         Random alt = new Random();
-        
-        return alt.nextInt(999998-100000+1)+100000;
-        
+
+        return alt.nextInt(999998 - 100000 + 1) + 100000;
+
     }
-    
-    
-    public double calcularDias(){
-        
+
+    public int calcularDias() {
+
         long diferenciaDias = ChronoUnit.DAYS.between(this.fecIngreso, this.fecSalida);
-        
-        return (double)diferenciaDias;
-        
+
+        return (int) diferenciaDias;
+
     }
-    
-    
-    
-    public double calcularTarifa(){
+
+    public int calcularMinutos(int dias) {
+
+        int numMin;
+        long minutosEnMismoDia;
+        long minutosDiaDespues;
+
+        switch (dias) {
+            case 0:
+                minutosEnMismoDia = ChronoUnit.MINUTES.between(this.horaIngreso, this.horaSalida);
+                numMin = (int) minutosEnMismoDia;
+                break;
+            case 1:
+                minutosEnMismoDia = ChronoUnit.MINUTES.between(this.horaIngreso, LocalTime.MIDNIGHT);
+                minutosDiaDespues = ChronoUnit.MINUTES.between(LocalTime.MIDNIGHT, this.horaSalida);
+                numMin = (int)minutosEnMismoDia + (int)minutosDiaDespues;
+                break;
+            default:
+                minutosEnMismoDia = ChronoUnit.MINUTES.between(this.horaIngreso, LocalTime.MIDNIGHT);
+                minutosDiaDespues = ChronoUnit.MINUTES.between(LocalTime.MIDNIGHT, this.horaSalida);
+                numMin = (int)minutosEnMismoDia + (int)minutosDiaDespues + ((dias-1)*1440);
+                break;
+        }
         
-        
-        
-        
+        return numMin;
+
+    }
+
+    public double calcularTarifa() {
+
     }
 
     public int getCodTicket() {
@@ -209,7 +228,5 @@ public class TicketVO {
     public String toString() {
         return "TicketVO{" + "codTicket=" + codTicket + ", tipoVehi=" + tipoVehi + ", matricula=" + matricula + ", codPlaza=" + codPlaza + ", fecIngreso=" + fecIngreso + ", fecSalida=" + fecSalida + ", horaIngreso=" + horaIngreso + ", horaSalida=" + horaSalida + ", pin=" + pin + ", costeEstancia=" + costeEstancia + '}';
     }
-    
-    
 
 }
