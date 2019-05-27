@@ -27,17 +27,11 @@ public class Vista {
 
         switch (eleccionZona) {
             case 1:
-
-                System.out.println("Ha elegido zona administrador");
-                System.out.println("-----------------");
-                System.out.println();
+                seleccionAdmin();
                 break;
 
             case 2:
-
-                System.out.println("Ha elegido zona cliente");
-                System.out.println("-----------------");
-                System.out.println();
+                seleccionCliente();
                 break;
 
         }
@@ -45,7 +39,7 @@ public class Vista {
 
     
     //RAMA DE ZONA CLIENTE
-    public void seleccionCliente() {
+    public static void seleccionCliente() {
 
         Scanner teclado = new Scanner(System.in);
 
@@ -117,7 +111,7 @@ public class Vista {
     
     //RAMA DE ZONA ADMINITRADOR
     
-    public void seleccionAdmin(){
+    public static void seleccionAdmin(){
         
         Scanner teclado= new Scanner(System.in);
         int seleccionAccion = teclado.nextInt();
@@ -157,8 +151,11 @@ public class Vista {
     
     //Métodos para implementar en las ramas anteriores
     public void depositarVehi() {
+        
+        System.out.println("Plazas libres totales ");
 
         System.out.println("Escoja una de las plazas libres");
+        
         //aquí se mostrarán todas las plazas disponibles
 
         System.out.println("Introduzca matrícula");

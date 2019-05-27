@@ -61,17 +61,29 @@ public class PlazaVO {
         
     }
     
-    public int mostrarPlazasLibres(ArrayList<PlazaVO> plazas){
+    public int mostrarPlazasLibres(){
         
-        int plazLib = 0;
+        PlazaDAO daoPlaza = new PlazaDAO();
         
-        for (PlazaVO plaza : plazas) {
-            if(plaza.getEstado() == 0){
-                plazLib++;
+        try{
+        ArrayList<PlazaVO> lista = (ArrayList<PlazaVO>) daoPlaza.getAll();
+        for (PlazaVO plaza : lista) {
+            
+            if(plaza.getEstado() == 0 && plaza.getTipoPlaza()== tipoVehi){
+                
+                plaza.setEstado(1);
+                return plaza.getCodPlaza();
+               
             }
+            
         }
         
-        return plazLib;       
+        } catch (SQLException sqle) {
+            System.out.println("No se ha podido realizar la operación:");
+            System.out.println(sqle.getMessage());
+        }
+        
+        return 0;     
         
     }
     
