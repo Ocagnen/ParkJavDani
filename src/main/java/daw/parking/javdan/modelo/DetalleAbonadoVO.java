@@ -49,7 +49,7 @@ public class DetalleAbonadoVO {
         return 0;
     }
 
-    public boolean retirarVehiAbo(String matricula, int plaza, int pin) {
+    public static boolean retirarVehiAbo(String matricula, int plaza, int pin) {
 
         DetalleAbonadoDAO daoDetalleAbonado = new DetalleAbonadoDAO();
 
