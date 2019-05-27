@@ -98,7 +98,7 @@ public class PlazaVO {
 
     }
 
-    public int obtenerPlazaLibre(int tipoVehi) {
+    public static int obtenerPlazaLibre(int tipoVehi) {
 
         PlazaDAO daoPlaza = new PlazaDAO();
 
