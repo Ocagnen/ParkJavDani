@@ -1,5 +1,7 @@
-package daw.praking.javdan.programa;
+package daw.parking.javdan.modelo;
 
+import daw.parking.javdan.modelo.AbonadoVO;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Vista {
@@ -37,9 +39,8 @@ public class Vista {
         }
     }
 
-    
     //RAMA DE ZONA CLIENTE
-    public static void seleccionCliente() {
+    public static void seleccionCliente(){
 
         Scanner teclado = new Scanner(System.in);
 
@@ -62,21 +63,64 @@ public class Vista {
                 System.out.println("Seleccione una opción: ");
                 System.out.println("1-->Depositar vehículo");
                 System.out.println("2-->Retirar vehículo");
-                System.out.println("3-->Retirar abono");
+
                 seleccionAccion = teclado.nextInt();
-                
-                while (!(seleccionAccion == 1 || seleccionAccion == 2 || seleccionAccion==3)) {
+
+                while (!(seleccionAccion == 1 || seleccionAccion == 2 || seleccionAccion == 3)) {
                     System.out.println("ERROR, seleccione una de las opciones mostradas");
                     seleccionAccion = teclado.nextInt();
                 }
-              
+
+                switch (seleccionAccion) {
+
+                    case 1:
+                        System.out.println("Introduzca el PIN de abonado");
+                        seleccionAccion = teclado.nextInt();
+                        System.out.println("Introduzca su matricula");
+                        teclado.nextLine();
+                        String matricula = teclado.nextLine();
+                        if (AbonadoVO.comprobarPin(seleccionAccion, matricula)) {
+
+                            PlazaDAO daoPlaza = new PlazaDAO();
+                            try {
+                                PlazaVO plazaTempo = daoPlaza.findByCod(DetalleAbonadoVO.obtenerPlaza(matricula));
+                                plazaTempo.setEstado(2);
+                                daoPlaza.updatePlaza(DetalleAbonadoVO.obtenerPlaza(matricula), plazaTempo);
+                            } catch (SQLException sqle) {
+                                System.out.println("No se ha podido realizar la operación:");
+                                System.out.println(sqle.getMessage());
+                            }
+
+                        } else {
+
+                            System.out.println("Error, los datos introducidos "
+                                    + "no son correctos");
+
+                        }
+                        break;
+                    case 2:
+                        System.out.println("Introduce la matricula de tu vehiculo");
+                        matricula = teclado.nextLine();
+                        System.out.println("Introduce el nº de plaza");
+                        int plaza = teclado.nextInt();
+                        System.out.println("Introduce tu PIN");
+                        int pin = teclado.nextInt();
+
+                        if (DetalleAbonadoVO.retirarVehiAbo(matricula, plaza, pin)) {
+                            System.out.println("Vehiculo retirado con éxito");
+                        }
+
+                        break;
+
+                }
+
                 break;
 
             case 2:
 
-                System.out.println("¿Desea hacerse abonado?");
-                System.out.println("1-->Si");
-                System.out.println("2-->No");
+                System.out.println("Elija una opción: ");
+                System.out.println("1-->Depositar vehículo");
+                System.out.println("2-->Retirar vehículo");
                 seleccionAccion = teclado.nextInt();
 
                 while (!(seleccionAccion == 1 || seleccionAccion == 2)) {
@@ -85,79 +129,126 @@ public class Vista {
                 }
 
                 switch (seleccionAccion) {
+
                     case 1:
-                       
-                        //depositarAb()
+                        PlazaVO.mostrarPlazasLibres();
+                        teclado.nextLine();
+                        System.out.println("Introduzca matricula");
+                        String matricula = teclado.nextLine();
+
+                        while (matricula.length() != 8) {
+                            System.out.println("Matricula erronea");
+                            System.out.println("Introduzcala de nuevo "
+                                    + "con formato 1111-XXX");
+                            matricula = teclado.nextLine();
+                        }
+
+                        System.out.println("Introduzca el tipo de vehiculo");
+                        System.out.println("0 - Turismo");
+                        System.out.println("1 - Motocicleta");
+                        System.out.println("2 - Caravana");
+                        int tipoVehi = teclado.nextInt();
+
+                        while (tipoVehi > 2 || tipoVehi < 0) {
+                            System.out.println("Tipo erroneo, pruebe de nuevo");
+                            System.out.println("0 - Turismo");
+                            System.out.println("1 - Motocicleta");
+                            System.out.println("2 - Caravana");
+                            tipoVehi = teclado.nextInt();
+                        }
+
+                        if (PlazaVO.obtenerPlazaLibre(tipoVehi) == 0) {
+                            System.out.println("Lo siento, no hay plazas libres");
+                        } else {
+                            System.out.println("Operación realizada con éxito");
+                            System.out.println("Su plaza es la número "
+                                    + PlazaVO.obtenerPlazaLibre(tipoVehi));
+                            TicketVO tickaux = TicketVO.generarTicket(matricula, tipoVehi, PlazaVO.obtenerPlazaLibre(tipoVehi));
+                            System.out.println("");
+                            System.out.println("INFORMACIÓN DEL TICKET");
+                            tickaux.toStringParaClientes();
+                        }
+
                         break;
 
                     case 2:
+                        teclado.nextLine();
+                        System.out.println("Introduzce la matricula");
+                        matricula = teclado.nextLine();
 
-                        System.out.println("Elija una opción: ");
-                        System.out.println("1-->Depositar vehículo");
-                        System.out.println("2-->Retirar vehículo");
-                        seleccionAccion = teclado.nextInt();
-                        
-                        while (!(seleccionAccion == 1 || seleccionAccion == 2)) {
-                              System.out.println("ERROR, seleccione una de las opciones mostradas");
-                              seleccionAccion = teclado.nextInt();
+                        while (matricula.length() != 8) {
+                            System.out.println("Matricula erronea");
+                            System.out.println("Introduzcala de nuevo "
+                                    + "con formato 1111-XXX");
+                            matricula = teclado.nextLine();
                         }
+
+                        System.out.println("Introduce nº plaza");
+                        int numeroPlaza = teclado.nextInt();
+
+                        System.out.println("Introduce el PIN");
+                        int pin = teclado.nextInt();
+
+                        int pkTick = TicketVO.obtenerCodTickSalida(matricula, numeroPlaza, pin);
+
+                        TicketVO auxTick = TicketVO.obtenerTicket(pkTick);
+
+                        auxTick.actualizarTicketSalida();
+
+                        System.out.println("El importe a pagar será de " + auxTick.calcularTarifa());                       
+
                         break;
+
                 }
-                break;
         }
 
     }//FIN DE RAMA DE ZONA CLIENTE 
-    
-    
-    //RAMA DE ZONA ADMINITRADOR
-    
-    public static void seleccionAdmin(){
-        
-        Scanner teclado= new Scanner(System.in);
+
+//RAMA DE ZONA ADMINITRADOR
+    public static void seleccionAdmin() {
+
+        Scanner teclado = new Scanner(System.in);
         int seleccionAccion = teclado.nextInt();
-        
+
         System.out.println("¿Que desea ver?");
         System.out.println("1-->Estado de Parking");
         System.out.println("2-->Facturación");
         System.out.println("3-->Abonos");
-        
-        while (!(seleccionAccion == 1 || seleccionAccion == 2 || seleccionAccion==3)) {
-                    System.out.println("ERROR, seleccione una de las opciones mostradas");
-                    seleccionAccion = teclado.nextInt();
-                }
-        
+
+        while (!(seleccionAccion == 1 || seleccionAccion == 2 || seleccionAccion == 3)) {
+            System.out.println("ERROR, seleccione una de las opciones mostradas");
+            seleccionAccion = teclado.nextInt();
+        }
+
         switch (seleccionAccion) {
             case 1:
-                
+
                 System.out.println("Se le mostrará el estado del parking");
                 //estadoParking();
                 break;
-            
+
             case 2:
-                
+
                 //mostarFacturación()
                 break;
-            
+
             case 3:
-                
+
                 //Abonos()
                 break;
         }
-        
+
     }
-    
+
     //FIN DE RAMA DE ZONA ADMINISTRADOR
-    
-    
     //Métodos para implementar en las ramas anteriores
     public void depositarVehi() {
-        
+
         System.out.println("Plazas libres totales ");
 
         System.out.println("Escoja una de las plazas libres");
-        
-        //aquí se mostrarán todas las plazas disponibles
 
+        //aquí se mostrarán todas las plazas disponibles
         System.out.println("Introduzca matrícula");
         //aquí introduciremos la matrícula
 
@@ -209,7 +300,6 @@ public class Vista {
         //
 
         //Se actualizarán las plazas
-        
         System.out.println("Aquí tiene su pin");
         //
     }
