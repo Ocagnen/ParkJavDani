@@ -112,6 +112,22 @@ public class TicketVO {
         return daoTicket.findByCod(pk);
 
     }
+    
+    public static void cerrarTicket(TicketVO ticket){
+        
+        TicketDAO daoTicket = new TicketDAO();
+        
+            try {
+                
+                daoTicket.updateTicket(ticket.codTicket, ticket);           
+
+        } catch (SQLException sqle) {
+            System.out.println("No se ha podido realizar la operación:");
+            System.out.println(sqle.getMessage());
+        }
+
+        
+    }
 
     public void actualizarTicketSalida() {
 
