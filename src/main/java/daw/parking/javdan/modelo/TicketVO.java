@@ -80,7 +80,9 @@ public class TicketVO {
     }
 
     public double calcularTarifa() {
-
+        
+        return calcularMinutos(calcularDias())*this.costeEstancia;
+        
     }
 
     public int getCodTicket() {
