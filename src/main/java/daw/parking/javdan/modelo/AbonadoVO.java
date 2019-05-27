@@ -31,7 +31,10 @@ public class AbonadoVO {
         this.numeroTarjeta = numeroTarjeta;
         this.email = email;
         this.pin = pin;
-    }
+    }    
+    
+    public AbonadoVO() {
+    }   
     
     public static boolean comprobarPin(int pin, String matricula){
         
@@ -59,8 +62,10 @@ public class AbonadoVO {
         
     }
 
-    public AbonadoVO() {
-    }   
+    public static void escribirDni(){
+        
+        
+    }
 
     public String getMatricula() {
         return matricula;
