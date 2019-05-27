@@ -5,6 +5,8 @@
  */
 package daw.parking.javdan.modelo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author javier
@@ -24,6 +26,7 @@ public class PlazaVO {
     }
 
     public PlazaVO() {
+        
     }
     
     
@@ -54,6 +57,21 @@ public class PlazaVO {
             default:
                 return "Abono libre";
         }
+        
+    }
+    
+    public int mostrarPlazasLibres(ArrayList<PlazaVO> plazas){
+        
+        int plazLib = 0;
+        
+        for (PlazaVO plaza : plazas) {
+            if(plaza.getEstado() == 0){
+                plazLib++;
+            }
+        }
+        
+        return plazLib;
+        
         
     }
 
