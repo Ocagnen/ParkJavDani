@@ -89,9 +89,9 @@ public class TicketVO {
             for (TicketVO ticket : lista) {
 
                 if (ticket.getMatricula().equals(matricula) && ticket.getCodPlaza() == plaza
-                        && ticket.getPin() == pin) {                 
+                        && ticket.getPin() == pin) {
 
-                   return ticket.codTicket;
+                    return ticket.codTicket;
 
                 }
 
@@ -101,15 +101,23 @@ public class TicketVO {
             System.out.println("No se ha podido realizar la operación:");
             System.out.println(sqle.getMessage());
         }
-        
+
         return -1;
     }
-    
-    public void actualizarTicketSalida(){
+
+    public static TicketVO obtenerTicket(int pk) throws SQLException {
+
+        TicketDAO daoTicket = new TicketDAO();
         
+        return daoTicket.findByCod(pk);
+
+    }
+
+    public void actualizarTicketSalida() {
+
         this.fecSalida = LocalDate.now();
-        this.horaSalida = LocalTime.now();     
-        
+        this.horaSalida = LocalTime.now();
+
     }
 
     public int calcularDias() {
@@ -148,13 +156,13 @@ public class TicketVO {
     }
 
     public double calcularTarifa() {
-        
+
         PlazaDAO daoPlaza = new PlazaDAO();
         PlazaVO plazaAux = new PlazaVO();
-        
+
         try {
-            plazaAux = daoPlaza.findByCod(this.codPlaza);            
-            
+            plazaAux = daoPlaza.findByCod(this.codPlaza);
+
         } catch (SQLException sqle) {
             System.out.println("No se ha podido realizar la operación:");
             System.out.println(sqle.getMessage());
