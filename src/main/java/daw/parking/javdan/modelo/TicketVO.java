@@ -216,6 +216,23 @@ public class TicketVO {
 
         return listaDevolver;
     }
+    
+    public void mostrarCobros(ArrayList<TicketVO> lista){
+        
+        System.out.println("COBROS");
+        double costeEst = 0;
+        
+        for (TicketVO ticketVO : lista) {
+            
+            System.out.println(ticketVO.getCosteEstancia()+ "€");
+            costeEst = costeEst + ticketVO.getCosteEstancia();
+            
+        }
+        
+        System.out.println("IMPORTE FINAL");
+        System.out.println(costeEst+ "€");
+        
+    }
 
     public int getCodTicket() {
         return codTicket;
