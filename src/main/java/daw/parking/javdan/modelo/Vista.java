@@ -171,7 +171,8 @@ public class Vista {
 
                             System.out.println("");
                             System.out.println("INFORMACIÓN DEL TICKET");
-                            tickaux.toStringParaClientes();
+                            System.out.println(tickaux.toStringParaClientes());
+                            
                         }
 
                         break;
@@ -297,10 +298,89 @@ public class Vista {
 
                 while (seleccionAccion > 3 || seleccionAccion < 1) {
                     System.out.println("Opcion incorrecta, seleccione una de las siguientes:");
-                    System.out.println("1 - Dar de alta a un abonado");
+                    System.out.println("1 - Insertar abonado");
                     System.out.println("2 - Modificar un abonado");
                     System.out.println("3 - Dar de baja a un abonado");
                     seleccionAccion = teclado.nextInt();
+                }
+
+                switch (seleccionAccion) {
+                    case 1:
+                        System.out.println("Introduzca opción");
+                        System.out.println("1 - Dar de alta nuevo abonado");
+                        System.out.println("2 - Dar de alta nuevo abono a plaza");
+                        seleccionAccion = teclado.nextInt();
+                        while (seleccionAccion > 2 || seleccionAccion < 1) {
+                            System.out.println("Opcion incorrecta, seleccione una de las siguientes:");
+                            System.out.println("1 - Dar de alta nuevo abonado");
+                            System.out.println("2 - Dar de alta nuevo abono a plaza");
+                            seleccionAccion = teclado.nextInt();
+                        }
+
+                        switch (seleccionAccion) {
+                            case 1:
+                                System.out.println("INTRODUCIR DATOS DE ABONADO");
+                                System.out.println("Introduzca nombre");
+                                teclado.nextLine();
+                                String nombre = teclado.nextLine();
+
+                                System.out.println("Introduzca apellidos");
+                                String apellidos = teclado.nextLine();
+
+                                System.out.println("Introduzca dni");
+                                String dni = teclado.nextLine();
+                                while (dni.length() != 9) {
+
+                                    System.out.println("Dni incorrecto");
+                                    dni = teclado.nextLine();
+
+                                }
+
+                                System.out.println("Introduzca su email");
+                                String email = teclado.nextLine();
+
+                                System.out.println("Introduzca su número de tarjeta");
+                                String numTarjeta = teclado.nextLine();
+                                while (numTarjeta.length() != 16) {
+                                    System.out.println("Número de tarjeta incorrecto");
+                                    numTarjeta = teclado.nextLine();
+                                }
+
+                                System.out.println("Introduzca su matricula");
+                                String matricula = teclado.nextLine();
+                                while (matricula.length() != 8) {
+                                    System.out.println("Matricula erronea, introduzca en formato 1111-XXX");
+                                    matricula = teclado.nextLine();
+                                }
+
+                                AbonadoVO abonadoAux = new AbonadoVO(matricula, dni, nombre, apellidos, numTarjeta, email, TicketVO.generarPin());
+
+                                AbonadoVO.insertarAbonado(abonadoAux);
+                                break;
+
+                            case 2:
+                                System.out.println("REGISTRAR NUEVO ABONO A PLAZA");
+                                System.out.println("Selecciona un tipo de abono");
+                                System.out.println("1 - Mensual(25€)");
+                                System.out.println("2 - Trimestral (70€)");
+                                System.out.println("3 - Semestral (130€)");
+                                System.out.println("4 - Anual (200€)");
+                                int tipoAbono = teclado.nextInt();
+                                while (tipoAbono > 4 || tipoAbono < 1) {
+                                    System.out.println("Opcion incorrecta, seleccione una de las siguientes:");
+                                    System.out.println("1 - Mensual(25€)");
+                                    System.out.println("2 - Trimestral (70€)");
+                                    System.out.println("3 - Semestral (130€)");
+                                    System.out.println("4 - Anual (200€)");
+                                    tipoAbono = teclado.nextInt();
+                                }
+                                
+                                
+                                
+                                
+
+                        }
+
                 }
 
                 break;
