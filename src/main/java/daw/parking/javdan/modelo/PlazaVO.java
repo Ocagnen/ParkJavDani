@@ -108,7 +108,7 @@ public class PlazaVO {
 
                 if (plaza.getEstado() == 0 && plaza.getTipoPlaza() == tipoVehi) {
 
-                    plaza.setEstado(1);
+                    PlazaVO.cambiarEstadoPlaza(plaza, 1);
                     return plaza.getCodPlaza();
 
                 }
