@@ -11,8 +11,6 @@ import java.util.Random;
 
 public class TicketVO {
 
-   
-
     private int codTicket;
     private int tipoVehi;
     private String matricula;
@@ -25,7 +23,7 @@ public class TicketVO {
     private double costeEstancia;
 
     public TicketVO(int codTicket, int tipoVehi, String matricula, int codPlaza, LocalDate fecIngreso, LocalDate fecSalida, LocalTime horaIngreso, LocalTime horaSalida, int pin, double costeEstancia) {
-        
+
         this.codTicket = codTicket;
         this.tipoVehi = tipoVehi;
         this.matricula = matricula;
@@ -39,7 +37,7 @@ public class TicketVO {
     }
 
     public TicketVO() {
-        
+
     }
 
     public static TicketVO generarTicket(String matricula, int tipoVehi, int codPlaz) {
@@ -71,29 +69,28 @@ public class TicketVO {
         return tick;
 
     }
-    
-    public static int generarPKTick(){
-        
+
+    public static int generarPKTick() {
+
         TicketDAO daoTicket = new TicketDAO();
-         ArrayList<TicketVO> tickAux = new ArrayList<>();
-         int contador = 0;
-        
-        try{
-            
-        tickAux = (ArrayList<TicketVO>) daoTicket.getAll();
-        
-        }catch (SQLException sqle) {
+        ArrayList<TicketVO> tickAux = new ArrayList<>();
+        int contador = 0;
+
+        try {
+
+            tickAux = (ArrayList<TicketVO>) daoTicket.getAll();
+
+        } catch (SQLException sqle) {
             System.out.println("No se ha podido realizar la operación:");
             System.out.println(sqle.getMessage());
         }
-        
+
         for (TicketVO ticketVO : tickAux) {
             contador++;
         }
-        
-        return contador+1;
 
-        
+        return contador + 1;
+
     }
 
     public static int generarPin() {
@@ -157,19 +154,17 @@ public class TicketVO {
         this.fecSalida = LocalDate.now();
         this.horaSalida = LocalTime.now();
         this.costeEstancia = this.calcularTarifa();
-        
-        TicketDAO daoTicket = new TicketDAO ();
-        
+
+        TicketDAO daoTicket = new TicketDAO();
+
         try {
-            
+
             daoTicket.updateTicket(this.getCodTicket(), this);
-            
+
         } catch (SQLException sqle) {
             System.out.println("No se ha podido realizar la operación:");
             System.out.println(sqle.getMessage());
         }
-        
-        
 
     }
 
@@ -231,45 +226,65 @@ public class TicketVO {
 
         ArrayList<TicketVO> listaAux = new ArrayList<>();
         ArrayList<TicketVO> listaDevolver = new ArrayList<>();
-        
+
         try {
-            
+
             listaAux = (ArrayList<TicketVO>) daoTicket.getAll();
-            
+
         } catch (SQLException sqle) {
             System.out.println("No se ha podido realizar la operación:");
             System.out.println(sqle.getMessage());
         }
-        
+
         for (TicketVO ticketVO : listaAux) {
-            
-            if(ticketVO.getFecSalida().isAfter(finIni)
-                    && ticketVO.getFecSalida().isBefore(fecFin)){
-                
+
+            if (ticketVO.getFecSalida().isAfter(finIni)
+                    && ticketVO.getFecSalida().isBefore(fecFin)) {
+
                 listaDevolver.add(ticketVO);
-                
+
             }
-            
+
         }
 
         return listaDevolver;
     }
-    
-    public static void mostrarCobros(ArrayList<TicketVO> lista){
-        
+
+    public static ArrayList<TicketVO> obtenerTicket(ArrayList<TicketVO> lista, LocalTime horaIni, LocalTime horaFin) {
+
+        TicketDAO daoTicket = new TicketDAO();
+
+        ArrayList<TicketVO> listaDevolver = new ArrayList<>();
+
+        for (TicketVO ticketVO : lista) {
+
+            if (ticketVO.getHoraIngreso().isAfter(horaIni)
+                    && ticketVO.getHoraSalida().isBefore(horaFin)) {
+
+                listaDevolver.add(ticketVO);
+
+            }
+
+        }
+
+        return listaDevolver;
+    }
+
+    public static void mostrarCobros(ArrayList<TicketVO> lista) {
+
         System.out.println("COBROS");
         double costeEst = 0;
-        
+
         for (TicketVO ticketVO : lista) {
-            
-            System.out.println(ticketVO.getCosteEstancia()+ "€");
+
+            System.out.println(ticketVO.getCosteEstancia() + "€");
             costeEst = costeEst + ticketVO.getCosteEstancia();
-            
+
         }
-        
+
         System.out.println("IMPORTE FINAL");
-        System.out.println(costeEst+ "€");
-        
+        System.out.println(costeEst + "€");
+
     }
 
     public int getCodTicket() {
