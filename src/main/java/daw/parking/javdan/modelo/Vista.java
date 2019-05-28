@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Vista {
 
-    public static void menu() throws SQLException {
+    public static int menu() throws SQLException {
 
         Scanner teclado = new Scanner(System.in);
 
@@ -17,15 +17,19 @@ public class Vista {
         System.out.println("Escoja una opción de las siguientes");
         System.out.println("1-->Zona administrador");
         System.out.println("2-->Zona cliente");
+        System.out.println("3-->SALIR");
 
         System.out.println("-----------------");
         System.out.println("-----------------");
-        // Cambialo por un while
+
         int eleccionZona = teclado.nextInt();
 
-        while (!(eleccionZona == 1 || eleccionZona == 2)) {
+        while (eleccionZona > 3 || eleccionZona < 1) {
 
             System.out.println("ERROR, seleccione una de las opciones mostradas");
+            System.out.println("1-->Zona administrador");
+            System.out.println("2-->Zona cliente");
+            System.out.println("3-->SALIR");
             eleccionZona = teclado.nextInt();
 
         }
@@ -33,11 +37,13 @@ public class Vista {
         switch (eleccionZona) {
             case 1:
                 seleccionAdmin();
-                break;
+                return 1;
 
             case 2:
                 seleccionCliente();
-                break;
+                return 2;
+            default:
+                return 3;
 
         }
     }
@@ -220,10 +226,15 @@ public class Vista {
         System.out.println("1-->Estado de Parking");
         System.out.println("2-->Facturación");
         System.out.println("3-->Abonos");
+        System.out.println("4 --> Caducidad de abonos");
         int seleccionAccion = teclado.nextInt();
 
-        while (!(seleccionAccion == 1 || seleccionAccion == 2 || seleccionAccion == 3)) {
-            System.out.println("ERROR, seleccione una de las opciones mostradas");
+        while (seleccionAccion > 4 || seleccionAccion < 1) {
+            System.out.println("Opcion incorrecta, seleccione una de las siguientes:");
+            System.out.println("1-->Estado de Parking");
+            System.out.println("2-->Facturación");
+            System.out.println("3-->Abonos");
+            System.out.println("4 --> Caducidad de abonos");
             seleccionAccion = teclado.nextInt();
         }
 
@@ -293,8 +304,6 @@ public class Vista {
                         System.out.println("Introduce los segundos (formato 00)");
                         segundo = teclado.nextInt();
                         LocalTime horaFin = LocalTime.of(hora, minuto, segundo);
-                        
-                        
 
                         ArrayList<TicketVO> listTickAux = TicketVO.obtenerTicketsFechas(fecIni, fecFin);
                         ArrayList<TicketVO> listTickAux2 = TicketVO.obtenerTicketHoras(listTickAux, horaIni, horaFin);
@@ -579,6 +588,39 @@ public class Vista {
                 }
 
                 break;
+            case 4:
+                System.out.println("CADUCIDAD DE ABONOS");
+                System.out.println("Seleccione opción");
+                System.out.println("1 - Ver abonos que caducan en un mes concreto");
+                System.out.println("2 - Ver abonos que caducan en los próximos"
+                        + " 10 días");
+                seleccionAccion = teclado.nextInt();
+                while (seleccionAccion > 2 || seleccionAccion < 1) {
+                    System.out.println("Opcion incorrecta, seleccione una de las siguientes:");
+                    System.out.println("1 - Ver abonos que caducan en un mes concreto");
+                    System.out.println("2 - Ver abonos que caducan en los próximos"
+                            + " 10 días");
+                    seleccionAccion = teclado.nextInt();
+                }
+
+                switch (seleccionAccion) {
+                    case 1:
+                        System.out.println("Introduce un mes (del 1 al 12)");
+                        seleccionAccion = teclado.nextInt();
+                        while (seleccionAccion > 12 || seleccionAccion < 1) {
+                            System.out.println("Opcion incorrecta");
+                            System.out.println("El mes debería estar entre 1 y 12");
+                            seleccionAccion = teclado.nextInt();
+                        }
+                        DetalleAbonadoVO.mostrarAbonosMes(seleccionAccion);
+                        break;
+                    case 2:
+                        System.out.println("ABONOS QUE CADUCAN EN LOS ÚLTIMOS "
+                                + " 10 DÍAS");
+                        DetalleAbonadoVO.abonosCaducanDiezDias();
+                        break;
+                }
+
         }
 
     }
