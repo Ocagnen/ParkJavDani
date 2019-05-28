@@ -31,79 +31,92 @@ public class AbonadoVO {
         this.numeroTarjeta = numeroTarjeta;
         this.email = email;
         this.pin = pin;
-    }    
-    
+    }
+
     public AbonadoVO() {
-    }   
-    
-    public static void insertarAbonado(AbonadoVO abonado){
-        
+    }
+
+    public static void insertarAbonado(AbonadoVO abonado) {
+
         AbonadoDAO daoAbonado = new AbonadoDAO();
+
+        try {
+
+            daoAbonado.insertAbonado(abonado);
+
+        } catch (SQLException sqle) {
+            System.out.println("No se ha podido realizar la operación:");
+            System.out.println(sqle.getMessage());
+        }
+
+    }
+
+    public static void modificarAbonado(AbonadoVO abonado) {
+
+        AbonadoDAO daoAbonado = new AbonadoDAO();      
         
         try {
             
-            daoAbonado.insertAbonado(abonado);
+            
+            daoAbonado.updateAbonado(abonado.getMatricula(), abonado);
             
         } catch (SQLException sqle) {
             System.out.println("No se ha podido realizar la operación:");
             System.out.println(sqle.getMessage());
-        }  
-        
-        
+        }
+
     }
-    
-    public static boolean comprobarPin(int pin, String matricula){
-        
+
+    public static boolean comprobarPin(int pin, String matricula) {
+
         AbonadoDAO daoAbonado = new AbonadoDAO();
-        
-        try{
-        ArrayList<AbonadoVO> lista = (ArrayList<AbonadoVO>) daoAbonado.getAll();
-        for (AbonadoVO abonado : lista) {
-            
-            if (abonado.getPin()==pin){
-                
-                return matricula.equals(abonado.matricula);
-                
+
+        try {
+            ArrayList<AbonadoVO> lista = (ArrayList<AbonadoVO>) daoAbonado.getAll();
+            for (AbonadoVO abonado : lista) {
+
+                if (abonado.getPin() == pin) {
+
+                    return matricula.equals(abonado.matricula);
+
+                }
+
             }
-            
-        }
-        
+
         } catch (SQLException sqle) {
             System.out.println("No se ha podido realizar la operación:");
             System.out.println(sqle.getMessage());
         }
-        
-        
+
         return false;
-        
+
     }
-    
-    public static boolean comprobarAbonadoMatr(String matricula){
-        
+
+    public static boolean comprobarAbonadoMatr(String matricula) {
+
         AbonadoDAO daoAbonado = new AbonadoDAO();
         ArrayList<AbonadoVO> listaAux = new ArrayList<>();
-        
-        try{            
-            listaAux = (ArrayList<AbonadoVO>) daoAbonado.getAll();          
-            
-        }catch (SQLException sqle) {
+
+        try {
+            listaAux = (ArrayList<AbonadoVO>) daoAbonado.getAll();
+
+        } catch (SQLException sqle) {
             System.out.println("No se ha podido realizar la operación:");
             System.out.println(sqle.getMessage());
         }
-        
+
         for (AbonadoVO abonadoVO : listaAux) {
-            if(abonadoVO.getMatricula().equalsIgnoreCase(matricula)){
+            if (abonadoVO.getMatricula().equalsIgnoreCase(matricula)) {
                 return true;
             }
         }
-        
+
         return false;
-        
+
     }
 
-    public static void escribirDni(){
-        
-        
+    public static void escribirDni() {
+
     }
 
     public String getMatricula() {
@@ -215,7 +228,5 @@ public class AbonadoVO {
         }
         return true;
     }
-    
-    
 
 }
