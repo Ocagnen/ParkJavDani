@@ -92,52 +92,51 @@ public class DetalleAbonadoVO {
         ArrayList<DetalleAbonadoVO> listaAux = new ArrayList<>();
         ArrayList<DetalleAbonadoVO> listaDev = new ArrayList<>();
         int anioActual = LocalDate.now().getYear();
-        
+
         try {
-            
+
             listaAux = (ArrayList<DetalleAbonadoVO>) daoDetAbo.getAll();
-            
-            
+
         } catch (SQLException sqle) {
             System.out.println("No se ha podido realizar la operación:");
             System.out.println(sqle.getMessage());
         }
-        
+
         for (DetalleAbonadoVO detalleAbonadoVO : listaAux) {
-            
-            if(detalleAbonadoVO.getFecFinAbono().isAfter(LocalDate.of(anioActual, 1, 1))
-                    && detalleAbonadoVO.getFecFinAbono().isBefore(LocalDate.of(anioActual, 12, 31))){
-                
+
+            if (detalleAbonadoVO.getFecFinAbono().isAfter(LocalDate.of(anioActual, 1, 1))
+                    && detalleAbonadoVO.getFecFinAbono().isBefore(LocalDate.of(anioActual, 12, 31))) {
+
                 listaDev.add(detalleAbonadoVO);
-                
+
             }
-            
+
         }
-        
+
         return listaDev;
 
     }
-    
-    public static void muestraCobroAbonados(ArrayList<DetalleAbonadoVO> lista){
-        
+
+    public static void muestraCobroAbonados(ArrayList<DetalleAbonadoVO> lista) {
+
         System.out.println("COBROS ABONADOS");
         int cobroTotal = 0;
-        
+
         for (DetalleAbonadoVO detalleAbonadoVO : lista) {
-            
-            System.out.println(detalleAbonadoVO.calcularAbonos()+ "€");  
-            cobroTotal = cobroTotal + detalleAbonadoVO.calcularAbonos();            
+
+            System.out.println(detalleAbonadoVO.calcularAbonos() + "€");
+            cobroTotal = cobroTotal + detalleAbonadoVO.calcularAbonos();
         }
-        
+
         System.out.println("COBRO TOTAL ABONADOS");
         System.out.println(cobroTotal + "€");
-        
+
     }
-    
-    public int calcularAbonos(){
-        
-        switch(this.tipoAbono){
-            
+
+    public int calcularAbonos() {
+
+        switch (this.tipoAbono) {
+
             case 0:
                 return 25;
             case 1:
@@ -145,77 +144,103 @@ public class DetalleAbonadoVO {
             case 2:
                 return 130;
             default:
-                return 200;          
-            
+                return 200;
+
         }
-        
+
     }
-    
-    public static DetalleAbonadoVO insertaNuevoDetalleAbonado(int tipoAbono, int tipoVehi, String matricula){
-        
+
+    public static DetalleAbonadoVO insertaNuevoDetalleAbonado(int tipoAbono, int tipoVehi, String matricula) {
+
         DetalleAbonadoDAO daoDetAbo = new DetalleAbonadoDAO();
         DetalleAbonadoVO detAb = new DetalleAbonadoVO();
-        
+
         PlazaDAO daoPlaza = new PlazaDAO();
         PlazaVO plazaAux = new PlazaVO();
-        
+
         AbonadoDAO daoAbonado = new AbonadoDAO();
-        AbonadoVO abonadoAux = new AbonadoVO();      
-        
-        
+        AbonadoVO abonadoAux = new AbonadoVO();
+
         int pkPlaza = PlazaVO.obtenerPlazaLibre(tipoVehi);
-        
-        try{
-        abonadoAux = daoAbonado.findByCod(matricula);
-        plazaAux = daoPlaza.findByCod(pkPlaza);
-        
+
+        try {
+            abonadoAux = daoAbonado.findByCod(matricula);
+            plazaAux = daoPlaza.findByCod(pkPlaza);
+
         } catch (SQLException sqle) {
             System.out.println("No se ha podido realizar la operación:");
             System.out.println(sqle.getMessage());
         }
-        
+
         detAb.setCodPlaza(pkPlaza);
         detAb.setFecFinAbono(LocalDate.now());
         detAb.setMatricula(matricula);
         detAb.setTipoAbono(tipoAbono);
         detAb.setFecFinAbono(DetalleAbonadoVO.generarFechaFinAbono(tipoAbono));
-        
+
         try {
-            
+
             daoDetAbo.insertDetAb(detAb);
-            
+
         } catch (SQLException sqle) {
             System.out.println("No se ha podido realizar la operación:");
             System.out.println(sqle.getMessage());
-        }      
-        
-        return detAb;    
-        
+        }
+
+        return detAb;
+
     }
-    
-    public static DetalleAbonadoVO obtenerDetallesAbonoActivo(String matricula) throws SQLException{
-        
+
+    public static DetalleAbonadoVO obtenerDetallesAbonoActivo(String matricula) throws SQLException {
+
         DetalleAbonadoDAO daoDetAbo = new DetalleAbonadoDAO();
         ArrayList<DetalleAbonadoVO> lista = new ArrayList<>();
         DetalleAbonadoVO detAuxi = new DetalleAbonadoVO();
-        
+
         lista = (ArrayList<DetalleAbonadoVO>) daoDetAbo.getAll();
-        
+
         for (DetalleAbonadoVO detalleAbonadoVO : lista) {
-            
-            if(detalleAbonadoVO.getMatricula().equals(matricula)
-                    && detalleAbonadoVO.getFecFinAbono().isAfter(LocalDate.now())){
+
+            if (detalleAbonadoVO.getMatricula().equals(matricula)
+                    && detalleAbonadoVO.getFecFinAbono().isAfter(LocalDate.now())) {
                 detAuxi = detalleAbonadoVO;
             }
-            
-        }       
-        
+
+        }
+
         return detAuxi;
     }
-    
-    public static LocalDate generarFechaFinAbono(int tipoAbo){
-        
-        switch(tipoAbo){
+
+    public static boolean compruebaAbonoActivo(String matricula) {
+
+        DetalleAbonadoDAO daoDetAbo = new DetalleAbonadoDAO();
+        ArrayList<DetalleAbonadoVO> lista = new ArrayList<>();
+
+        try {
+
+            lista = (ArrayList<DetalleAbonadoVO>) daoDetAbo.getAll();
+
+            for (DetalleAbonadoVO detalleAbonadoVO : lista) {
+
+                if (detalleAbonadoVO.getMatricula().equals(matricula)
+                        && detalleAbonadoVO.getFecFinAbono().isAfter(LocalDate.now())) {
+                    return true;
+                }
+
+            }
+
+        } catch (SQLException sqle) {
+            System.out.println("No se ha podido realizar la operación:");
+            System.out.println(sqle.getMessage());
+        }
+
+        return false;
+
+    }
+
+    public static LocalDate generarFechaFinAbono(int tipoAbo) {
+
+        switch (tipoAbo) {
             case 0:
                 return LocalDate.now().plusMonths(1);
             case 1:
@@ -223,10 +248,10 @@ public class DetalleAbonadoVO {
             case 2:
                 return LocalDate.now().plusMonths(6);
             default:
-                return LocalDate.now().plusYears(1);           
-            
+                return LocalDate.now().plusYears(1);
+
         }
-        
+
     }
 
     public String getMatricula() {
