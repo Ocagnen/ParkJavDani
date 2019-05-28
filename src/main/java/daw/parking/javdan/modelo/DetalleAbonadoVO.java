@@ -253,10 +253,10 @@ public class DetalleAbonadoVO {
         }
 
     }
-    
-    public static void renovarAbono(DetalleAbonadoVO detAb, int tipoAbo){
-        
-        switch(tipoAbo){
+
+    public static void renovarAbono(DetalleAbonadoVO detAb, int tipoAbo) {
+
+        switch (tipoAbo) {
             case 0:
                 detAb.setFecFinAbono(detAb.getFecFinAbono().plusMonths(1));
                 break;
@@ -268,38 +268,55 @@ public class DetalleAbonadoVO {
                 break;
             case 3:
                 detAb.setFecFinAbono(detAb.getFecFinAbono().plusYears(1));
-                break;          
-            
+                break;
+
         }
-        
+
         DetalleAbonadoDAO daoDetAbo = new DetalleAbonadoDAO();
-        
-        try{
-            
+
+        try {
+
             daoDetAbo.updateDetAb(detAb.getMatricula(), detAb.getCodPlaza(), detAb.getFecIniAbono(), detAb);
-            
-        }catch (SQLException sqle) {
+
+        } catch (SQLException sqle) {
             System.out.println("No se ha podido realizar la operación:");
             System.out.println(sqle.getMessage());
-        }       
-        
+        }
+
     }
-    
-    public static void mostrarAbonosMes(int mes){
-        
+
+    public static void mostrarAbonosMes(int mes) {
+
         ArrayList<DetalleAbonadoVO> lista = DetalleAbonadoVO.obtenerAbonosAnuales();
-        
-        System.out.println("ABONOS QUE CADUCAN EN EL MES "+mes);
+
+        System.out.println("ABONOS QUE CADUCAN EN EL MES " + mes);
+
+        for (DetalleAbonadoVO detalleAbonadoVO : lista) {
+
+            if ((detalleAbonadoVO.getFecFinAbono().getMonthValue() == mes)) {
+
+                System.out.println(detalleAbonadoVO.toString());
+
+            }
+
+        }
+
+    }
+
+    public static void abonosCaducanDiezDias() {
+
+        ArrayList<DetalleAbonadoVO> lista = DetalleAbonadoVO.obtenerAbonosAnuales();
         
         for (DetalleAbonadoVO detalleAbonadoVO : lista) {
             
-            if((detalleAbonadoVO.getFecFinAbono().getMonthValue() == mes)
-            && (detalleAbonadoVO.getFecFinAbono().getYear() == LocalDate.now().getYear() )){
+            if((detalleAbonadoVO.getFecFinAbono().isAfter(LocalDate.now())
+                    && detalleAbonadoVO.getFecFinAbono().isBefore(LocalDate.now().plusDays(10)))){
                 
                 System.out.println(detalleAbonadoVO.toString());
                 
             }
             
+                
         }
         
     }
