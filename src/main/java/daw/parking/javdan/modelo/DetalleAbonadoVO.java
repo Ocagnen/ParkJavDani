@@ -117,6 +117,36 @@ public class DetalleAbonadoVO {
         return listaDev;
 
     }
+    
+    public static void muestraCobroAbonados(ArrayList<DetalleAbonadoVO> lista){
+        
+        System.out.println("COBROS ABONADOS");
+        
+        for (DetalleAbonadoVO detalleAbonadoVO : lista) {
+            
+            System.out.println(detalleAbonadoVO);
+            
+            
+        }
+        
+    }
+    
+    public double calcularAbonos(){
+        
+        switch(this.tipoAbono){
+            
+            case 0:
+                return 25;
+            case 1:
+                return 70;
+            case 2:
+                return 130;
+            default:
+                return 200;          
+            
+        }
+        
+    }
 
     public String getMatricula() {
         return matricula;
