@@ -291,16 +291,18 @@ public class Vista {
                 System.out.println("GESTION DE ABONADOS");
                 System.out.println("Introduzca el número de la opción "
                         + "que desea ejecutar");
-                System.out.println("1 - Dar de alta a un abonado");
+                System.out.println("1 - Insertar abonado");
                 System.out.println("2 - Modificar un abonado");
-                System.out.println("3 - Dar de baja a un abonado");
+                System.out.println("3 - Modificar un abono concreto");
+                System.out.println("4 - Dar de baja a un abonado");
                 seleccionAccion = teclado.nextInt();
 
-                while (seleccionAccion > 3 || seleccionAccion < 1) {
+                while (seleccionAccion > 4 || seleccionAccion < 1) {
                     System.out.println("Opcion incorrecta, seleccione una de las siguientes:");
                     System.out.println("1 - Insertar abonado");
                     System.out.println("2 - Modificar un abonado");
-                    System.out.println("3 - Dar de baja a un abonado");
+                    System.out.println("3 - Modificar un abono concreto");
+                    System.out.println("4 - Dar de baja a un abonado");
                     seleccionAccion = teclado.nextInt();
                 }
 
@@ -386,26 +388,171 @@ public class Vista {
                                     System.out.println("1 - Motocicleta");
                                     System.out.println("2 - Caravana");
                                     tipoVe = teclado.nextInt();
-                                }             
-                        
+                                }
+
                                 System.out.println("Introduce tu matricula");
+                                teclado.nextLine();
                                 String matrAbo = teclado.nextLine();
-                                while (matrAbo.length() != 8)  {
+                                while ((matrAbo.length() != 8)
+                                        && (AbonadoVO.comprobarAbonadoMatr(matrAbo))) {
                                     System.out.println("Matricula erronea, introduzca en formato 1111-XXX");
+                                    System.out.println("Tambien es posible que la "
+                                            + "matricula introducida no esté abonada");
                                     matrAbo = teclado.nextLine();
                                 }
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
+
+                                DetalleAbonadoVO.insertaNuevoDetalleAbonado(tipoAbono, tipoVe, matrAbo);
+                                break;
 
                         }
+                        break;
+
+                    case 2:
+                        System.out.println("MODIFICAR DATOS DE ABONADO");
+                        System.out.println("Introduzca la matricula del abdonado"
+                                + " que desea modificar");
+                        teclado.nextLine();
+                        String matrModif = teclado.nextLine();
+                        while ((matrModif.length() != 8)
+                                && (AbonadoVO.comprobarAbonadoMatr(matrModif))) {
+                            System.out.println("Matricula erronea, introduzca en formato 1111-XXX");
+                            System.out.println("Tambien es posible que la "
+                                    + "matricula introducida no esté abonada");
+                            matrModif = teclado.nextLine();
+                        }
+                        AbonadoVO aboAux = AbonadoVO.obtenerAbonado(matrModif);
+
+                        do {
+                            System.out.println("Introduzca el valor que desea modificar");
+                            System.out.println("1 - Nombre");
+                            System.out.println("2 - Apellidos");
+                            System.out.println("3 - Correo");
+                            System.out.println("4 - Dni");
+                            System.out.println("5 - Nº de tarjeta");
+                            System.out.println("6 - Salir");
+                            seleccionAccion = teclado.nextInt();
+                            while (seleccionAccion > 6 || seleccionAccion < 1) {
+                                System.out.println("Opcion incorrecta, seleccione una de las siguientes:");
+                                System.out.println("1 - Nombre");
+                                System.out.println("2 - Apellidos");
+                                System.out.println("3 - Correo");
+                                System.out.println("4 - Dni");
+                                System.out.println("5 - Nº de tarjeta");
+                                seleccionAccion = teclado.nextInt();
+                            }
+
+                            switch (seleccionAccion) {
+
+                                case 1:
+                                    System.out.println("Introduzca nuevo nombre");
+                                    teclado.nextLine();
+                                    String nuevoNombre = teclado.nextLine();
+                                    aboAux.setNombre(nuevoNombre);
+                                    AbonadoVO.modificarAbonado(aboAux);
+                                    break;
+                                case 2:
+                                    System.out.println("Introduzca nuevos apellidos");
+                                    teclado.nextLine();
+                                    String nuevoApel = teclado.nextLine();
+                                    aboAux.setApellidos(nuevoApel);
+                                    AbonadoVO.modificarAbonado(aboAux);
+                                    break;
+                                case 3:
+                                    System.out.println("Introduzca nuevo correo");
+                                    teclado.nextLine();
+                                    String nuevoCorreo = teclado.nextLine();
+                                    aboAux.setEmail(nuevoCorreo);
+                                    AbonadoVO.modificarAbonado(aboAux);
+                                    break;
+                                case 4:
+                                    System.out.println("Introduzca nuevo Dni");
+                                    teclado.nextLine();
+                                    String nuevoDni = teclado.nextLine();
+                                    while (nuevoDni.length() != 9) {
+
+                                        System.out.println("Dni incorrecto");
+                                        nuevoDni = teclado.nextLine();
+
+                                    }
+                                    aboAux.setDni(nuevoDni);
+                                    AbonadoVO.modificarAbonado(aboAux);
+                                    break;
+                                case 5:
+                                    System.out.println("Introduzca nuevo nº tarjeta");
+                                    teclado.nextLine();
+                                    String nuevaTarj = teclado.nextLine();
+                                    while (nuevaTarj.length() != 16) {
+
+                                        System.out.println("nº tarjeta incorrecto");
+                                        nuevaTarj = teclado.nextLine();
+
+                                    }
+                                    aboAux.setDni(nuevaTarj);
+                                    AbonadoVO.modificarAbonado(aboAux);
+                                    break;
+                            }
+
+                        } while (seleccionAccion != 6);
+                        break;
+
+                    case 3:
+                        System.out.println("MODIFICACION DE ABONO CONCRETO");
+                        System.out.println("Introduzca matricula abonado");
+                        teclado.nextLine();
+                        String matAb = teclado.nextLine();
+                        while ((matAb.length() != 8)
+                                && (AbonadoVO.comprobarAbonadoMatr(matAb))) {
+                            System.out.println("Matricula erronea, introduzca en formato 1111-XXX");
+                            System.out.println("Tambien es posible que la "
+                                    + "matricula introducida no esté abonada");
+                            matAb = teclado.nextLine();
+                        }
+
+                        if (DetalleAbonadoVO.compruebaAbonoActivo(matAb)) {
+
+                            System.out.println("Introduzca el nuevo tipo"
+                                    + " de tarifa que desea el abonado");
+                            System.out.println("1 - Mensual(25€)");
+                            System.out.println("2 - Trimestral (70€)");
+                            System.out.println("3 - Semestral (130€)");
+                            System.out.println("4 - Anual (200€)");
+                            int tipoAbo = teclado.nextInt();
+                            while (tipoAbo > 4 || tipoAbo < 1) {
+                                System.out.println("Opcion incorrecta, seleccione una de las siguientes:");
+                                System.out.println("1 - Mensual(25€)");
+                                System.out.println("2 - Trimestral (70€)");
+                                System.out.println("3 - Semestral (130€)");
+                                System.out.println("4 - Anual (200€)");
+                                tipoAbo = teclado.nextInt();
+                            }
+
+                            DetalleAbonadoVO.renovarAbono(DetalleAbonadoVO.obtenerDetallesAbonoActivo(matAb), tipoAbo);
+
+                        } else {
+                            System.out.println("La matricula introducida no"
+                                    + "dispone de abonos que ampliar");
+                        }
+                        break;
+
+                    case 4:
+                        System.out.println("DAR DE BAJA ABONADO");
+                        System.out.println("Introduce matricula del abonado");
+                        teclado.nextLine();
+                        String mat = teclado.nextLine();
+                        while ((mat.length() != 8)
+                                && (AbonadoVO.comprobarAbonadoMatr(mat))) {
+                            System.out.println("Matricula erronea, introduzca en formato 1111-XXX");
+                            System.out.println("Tambien es posible que la "
+                                    + "matricula introducida no esté abonada");
+                            mat = teclado.nextLine();
+                        }
+
+                        AbonadoVO.borrarAbonado(AbonadoVO.obtenerAbonado(mat));
+
+                        DetalleAbonadoVO detAux = DetalleAbonadoVO.obtenerDetallesAbonoActivo(mat);
+
+                        PlazaVO.cambiarEstadoPlaza(PlazaVO.obtenerPlazaConId(detAux.getCodPlaza()), 0);
+                        break;
 
                 }
 
