@@ -121,6 +121,23 @@ public class AbonadoVO {
         return daoAbonado.findByCod(matricula);
 
     }
+    
+    public static void borrarAbonado(AbonadoVO abo){
+        
+        abo.setApellidos("--");
+        abo.setDni("---------");
+        abo.setEmail("--");
+        abo.setNombre("--");
+        abo.setNumeroTarjeta("----------------");
+        
+        AbonadoDAO daoAbonado = new AbonadoDAO();
+        try{
+        daoAbonado.updateAbonado(abo.getMatricula(), abo);
+        }catch (SQLException sqle) {
+            System.out.println("No se ha podido realizar la operación:");
+            System.out.println(sqle.getMessage());
+        }
+    }
 
     public static void escribirDni() {
 
