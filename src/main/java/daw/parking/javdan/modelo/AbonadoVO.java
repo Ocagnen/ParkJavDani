@@ -77,6 +77,29 @@ public class AbonadoVO {
         return false;
         
     }
+    
+    public static boolean comprobarAbonadoMatr(String matricula){
+        
+        AbonadoDAO daoAbonado = new AbonadoDAO();
+        ArrayList<AbonadoVO> listaAux = new ArrayList<>();
+        
+        try{            
+            listaAux = (ArrayList<AbonadoVO>) daoAbonado.getAll();          
+            
+        }catch (SQLException sqle) {
+            System.out.println("No se ha podido realizar la operación:");
+            System.out.println(sqle.getMessage());
+        }
+        
+        for (AbonadoVO abonadoVO : listaAux) {
+            if(abonadoVO.getMatricula().equalsIgnoreCase(matricula)){
+                return true;
+            }
+        }
+        
+        return false;
+        
+    }
 
     public static void escribirDni(){
         
