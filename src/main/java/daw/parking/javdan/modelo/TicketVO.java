@@ -60,7 +60,7 @@ public class TicketVO {
         try {
 
             TicketDAO daoTicket = new TicketDAO();
-
+            System.out.println("No lo hago");
             daoTicket.insertTicket(tick);
 
         } catch (SQLException sqle) {
@@ -132,6 +132,20 @@ public class TicketVO {
 
         this.fecSalida = LocalDate.now();
         this.horaSalida = LocalTime.now();
+        this.costeEstancia = this.calcularTarifa();
+        
+        TicketDAO daoTicket = new TicketDAO ();
+        
+        try {
+            
+            daoTicket.updateTicket(this.getCodTicket(), this);
+            
+        } catch (SQLException sqle) {
+            System.out.println("No se ha podido realizar la operación:");
+            System.out.println(sqle.getMessage());
+        }
+        
+        
 
     }
 
