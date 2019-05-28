@@ -108,25 +108,24 @@ public class TicketVO {
     public static TicketVO obtenerTicket(int pk) throws SQLException {
 
         TicketDAO daoTicket = new TicketDAO();
-        
+
         return daoTicket.findByCod(pk);
 
     }
-    
-    public static void cerrarTicket(TicketVO ticket){
-        
+
+    public static void cerrarTicket(TicketVO ticket) {
+
         TicketDAO daoTicket = new TicketDAO();
-        
-            try {
-                
-                daoTicket.updateTicket(ticket.codTicket, ticket);           
+
+        try {
+
+            daoTicket.updateTicket(ticket.codTicket, ticket);
 
         } catch (SQLException sqle) {
             System.out.println("No se ha podido realizar la operación:");
             System.out.println(sqle.getMessage());
         }
 
-        
     }
 
     public void actualizarTicketSalida() {
@@ -186,6 +185,36 @@ public class TicketVO {
 
         return calcularMinutos(calcularDias()) * plazaAux.getCoste();
 
+    }
+
+    public ArrayList<TicketVO> obtenerTicketsFechas(LocalDate finIni, LocalDate fecFin) {
+
+        TicketDAO daoTicket = new TicketDAO();
+
+        ArrayList<TicketVO> listaAux = new ArrayList<>();
+        ArrayList<TicketVO> listaDevolver = new ArrayList<>();
+        
+        try {
+            
+            listaAux = (ArrayList<TicketVO>) daoTicket.getAll();
+            
+        } catch (SQLException sqle) {
+            System.out.println("No se ha podido realizar la operación:");
+            System.out.println(sqle.getMessage());
+        }
+        
+        for (TicketVO ticketVO : listaAux) {
+            
+            if(ticketVO.getFecSalida().isAfter(finIni)
+                    && ticketVO.getFecSalida().isBefore(fecFin)){
+                
+                listaDevolver.add(ticketVO);
+                
+            }
+            
+        }
+
+        return listaDevolver;
     }
 
     public int getCodTicket() {
