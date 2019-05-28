@@ -140,6 +140,13 @@ public class PlazaVO {
         }
 
     }
+    
+    public static PlazaVO obtenerPlazaConId(int codplaza) throws SQLException{
+        
+        PlazaDAO daoPlaza = new PlazaDAO();
+        
+        return daoPlaza.findByCod(codplaza);
+    }
 
     public int getCodPlaza() {
         return codPlaza;
