@@ -264,7 +264,7 @@ public class Vista {
                         System.out.println("Introduce el dia (formato dd)");
                         int dia = teclado.nextInt();
                         LocalDate fecIni = LocalDate.of(anio, mes, dia);
-                        
+
                         System.out.println("FECHA FINAL");
                         System.out.println("Introduce el año (formato YYYY)");
                         anio = teclado.nextInt();
@@ -273,16 +273,36 @@ public class Vista {
                         System.out.println("Introduce el dia (formato dd)");
                         dia = teclado.nextInt();
                         LocalDate fecFin = LocalDate.of(anio, mes, dia);
-                        
+
                         ArrayList<TicketVO> listTickAux = TicketVO.obtenerTicketsFechas(fecIni, fecFin);
                         TicketVO.mostrarCobros(listTickAux);
+                        break;
+
+                    case 2:
+                        ArrayList<DetalleAbonadoVO> listDetAb = DetalleAbonadoVO.obtenerAbonosAnuales();
+                        DetalleAbonadoVO.muestraCobroAbonados(listDetAb);
+                        break;
                 }
 
                 break;
 
             case 3:
+                System.out.println("GESTION DE ABONADOS");
+                System.out.println("Introduzca el número de la opción "
+                        + "que desea ejecutar");
+                System.out.println("1 - Dar de alta a un abonado");
+                System.out.println("2 - Modificar un abonado");
+                System.out.println("3 - Dar de baja a un abonado");
+                seleccionAccion = teclado.nextInt();
 
-                //Abonos()
+                while (seleccionAccion > 3 || seleccionAccion < 1) {
+                    System.out.println("Opcion incorrecta, seleccione una de las siguientes:");
+                    System.out.println("1 - Dar de alta a un abonado");
+                    System.out.println("2 - Modificar un abonado");
+                    System.out.println("3 - Dar de baja a un abonado");
+                    seleccionAccion = teclado.nextInt();
+                }
+
                 break;
         }
 
