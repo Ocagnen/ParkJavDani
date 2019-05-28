@@ -85,6 +85,39 @@ public class DetalleAbonadoVO {
 
     }
 
+    public static ArrayList<DetalleAbonadoVO> obtenerAbonosAnuales() {
+
+        DetalleAbonadoDAO daoDetAbo = new DetalleAbonadoDAO();
+
+        ArrayList<DetalleAbonadoVO> listaAux = new ArrayList<>();
+        ArrayList<DetalleAbonadoVO> listaDev = new ArrayList<>();
+        int anioActual = LocalDate.now().getYear();
+        
+        try {
+            
+            listaAux = (ArrayList<DetalleAbonadoVO>) daoDetAbo.getAll();
+            
+            
+        } catch (SQLException sqle) {
+            System.out.println("No se ha podido realizar la operación:");
+            System.out.println(sqle.getMessage());
+        }
+        
+        for (DetalleAbonadoVO detalleAbonadoVO : listaAux) {
+            
+            if(detalleAbonadoVO.getFecFinAbono().isAfter(LocalDate.of(anioActual, 1, 1))
+                    && detalleAbonadoVO.getFecFinAbono().isBefore(LocalDate.of(anioActual, 12, 31))){
+                
+                listaDev.add(detalleAbonadoVO);
+                
+            }
+            
+        }
+        
+        return listaDev;
+
+    }
+
     public String getMatricula() {
         return matricula;
     }
