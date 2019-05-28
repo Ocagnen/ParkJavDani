@@ -250,9 +250,7 @@ public class TicketVO {
         return listaDevolver;
     }
 
-    public static ArrayList<TicketVO> obtenerTicket(ArrayList<TicketVO> lista, LocalTime horaIni, LocalTime horaFin) {
-
-        TicketDAO daoTicket = new TicketDAO();
+    public static ArrayList<TicketVO> obtenerTicketHoras(ArrayList<TicketVO> lista, LocalTime horaIni, LocalTime horaFin) {
 
         ArrayList<TicketVO> listaDevolver = new ArrayList<>();
 
