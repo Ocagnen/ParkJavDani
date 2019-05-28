@@ -15,10 +15,12 @@ public class PlazaDAO implements IPlaza{
     
     private Connection con = null;
 
+    // Constructor por defecto
     public PlazaDAO() {
         con = Conexion.getInstance();
     }
 
+    // Método para obtener en una lista todas las plazas de la bbdd
     @Override
     public List<PlazaVO> getAll() throws SQLException {
         
@@ -32,7 +34,7 @@ public class PlazaDAO implements IPlaza{
             // Ahora construimos la lista, recorriendo el ResultSet y mapeando los datos
             while (res.next()) {
                 PlazaVO p= new PlazaVO();
-                // Recogemos los datos de la persona, guardamos en un objeto
+                // Recogemos los datos de la plaza, guardamos en un objeto
                 p.setCodPlaza(res.getInt("codplaza"));
                 p.setTipoPlaza(res.getInt("tipoplaza"));
                 p.setEstado(res.getInt("estado"));
@@ -45,6 +47,7 @@ public class PlazaDAO implements IPlaza{
             return lista;
     }
 
+    // Método para obtener una plaza de la bbdd segun su pk
     @Override
     public PlazaVO findByCod(int codplaz) throws SQLException {
        
@@ -64,7 +67,7 @@ public class PlazaDAO implements IPlaza{
             // Nos posicionamos en el primer registro del Resultset. Sólo debe haber una fila
             // si existe esa pk
             if (res.first()) {
-                // Recogemos los datos de la persona, guardamos en un objeto
+                // Recogemos los datos de la plaza, guardamos en un objeto
                 p.setCodPlaza(res.getInt("codplaza"));
                 p.setTipoPlaza(res.getInt("tipoplaza"));
                 p.setEstado(res.getInt("estado"));
@@ -80,6 +83,7 @@ public class PlazaDAO implements IPlaza{
         
     }
 
+    // Método para insertar una plaza en la bbdd
     @Override
     public int insertPlaza(PlazaVO plaza) throws SQLException {
         
@@ -108,6 +112,7 @@ public class PlazaDAO implements IPlaza{
         
     }
 
+    // Método para insertar una plaza en la bbdd
     @Override
     public int insertPlaza(List<PlazaVO> lista) throws SQLException {
        
@@ -121,6 +126,7 @@ public class PlazaDAO implements IPlaza{
         
     }
 
+    // Método para eliminar una plaza de la bbdd
     @Override
     public int deletePlaza(PlazaVO p) throws SQLException {
         
@@ -141,6 +147,7 @@ public class PlazaDAO implements IPlaza{
         
     }
 
+    // Método para eliminar todas las plazas de la base de datos
     @Override
     public int deletePlaza() throws SQLException {
        
@@ -160,6 +167,7 @@ public class PlazaDAO implements IPlaza{
         
     }
 
+    // Método para modificar una plaza concreta
     @Override
     public int updatePlaza(int codpla, PlazaVO nuevosDatos) throws SQLException {
         

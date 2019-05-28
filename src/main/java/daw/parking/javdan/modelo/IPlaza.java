@@ -26,13 +26,13 @@ public interface IPlaza {
     // Método para insertar varios registros
     int insertPlaza (List<PlazaVO> lista) throws SQLException;
     
-    // Método para borrar una persona
+    // Método para borrar una plaza
     int deletePlaza (PlazaVO p) throws SQLException;
     
     // Método para borrar toda la tabla
     int deletePlaza() throws SQLException;
     
-    // Método para modificar un abonado
+    // Método para modificar una plaza
     int updatePlaza (int codpla, PlazaVO nuevosDatos) throws SQLException;
     
 }

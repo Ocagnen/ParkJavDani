@@ -19,13 +19,13 @@ public interface ITicket {
     // Método para insertar varios registros
     int insertTicket (List<TicketVO> lista) throws SQLException;
     
-    // Método para borrar una persona
+    // Método para borrar un ticket
     int deleteTicket (TicketVO t) throws SQLException;
     
     // Método para borrar toda la tabla
     int deleteTicket() throws SQLException;
     
-    // Método para modificar un abonado
+    // Método para modificar un ticket
     int updateTicket (int codticket, TicketVO nuevosDatos) throws SQLException;
     
 }

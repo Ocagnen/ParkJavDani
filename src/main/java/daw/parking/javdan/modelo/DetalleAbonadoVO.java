@@ -14,6 +14,7 @@ public class DetalleAbonadoVO {
     private LocalDate fecIniAbono;
     private LocalDate fecFinAbono;
 
+    // Constructor parametrizado
     public DetalleAbonadoVO(String matricula, int codPlaza, int tipoAbono, LocalDate fecIniAbono, LocalDate fecFinAbono) {
         this.matricula = matricula;
         this.codPlaza = codPlaza;
@@ -22,9 +23,11 @@ public class DetalleAbonadoVO {
         this.fecFinAbono = fecFinAbono;
     }
 
+    // Constructor por defecto
     public DetalleAbonadoVO() {
     }
 
+    // Método para obtener el cod plaza de un abono
     public static int obtenerPlaza(String matricula) {
 
         DetalleAbonadoDAO daoDetalleAbonado = new DetalleAbonadoDAO();
@@ -49,6 +52,7 @@ public class DetalleAbonadoVO {
         return 0;
     }
 
+    // Método para retirar un Vehiculo de abonado
     public static boolean retirarVehiAbo(String matricula, int plaza, int pin) {
 
         DetalleAbonadoDAO daoDetalleAbonado = new DetalleAbonadoDAO();
@@ -85,6 +89,7 @@ public class DetalleAbonadoVO {
 
     }
 
+    // Método para obtener todos los abonos del año en una lista
     public static ArrayList<DetalleAbonadoVO> obtenerAbonosAnuales() {
 
         DetalleAbonadoDAO daoDetAbo = new DetalleAbonadoDAO();
@@ -117,6 +122,7 @@ public class DetalleAbonadoVO {
 
     }
 
+    // Método para mostrar el cobro de los abonados
     public static void muestraCobroAbonados(ArrayList<DetalleAbonadoVO> lista) {
 
         System.out.println("COBROS ABONADOS");
@@ -133,6 +139,7 @@ public class DetalleAbonadoVO {
 
     }
 
+    // Método para calcular el importe de los abonos
     public int calcularAbonos() {
 
         switch (this.tipoAbono) {
@@ -150,6 +157,7 @@ public class DetalleAbonadoVO {
 
     }
 
+    // Método para insertar un abono en la bbdd
     public static DetalleAbonadoVO insertaNuevoDetalleAbonado(int tipoAbono, int tipoVehi, String matricula) {
 
         DetalleAbonadoDAO daoDetAbo = new DetalleAbonadoDAO();
@@ -191,6 +199,7 @@ public class DetalleAbonadoVO {
 
     }
 
+    // Método para obtener un abonado que tenga un abono activo
     public static DetalleAbonadoVO obtenerDetallesAbonoActivo(String matricula) throws SQLException {
 
         DetalleAbonadoDAO daoDetAbo = new DetalleAbonadoDAO();
@@ -211,6 +220,7 @@ public class DetalleAbonadoVO {
         return detAuxi;
     }
 
+    // Comprobar si un abonado tiene un abono activo
     public static boolean compruebaAbonoActivo(String matricula) {
 
         DetalleAbonadoDAO daoDetAbo = new DetalleAbonadoDAO();
@@ -238,6 +248,7 @@ public class DetalleAbonadoVO {
 
     }
 
+    // Método para generar la fecha de abono tras actualizarla
     public static LocalDate generarFechaFinAbono(int tipoAbo) {
 
         switch (tipoAbo) {
@@ -254,6 +265,7 @@ public class DetalleAbonadoVO {
 
     }
 
+    // Método para renovar los abonos cambiando su fecha de vencimiento
     public static void renovarAbono(DetalleAbonadoVO detAb, int tipoAbo) {
 
         switch (tipoAbo) {
@@ -285,6 +297,7 @@ public class DetalleAbonadoVO {
 
     }
 
+    // Método para mostrar los abonos de un mes concreto
     public static void mostrarAbonosMes(int mes) {
 
         ArrayList<DetalleAbonadoVO> lista = DetalleAbonadoVO.obtenerAbonosAnuales();
@@ -303,6 +316,7 @@ public class DetalleAbonadoVO {
 
     }
 
+    // Método para mostrar los abonos que caducan en 10 dias
     public static void abonosCaducanDiezDias() {
 
         ArrayList<DetalleAbonadoVO> lista = DetalleAbonadoVO.obtenerAbonosAnuales();
@@ -321,6 +335,7 @@ public class DetalleAbonadoVO {
         
     }
 
+    // Getters y setters
     public String getMatricula() {
         return matricula;
     }
@@ -361,6 +376,7 @@ public class DetalleAbonadoVO {
         this.fecFinAbono = fecFinAbono;
     }
 
+    // hashCode y Equals
     @Override
     public int hashCode() {
         int hash = 3;
@@ -402,6 +418,7 @@ public class DetalleAbonadoVO {
         return true;
     }
 
+    // Método toString
     @Override
     public String toString() {
         return "DetalleAbonadoVO{" + "matricula=" + matricula + ", codPlaza=" + codPlaza + ", tipoAbono=" + tipoAbono + ", fecIniAbono=" + fecIniAbono + ", fecFinAbono=" + fecFinAbono + '}';

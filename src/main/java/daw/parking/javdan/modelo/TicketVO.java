@@ -22,6 +22,7 @@ public class TicketVO {
     private int pin;
     private double costeEstancia;
 
+    // Constructor parametrizado
     public TicketVO(int codTicket, int tipoVehi, String matricula, int codPlaza, LocalDate fecIngreso, LocalDate fecSalida, LocalTime horaIngreso, LocalTime horaSalida, int pin, double costeEstancia) {
 
         this.codTicket = codTicket;
@@ -36,10 +37,12 @@ public class TicketVO {
         this.costeEstancia = costeEstancia;
     }
 
+    // Constructor por defecto
     public TicketVO() {
 
     }
 
+    // Método para generar un ticket con los datos del usuario
     public static TicketVO generarTicket(String matricula, int tipoVehi, int codPlaz) {
 
         TicketVO tick = new TicketVO();
@@ -70,6 +73,7 @@ public class TicketVO {
 
     }
 
+    // Método para generar la PK del ticket
     public static int generarPKTick() {
 
         TicketDAO daoTicket = new TicketDAO();
@@ -93,6 +97,7 @@ public class TicketVO {
 
     }
 
+    // Método para generar un PIN aleatorio
     public static int generarPin() {
 
         Random alt = new Random();
@@ -101,6 +106,8 @@ public class TicketVO {
 
     }
 
+    // Método para obtener el codigo del ticket al sacar el coche mediante
+    // los datos del usuario
     public static int obtenerCodTickSalida(String matricula, int plaza, int pin) {
 
         TicketDAO daoTicket = new TicketDAO();
@@ -126,6 +133,7 @@ public class TicketVO {
         return -1;
     }
 
+    // Método para obtener el ticket de la bbdd mediante su pk
     public static TicketVO obtenerTicket(int pk) throws SQLException {
 
         TicketDAO daoTicket = new TicketDAO();
@@ -134,6 +142,7 @@ public class TicketVO {
 
     }
 
+    // Método para cerrar el ticket una vez salga el cliente
     public static void cerrarTicket(TicketVO ticket) {
 
         TicketDAO daoTicket = new TicketDAO();
@@ -149,6 +158,7 @@ public class TicketVO {
 
     }
 
+    // Método para actualizar el ticket al salir el coche
     public void actualizarTicketSalida() {
 
         this.fecSalida = LocalDate.now();
@@ -168,6 +178,7 @@ public class TicketVO {
 
     }
 
+    // Método para calcular el número de dias que el coche estuvo dentro
     public int calcularDias() {
 
         long diferenciaDias = ChronoUnit.DAYS.between(this.fecIngreso, this.fecSalida);
@@ -176,6 +187,7 @@ public class TicketVO {
 
     }
 
+    // Método pra calcular el número de minutos en base al número de dias
     public int calcularMinutos(int dias) {
 
         int numMin;
@@ -203,6 +215,7 @@ public class TicketVO {
 
     }
 
+    // Método para calcular el importe que debe pagar el cliente
     public double calcularTarifa() {
 
         PlazaDAO daoPlaza = new PlazaDAO();
@@ -220,6 +233,7 @@ public class TicketVO {
 
     }
 
+    // Método para obtener los tickets entre dos fechas
     public static ArrayList<TicketVO> obtenerTicketsFechas(LocalDate finIni, LocalDate fecFin) {
 
         TicketDAO daoTicket = new TicketDAO();
@@ -250,6 +264,7 @@ public class TicketVO {
         return listaDevolver;
     }
 
+    // Métodos para obtener los tickets entre unas horas determinadas
     public static ArrayList<TicketVO> obtenerTicketHoras(ArrayList<TicketVO> lista, LocalTime horaIni, LocalTime horaFin) {
 
         ArrayList<TicketVO> listaDevolver = new ArrayList<>();
@@ -268,6 +283,7 @@ public class TicketVO {
         return listaDevolver;
     }
 
+    // Método para mostrar los cobros realizados mediante una lista de tickets
     public static void mostrarCobros(ArrayList<TicketVO> lista) {
 
         System.out.println("COBROS");
@@ -285,6 +301,7 @@ public class TicketVO {
 
     }
 
+    // Getters y setters
     public int getCodTicket() {
         return codTicket;
     }
@@ -365,6 +382,7 @@ public class TicketVO {
         this.costeEstancia = costeEstancia;
     }
 
+    // hashCode y equals
     @Override
     public int hashCode() {
         int hash = 3;
@@ -426,11 +444,13 @@ public class TicketVO {
         return true;
     }
 
+    //Método toString
     @Override
     public String toString() {
         return "TicketVO{" + "codTicket=" + codTicket + ", tipoVehi=" + tipoVehi + ", matricula=" + matricula + ", codPlaza=" + codPlaza + ", fecIngreso=" + fecIngreso + ", fecSalida=" + fecSalida + ", horaIngreso=" + horaIngreso + ", horaSalida=" + horaSalida + ", pin=" + pin + ", costeEstancia=" + costeEstancia + '}';
     }
 
+    // Método toString para mostrar a los clientes
     public String toStringParaClientes() {
         return "TicketVO{" + " matricula=" + matricula + ", codPlaza=" + codPlaza + ", fecIngreso=" + fecIngreso + ", horaIngreso=" + horaIngreso + ", pin=" + pin + '}';
 

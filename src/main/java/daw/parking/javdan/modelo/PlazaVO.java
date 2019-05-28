@@ -19,6 +19,7 @@ public class PlazaVO {
     private int estado;
     private double coste;
 
+    // Constructor parametrizado
     public PlazaVO(int codPlaza, int tipoPlaza, int estado, double coste) {
         this.codPlaza = codPlaza;
         this.tipoPlaza = tipoPlaza;
@@ -26,10 +27,12 @@ public class PlazaVO {
         this.coste = coste;
     }
 
+    // Constructor por defecto
     public PlazaVO() {
 
     }
 
+    // Método obtener un String con el tipo de plaza
     public String getNombreTipo() {
 
         switch (this.tipoPlaza) {
@@ -44,6 +47,7 @@ public class PlazaVO {
 
     }
 
+    // Método para obtener un String con el estado de la plaza
     public String mostrarEstado() {
 
         switch (this.estado) {
@@ -59,6 +63,7 @@ public class PlazaVO {
 
     }
 
+    // Método para mostrar las plazas libres en la bbdd
     public static void mostrarPlazasLibres() {
 
         PlazaDAO daoPlaza = new PlazaDAO();
@@ -98,6 +103,7 @@ public class PlazaVO {
 
     }
 
+    // Método para obtener una plaza libre del tipo de vechiulo que se desee
     public static int obtenerPlazaLibre(int tipoVehi) {
 
         PlazaDAO daoPlaza = new PlazaDAO();
@@ -124,6 +130,7 @@ public class PlazaVO {
 
     }
 
+    // Método para cambiar el estado de una plaza concreta
     public static void cambiarEstadoPlaza(PlazaVO plaza, int estado) {
 
         PlazaDAO daoPlaza = new PlazaDAO();
@@ -141,6 +148,7 @@ public class PlazaVO {
 
     }
     
+    // Método para obtener la plaza mediante su id
     public static PlazaVO obtenerPlazaConId(int codplaza) throws SQLException{
         
         PlazaDAO daoPlaza = new PlazaDAO();
@@ -148,6 +156,7 @@ public class PlazaVO {
         return daoPlaza.findByCod(codplaza);
     }
 
+    // Getters y setters
     public int getCodPlaza() {
         return codPlaza;
     }
@@ -180,15 +189,18 @@ public class PlazaVO {
         this.coste = coste;
     }
 
+    // Método toString
     @Override
     public String toString() {
         return "PlazaVO{" + "codPlaza=" + codPlaza + ", tipoPlaza=" + tipoPlaza + ", estado=" + estado + ", coste=" + coste + '}';
     }
 
+    // Método toString para los administradores
     public String toStringAdmin() {
         return "PlazaVO{" + "codPlaza=" + codPlaza + ", tipoPlaza=" + this.getNombreTipo() + ", estado=" + this.mostrarEstado() + '}';
     }
 
+    // hashCode y equals
     @Override
     public int hashCode() {
         int hash = 3;

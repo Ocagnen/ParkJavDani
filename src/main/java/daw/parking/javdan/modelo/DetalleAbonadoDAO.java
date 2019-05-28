@@ -16,10 +16,12 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
 
        private Connection con = null;
 
+    // Constructor por defecto
     public DetalleAbonadoDAO() {
         con = Conexion.getInstance();
     }
 
+    // Método para obtener todos los DetAbon de la BD en una lista
     @Override
     public List<DetalleAbonadoVO> getAll() throws SQLException {
         
@@ -49,6 +51,7 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
         return lista;
     }
 
+    // Método que devuelve un objeto de la bd mediante su pk
     @Override
     public DetalleAbonadoVO findByCod(String matricula, int codplaz, LocalDate fecIniabono) throws SQLException {
         
@@ -70,7 +73,6 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
             // Nos posicionamos en el primer registro del Resultset. Sólo debe haber una fila
             // si existe esa pk
             if (res.first()) {
-                // Recogemos los datos de la persona, guardamos en un objeto
                 d.setMatricula(res.getString("matricula"));
                 d.setCodPlaza(res.getInt("codplaza"));
                 d.setTipoAbono(res.getInt("tipoabono"));
@@ -84,6 +86,7 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
         
     }
 
+    // Método para insertar DetAbonado en la bbdd
     @Override
     public int insertDetAb(DetalleAbonadoVO DetalleAbonado) throws SQLException {
         
@@ -114,6 +117,7 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
         
     }
 
+    // Método para insertar una lista de DetallesAbonados en la bbdd
     @Override
     public int insertDetAb(List<DetalleAbonadoVO> lista) throws SQLException {
         
@@ -127,6 +131,7 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
         
     }
 
+    // Método para eliminar un objeto DetAbonado concreto de la bbdd
     @Override
     public int deleteDetAb(DetalleAbonadoVO d) throws SQLException {
         
@@ -151,6 +156,7 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
         
     }
 
+    // Método para borrar todos los objetos de la bbdd
     @Override
     public int deleteDetAb() throws SQLException {
         
@@ -170,6 +176,7 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
         
     }
 
+    // Método para modificar un objeto de la bbdd
     @Override
     public int updateDetAb(String matricula, int codplaz, LocalDate fecIniabono, DetalleAbonadoVO nuevosDatos) throws SQLException {
       
@@ -178,7 +185,6 @@ public class DetalleAbonadoDAO implements IDetalleAbonado {
                 + " where matricula =? and codplaza = ? and feciniabono=?";
 
         if (findByCod(matricula,codplaz,fecIniabono) == null) {
-            // La persona a actualizar no existe
             
             return numFilas;
         } else {

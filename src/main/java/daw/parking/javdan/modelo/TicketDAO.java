@@ -15,10 +15,12 @@ public class TicketDAO implements ITicket {
 
     private Connection con = null;
 
+    // Constructor por defecto
     public TicketDAO() {
         con = Conexion.getInstance();
     }
 
+    // Método para obtener una lista con todos los objetos de la bbdd
     @Override
     public List<TicketVO> getAll() throws SQLException {
 
@@ -51,6 +53,7 @@ public class TicketDAO implements ITicket {
         return lista;
     }
 
+    // Método para encontrar un ticket segun su pk
     @Override
     public TicketVO findByCod(int codticket) throws SQLException {
 
@@ -85,6 +88,7 @@ public class TicketDAO implements ITicket {
 
     }
 
+    // Método para insertar un ticket en la bbdd
     @Override
     public int insertTicket(TicketVO ticket) throws SQLException {
 
@@ -119,6 +123,7 @@ public class TicketDAO implements ITicket {
 
     }
 
+    // Método para insertar una lista de tickets en la bbdd
     @Override
     public int insertTicket(List<TicketVO> lista) throws SQLException {
 
@@ -131,6 +136,7 @@ public class TicketDAO implements ITicket {
         return numFilas;
     }
 
+    // Metodo para borrar un ticket concreto de la bbdd
     @Override
     public int deleteTicket(TicketVO t) throws SQLException {
 
@@ -150,6 +156,7 @@ public class TicketDAO implements ITicket {
 
     }
 
+    // Método para borrar todos los tickets de la bbdd
     @Override
     public int deleteTicket() throws SQLException {
 
@@ -169,6 +176,7 @@ public class TicketDAO implements ITicket {
 
     }
 
+    // Método para modificar un ticket de la base de datos
     @Override
     public int updateTicket(int codTicket, TicketVO nuevosDatos) throws SQLException {
 
@@ -178,7 +186,7 @@ public class TicketDAO implements ITicket {
                 + "pin = ?, costeestancia=? where codticket=?";
 
         if (findByCod(codTicket) == null) {
-            // La persona a actualizar no existe
+            // El ticket a actualizar no existe
             return numFilas;
         } else {
             // Instanciamos el objeto PreparedStatement para inserción

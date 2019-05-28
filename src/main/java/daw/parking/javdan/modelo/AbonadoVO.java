@@ -23,6 +23,7 @@ public class AbonadoVO {
     private String email;
     private int pin;
 
+    // Constructor Param
     public AbonadoVO(String matricula, String dni, String nombre, String apellidos, String numeroTarjeta, String email, int pin) {
         this.matricula = matricula;
         this.dni = dni;
@@ -33,9 +34,11 @@ public class AbonadoVO {
         this.pin = pin;
     }
 
+    // Constructor por defecto
     public AbonadoVO() {
     }
 
+    // Método para insertar un abonado concreto
     public static void insertarAbonado(AbonadoVO abonado) {
 
         AbonadoDAO daoAbonado = new AbonadoDAO();
@@ -51,6 +54,7 @@ public class AbonadoVO {
 
     }
 
+    // Método para modificar un abonado
     public static void modificarAbonado(AbonadoVO abonado) {
 
         AbonadoDAO daoAbonado = new AbonadoDAO();
@@ -66,6 +70,7 @@ public class AbonadoVO {
 
     }
 
+    // Método para comprobar si el pin es correcto
     public static boolean comprobarPin(int pin, String matricula) {
 
         AbonadoDAO daoAbonado = new AbonadoDAO();
@@ -91,6 +96,7 @@ public class AbonadoVO {
 
     }
 
+    // Método para comprobar si el abonado está en nuestra BD
     public static boolean comprobarAbonadoMatr(String matricula) {
 
         AbonadoDAO daoAbonado = new AbonadoDAO();
@@ -114,6 +120,7 @@ public class AbonadoVO {
 
     }
 
+    // Método para obtener un abonado a partir de su matricula
     public static AbonadoVO obtenerAbonado(String matricula) throws SQLException {
 
         AbonadoDAO daoAbonado = new AbonadoDAO();
@@ -122,6 +129,7 @@ public class AbonadoVO {
 
     }
     
+    // Método para borrar los datos personales de un abonado de nuestra BD
     public static void borrarAbonado(AbonadoVO abo){
         
         abo.setApellidos("--");
@@ -139,10 +147,8 @@ public class AbonadoVO {
         }
     }
 
-    public static void escribirDni() {
-
-    }
-
+    
+    // Getters y setters
     public String getMatricula() {
         return matricula;
     }
@@ -199,11 +205,13 @@ public class AbonadoVO {
         this.pin = pin;
     }
 
+    // Método toString
     @Override
     public String toString() {
         return "AbonadoVO{" + "matricula=" + matricula + ", dni=" + dni + ", nombre=" + nombre + ", apellidos=" + apellidos + ", numeroTarjeta=" + numeroTarjeta + ", email=" + email + ", pin=" + pin + '}';
     }
 
+    // Equals y hashCode
     @Override
     public int hashCode() {
         int hash = 5;

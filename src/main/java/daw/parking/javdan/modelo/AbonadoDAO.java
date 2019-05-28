@@ -25,6 +25,7 @@ public class AbonadoDAO implements IAbonado {
         con = Conexion.getInstance();
     }
 
+    // Método para obtener en una lista todos los Abonados de la BBDD
     @Override
     public List<AbonadoVO> getAll() throws SQLException {
         List<AbonadoVO> lista = new ArrayList<>();
@@ -51,7 +52,8 @@ public class AbonadoDAO implements IAbonado {
 
         return lista;
     }
-
+    
+    // Método para obtener el abonado con la PK correspondiente en la BD
     @Override
     public AbonadoVO findByCod(String codabo) throws SQLException {
 
@@ -86,7 +88,7 @@ public class AbonadoDAO implements IAbonado {
         }
 
     }
-
+    // Método para insertar un abonado en la BBDD
     @Override
     public int insertAbonado(AbonadoVO abonado) throws SQLException {       
         
@@ -117,7 +119,8 @@ public class AbonadoDAO implements IAbonado {
         }
 
     }
-
+    
+    // Método para insertar una lista de abonados en la BD
     @Override
     public int insertAbonado(List<AbonadoVO> lista) throws SQLException {
          int numFilas = 0;
@@ -128,7 +131,8 @@ public class AbonadoDAO implements IAbonado {
 
         return numFilas;
     }
-
+    
+    // Método para eliminar un abonado concreto
     @Override
     public int deleteAbonado(AbonadoVO abonado) throws SQLException {
 
@@ -148,7 +152,7 @@ public class AbonadoDAO implements IAbonado {
         return numFilas;
 
     }
-
+    // Método para eliminar todos los abonados
     @Override
     public int deleteAbonado() throws SQLException {
 
@@ -168,6 +172,7 @@ public class AbonadoDAO implements IAbonado {
 
     }
 
+    // Método para modificar un abonado concreto de la bbdd
     @Override
     public int updateAbonado(String codabo, AbonadoVO nuevosDatos) throws SQLException {
         

@@ -26,7 +26,7 @@ public interface IAbonado {
     // Método para insertar varios registros
     int insertAbonado (List<AbonadoVO> lista) throws SQLException;
     
-    // Método para borrar una persona
+    // Método para borrar un aboando
     int deleteAbonado (AbonadoVO p) throws SQLException;
     
     // Método para borrar toda la tabla

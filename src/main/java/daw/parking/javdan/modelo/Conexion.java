@@ -16,20 +16,21 @@ import java.sql.SQLException;
 public class Conexion {
 
     
+    // Datos para establecer la conexión con nuestra BD
+    
     private static final String SERVIDOR = "jdbc:mysql://192.168.56.101/";
     private static final String NOMBRE_BASE_DATOS = "parking";
     private static final String USER = "javier";
     private static final String PASS = "contraseña";
-    
-    /*
+     
+ /*
     private static final String SERVIDOR = "jdbc:mysql://192.168.56.102/";
     private static final String NOMBRE_BASE_DATOS = "parking";
     private static final String USER = "root";
     private static final String PASS = "123456";
-    */
-    
+     */
     private static Connection instancia = null;
-    
+
     // Constructor privado no accesible desde otras clases
     private Conexion() {
 
@@ -56,4 +57,3 @@ public class Conexion {
     }
 
 }
-

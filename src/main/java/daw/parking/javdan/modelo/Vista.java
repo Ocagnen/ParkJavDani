@@ -16,6 +16,7 @@ import java.util.Scanner;
 
 public class Vista {
 
+    // Menú donde se ejecutarán las ordenes hasta se introduce un 3
     public static int menu() throws SQLException {
 
         Scanner teclado = new Scanner(System.in);
@@ -75,14 +76,14 @@ public class Vista {
 
         switch (seleccionAccion) {
             case 1:
-
+                // Parte para abonados
                 System.out.println("Seleccione una opción: ");
                 System.out.println("1-->Depositar vehículo");
                 System.out.println("2-->Retirar vehículo");
 
                 seleccionAccion = teclado.nextInt();
 
-                while (!(seleccionAccion == 1 || seleccionAccion == 2 || seleccionAccion == 3)) {
+                while (!(seleccionAccion == 1 || seleccionAccion == 2)) {
                     System.out.println("ERROR, seleccione una de las opciones mostradas");
                     seleccionAccion = teclado.nextInt();
                 }
@@ -95,6 +96,8 @@ public class Vista {
                         System.out.println("Introduzca su matricula");
                         teclado.nextLine();
                         String matricula = teclado.nextLine();
+                        // Se comprueba si el pin es valido si lo es se introduce el 
+                        // vehiculo tras obtener una plaza
                         if (AbonadoVO.comprobarPin(seleccionAccion, matricula)) {
 
                             PlazaDAO daoPlaza = new PlazaDAO();
@@ -122,6 +125,7 @@ public class Vista {
                         System.out.println("Introduce tu PIN");
                         int pin = teclado.nextInt();
 
+                        // Si el abonado introduce datos correctos se retira vehi
                         if (DetalleAbonadoVO.retirarVehiAbo(matricula, plaza, pin)) {
                             System.out.println("Vehiculo retirado con éxito");
                         }
@@ -134,6 +138,7 @@ public class Vista {
 
             case 2:
 
+                // Parte para clientes no abonados
                 System.out.println("Elija una opción: ");
                 System.out.println("1-->Depositar vehículo");
                 System.out.println("2-->Retirar vehículo");
@@ -147,6 +152,7 @@ public class Vista {
                 switch (seleccionAccion) {
 
                     case 1:
+                        // Depositar vehiculo
                         PlazaVO.mostrarPlazasLibres();
                         teclado.nextLine();
                         System.out.println("Introduzca matricula");
@@ -172,12 +178,12 @@ public class Vista {
                             System.out.println("2 - Caravana");
                             tipoVehi = teclado.nextInt();
                         }
-
-                        if (PlazaVO.obtenerPlazaLibre(tipoVehi) == 0) {
+                        int codPlazaAux = PlazaVO.obtenerPlazaLibre(tipoVehi);
+                        if (codPlazaAux == 0) {
                             System.out.println("Lo siento, no hay plazas libres");
                         } else {
                             System.out.println("Operación realizada con éxito");
-                            int codPlazaAux = PlazaVO.obtenerPlazaLibre(tipoVehi);
+                            
 
                             System.out.println("Su plaza es la número "
                                     + codPlazaAux);
@@ -192,6 +198,7 @@ public class Vista {
                         break;
 
                     case 2:
+                        // Retirar vehiculo
                         teclado.nextLine();
                         System.out.println("Introduzce la matricula");
                         matricula = teclado.nextLine();
@@ -247,6 +254,7 @@ public class Vista {
 
         switch (seleccionAccion) {
             case 1:
+                // Mostrar todas las plazas y su estado
                 System.out.println("---------- ESTADO DEL PARKING -----------");
                 PlazaDAO daoPlaza = new PlazaDAO();
                 ArrayList<PlazaVO> lista = (ArrayList<PlazaVO>) daoPlaza.getAll();
@@ -262,6 +270,8 @@ public class Vista {
                 break;
 
             case 2:
+                // Opciones de facturacion
+                System.out.println("---------FACTURACIÓN.----------------");
                 System.out.println("Introduzca el tipo de facturación a consultar");
                 System.out.println("1 - Entre fechas");
                 System.out.println("2 - Abonos");
@@ -275,6 +285,7 @@ public class Vista {
                 }
 
                 switch (seleccionAccion) {
+                    // Obtener abonados entre dos fechas y horas
                     case 1:
                         System.out.println("FECHA INICIAL");
                         System.out.println("Introduce el año (formato YYYY)");
@@ -326,7 +337,8 @@ public class Vista {
                 break;
 
             case 3:
-                System.out.println("GESTION DE ABONADOS");
+                // Gestionar abonados
+                System.out.println("---------GESTION DE ABONADOS---------");
                 System.out.println("Introduzca el número de la opción "
                         + "que desea ejecutar");
                 System.out.println("1 - Insertar abonado");
@@ -346,6 +358,7 @@ public class Vista {
 
                 switch (seleccionAccion) {
                     case 1:
+                        // Insertar un abonado
                         System.out.println("Introduzca opción");
                         System.out.println("1 - Dar de alta nuevo abonado");
                         System.out.println("2 - Dar de alta nuevo abono a plaza");
@@ -359,6 +372,7 @@ public class Vista {
 
                         switch (seleccionAccion) {
                             case 1:
+                                // Dar de alta nuevo abonado
                                 System.out.println("INTRODUCIR DATOS DE ABONADO");
                                 System.out.println("Introduzca nombre");
                                 teclado.nextLine();
@@ -399,6 +413,7 @@ public class Vista {
                                 break;
 
                             case 2:
+                                //Dar de alta nuevo abono a plaza
                                 System.out.println("REGISTRAR NUEVO ABONO A PLAZA");
                                 System.out.println("Selecciona un tipo de abono");
                                 System.out.println("1 - Mensual(25€)");
@@ -446,6 +461,7 @@ public class Vista {
                         break;
 
                     case 2:
+                        // Cambia los datos de un abonado existente
                         System.out.println("MODIFICAR DATOS DE ABONADO");
                         System.out.println("Introduzca la matricula del abdonado"
                                 + " que desea modificar");
@@ -534,6 +550,7 @@ public class Vista {
                         break;
 
                     case 3:
+                        // Renovar un abono que va a expirar
                         System.out.println("MODIFICACION DE ABONO CONCRETO");
                         System.out.println("Introduzca matricula abonado");
                         teclado.nextLine();
@@ -573,6 +590,7 @@ public class Vista {
                         break;
 
                     case 4:
+                        // Eliminar datos personales de un abonado
                         System.out.println("DAR DE BAJA ABONADO");
                         System.out.println("Introduce matricula del abonado");
                         teclado.nextLine();
@@ -596,6 +614,7 @@ public class Vista {
 
                 break;
             case 4:
+                // Muestra los abonos cerca de caducar
                 System.out.println("CADUCIDAD DE ABONOS");
                 System.out.println("Seleccione opción");
                 System.out.println("1 - Ver abonos que caducan en un mes concreto");
@@ -611,6 +630,7 @@ public class Vista {
                 }
 
                 switch (seleccionAccion) {
+                    // Muestra abonos que caducan en mes conctreto
                     case 1:
                         System.out.println("Introduce un mes (del 1 al 12)");
                         seleccionAccion = teclado.nextInt();
@@ -622,7 +642,8 @@ public class Vista {
                         DetalleAbonadoVO.mostrarAbonosMes(seleccionAccion);
                         break;
                     case 2:
-                        System.out.println("ABONOS QUE CADUCAN EN LOS ÚLTIMOS "
+                        // Muestra abonos que caducan en 10 dias desde hoy
+                        System.out.println("ABONOS QUE CADUCAN EN LOS PRÓXIMOS "
                                 + " 10 DÍAS");
                         DetalleAbonadoVO.abonosCaducanDiezDias();
                         break;

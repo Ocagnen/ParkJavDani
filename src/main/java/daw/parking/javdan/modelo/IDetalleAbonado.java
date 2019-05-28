@@ -20,13 +20,13 @@ public interface IDetalleAbonado {
     // Método para insertar varios registros
     int insertDetAb (List<DetalleAbonadoVO> lista) throws SQLException;
     
-    // Método para borrar una persona
+    // Método para borrar un abono
     int deleteDetAb (DetalleAbonadoVO d) throws SQLException;
     
     // Método para borrar toda la tabla
     int deleteDetAb() throws SQLException;
     
-    // Método para modificar un abonado
+    // Método para modificar un abono
     int updateDetAb (String matricula, int codplaz, LocalDate fecIniAbono, DetalleAbonadoVO nuevosDatos) throws SQLException;
     
 }
