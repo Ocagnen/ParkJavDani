@@ -232,7 +232,9 @@ public class Vista {
                 ArrayList<PlazaVO> lista = (ArrayList<PlazaVO>) daoPlaza.getAll();
                 
                 for (PlazaVO plazaVO : lista) {
-                    plazaVO.toStringAdmin();
+                    
+                    System.out.println(plazaVO.toStringAdmin());
+                    
                 }
                 
                 System.out.println("");
