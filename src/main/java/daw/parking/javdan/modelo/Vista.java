@@ -3,6 +3,7 @@ package daw.parking.javdan.modelo;
 import daw.parking.javdan.modelo.AbonadoVO;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -275,8 +276,29 @@ public class Vista {
                         dia = teclado.nextInt();
                         LocalDate fecFin = LocalDate.of(anio, mes, dia);
 
+                        System.out.println("HORA INICIAL");
+                        System.out.println("Introduce la hora (formato 00)");
+                        int hora = teclado.nextInt();
+                        System.out.println("Introduce los minutos (formato 00)");
+                        int minuto = teclado.nextInt();
+                        System.out.println("Introduce los segundos (formato 00)");
+                        int segundo = teclado.nextInt();
+                        LocalTime horaIni = LocalTime.of(hora, minuto, segundo);
+
+                        System.out.println("HORA FINAL");
+                        System.out.println("Introduce la hora (formato 00)");
+                        hora = teclado.nextInt();
+                        System.out.println("Introduce los minutos (formato 00)");
+                        minuto = teclado.nextInt();
+                        System.out.println("Introduce los segundos (formato 00)");
+                        segundo = teclado.nextInt();
+                        LocalTime horaFin = LocalTime.of(hora, minuto, segundo);
+                        
+                        
+
                         ArrayList<TicketVO> listTickAux = TicketVO.obtenerTicketsFechas(fecIni, fecFin);
-                        TicketVO.mostrarCobros(listTickAux);
+                        ArrayList<TicketVO> listTickAux2 = TicketVO.obtenerTicketHoras(listTickAux, horaIni, horaFin);
+                        TicketVO.mostrarCobros(listTickAux2);
                         break;
 
                     case 2:
