@@ -2,6 +2,7 @@ package daw.parking.javdan.modelo;
 
 import daw.parking.javdan.modelo.AbonadoVO;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -41,7 +42,7 @@ public class Vista {
     }
 
     //RAMA DE ZONA CLIENTE
-    public static void seleccionCliente() throws SQLException{
+    public static void seleccionCliente() throws SQLException {
 
         Scanner teclado = new Scanner(System.in);
 
@@ -128,11 +129,11 @@ public class Vista {
                     System.out.println("ERROR, seleccione una de las opciones mostradas");
                     seleccionAccion = teclado.nextInt();
                 }
-                
+
                 switch (seleccionAccion) {
 
                     case 1:
-                        PlazaVO.mostrarPlazasLibres();  
+                        PlazaVO.mostrarPlazasLibres();
                         teclado.nextLine();
                         System.out.println("Introduzca matricula");
                         String matricula = teclado.nextLine();
@@ -162,12 +163,12 @@ public class Vista {
                             System.out.println("Lo siento, no hay plazas libres");
                         } else {
                             System.out.println("Operación realizada con éxito");
-                            int codPlazaAux =PlazaVO.obtenerPlazaLibre(tipoVehi) ;
-                            
+                            int codPlazaAux = PlazaVO.obtenerPlazaLibre(tipoVehi);
+
                             System.out.println("Su plaza es la número "
                                     + codPlazaAux);
                             TicketVO tickaux = TicketVO.generarTicket(matricula, tipoVehi, codPlazaAux);
-                            
+
                             System.out.println("");
                             System.out.println("INFORMACIÓN DEL TICKET");
                             tickaux.toStringParaClientes();
@@ -199,7 +200,7 @@ public class Vista {
 
                         auxTick.actualizarTicketSalida();
 
-                        System.out.println("El importe a pagar será de " + auxTick.calcularTarifa());                       
+                        System.out.println("El importe a pagar será de " + auxTick.calcularTarifa());
 
                         break;
 
@@ -212,7 +213,6 @@ public class Vista {
     public static void seleccionAdmin() throws SQLException {
 
         Scanner teclado = new Scanner(System.in);
-        
 
         System.out.println("¿Que desea ver?");
         System.out.println("1-->Estado de Parking");
@@ -230,15 +230,15 @@ public class Vista {
                 System.out.println("---------- ESTADO DEL PARKING -----------");
                 PlazaDAO daoPlaza = new PlazaDAO();
                 ArrayList<PlazaVO> lista = (ArrayList<PlazaVO>) daoPlaza.getAll();
-                
+
                 for (PlazaVO plazaVO : lista) {
-                    
+
                     System.out.println(plazaVO.toStringAdmin());
-                    
+
                 }
-                
+
                 System.out.println("");
-                
+
                 break;
 
             case 2:
@@ -246,13 +246,38 @@ public class Vista {
                 System.out.println("1 - Entre fechas");
                 System.out.println("2 - Abonos");
                 seleccionAccion = teclado.nextInt();
-                
-                switch(seleccionAccion){
-                    case 1:
-                        
-                    
+
+                while (seleccionAccion > 2 || seleccionAccion < 1) {
+                    System.out.println("Opcion incorrecta, seleccione una de las siguientes:");
+                    System.out.println("1 - Entre fechas");
+                    System.out.println("2 - Abonos");
+                    seleccionAccion = teclado.nextInt();
                 }
-                
+
+                switch (seleccionAccion) {
+                    case 1:
+                        System.out.println("FECHA INICIAL");
+                        System.out.println("Introduce el año (formato YYYY)");
+                        int anio = teclado.nextInt();
+                        System.out.println("Introduce el mes (formato MM)");
+                        int mes = teclado.nextInt();
+                        System.out.println("Introduce el dia (formato dd)");
+                        int dia = teclado.nextInt();
+                        LocalDate fecIni = LocalDate.of(anio, mes, dia);
+                        
+                        System.out.println("FECHA FINAL");
+                        System.out.println("Introduce el año (formato YYYY)");
+                        anio = teclado.nextInt();
+                        System.out.println("Introduce el mes (formato MM)");
+                        mes = teclado.nextInt();
+                        System.out.println("Introduce el dia (formato dd)");
+                        dia = teclado.nextInt();
+                        LocalDate fecFin = LocalDate.of(anio, mes, dia);
+                        
+                        ArrayList<TicketVO> listTickAux = TicketVO.obtenerTicketsFechas(fecIni, fecFin);
+                        TicketVO.mostrarCobros(listTickAux);
+                }
+
                 break;
 
             case 3:
@@ -261,6 +286,6 @@ public class Vista {
                 break;
         }
 
-    }    
+    }
 
 }
