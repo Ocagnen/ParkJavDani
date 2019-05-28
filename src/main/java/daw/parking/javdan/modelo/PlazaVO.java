@@ -60,12 +60,11 @@ public class PlazaVO {
     }
 
     public static void mostrarPlazasLibres() {
-        
-        PlazaDAO daoPlaza = new PlazaDAO();        
+
+        PlazaDAO daoPlaza = new PlazaDAO();
         int contadorTuris = 0;
         int contadorMoto = 0;
         int contadorCarav = 0;
-        
 
         try {
             ArrayList<PlazaVO> lista = (ArrayList<PlazaVO>) daoPlaza.getAll();
@@ -91,11 +90,11 @@ public class PlazaVO {
             System.out.println(sqle.getMessage());
         }
 
-        System.out.println("Hay un total de "+
-                (contadorTuris+contadorMoto+contadorCarav)+" plazas libres");
-        System.out.println(contadorTuris+" plazas de turismos");
-        System.out.println(contadorMoto+ " plazas de motos");
-        System.out.println(contadorCarav+ " plazas de caravanas");
+        System.out.println("Hay un total de "
+                + (contadorTuris + contadorMoto + contadorCarav) + " plazas libres");
+        System.out.println(contadorTuris + " plazas de turismos");
+        System.out.println(contadorMoto + " plazas de motos");
+        System.out.println(contadorCarav + " plazas de caravanas");
 
     }
 
@@ -124,7 +123,23 @@ public class PlazaVO {
         return 0;
 
     }
-    
+
+    public static void cambiarEstadoPlaza(PlazaVO plaza, int estado) {
+
+        PlazaDAO daoPlaza = new PlazaDAO();
+
+        try {
+
+            plaza.setEstado(estado);
+
+            daoPlaza.updatePlaza(estado, plaza);
+
+        } catch (SQLException sqle) {
+            System.out.println("No se ha podido realizar la operación:");
+            System.out.println(sqle.getMessage());
+        }
+
+    }
 
     public int getCodPlaza() {
         return codPlaza;
@@ -162,9 +177,9 @@ public class PlazaVO {
     public String toString() {
         return "PlazaVO{" + "codPlaza=" + codPlaza + ", tipoPlaza=" + tipoPlaza + ", estado=" + estado + ", coste=" + coste + '}';
     }
-    
+
     public String toStringAdmin() {
-        return "PlazaVO{" + "codPlaza=" + codPlaza + ", tipoPlaza=" + this.getNombreTipo() + ", estado=" + this.mostrarEstado() +'}';
+        return "PlazaVO{" + "codPlaza=" + codPlaza + ", tipoPlaza=" + this.getNombreTipo() + ", estado=" + this.mostrarEstado() + '}';
     }
 
     @Override
