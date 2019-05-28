@@ -284,6 +284,25 @@ public class DetalleAbonadoVO {
         }       
         
     }
+    
+    public static void mostrarAbonosMes(int mes){
+        
+        ArrayList<DetalleAbonadoVO> lista = DetalleAbonadoVO.obtenerAbonosAnuales();
+        
+        System.out.println("ABONOS QUE CADUCAN EN EL MES "+mes);
+        
+        for (DetalleAbonadoVO detalleAbonadoVO : lista) {
+            
+            if((detalleAbonadoVO.getFecFinAbono().getMonthValue() == mes)
+            && (detalleAbonadoVO.getFecFinAbono().getYear() == LocalDate.now().getYear() )){
+                
+                System.out.println(detalleAbonadoVO.toString());
+                
+            }
+            
+        }
+        
+    }
 
     public String getMatricula() {
         return matricula;
