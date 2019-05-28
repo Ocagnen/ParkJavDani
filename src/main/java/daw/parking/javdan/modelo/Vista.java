@@ -128,12 +128,12 @@ public class Vista {
                     System.out.println("ERROR, seleccione una de las opciones mostradas");
                     seleccionAccion = teclado.nextInt();
                 }
-
+                
                 switch (seleccionAccion) {
 
                     case 1:
-                        PlazaVO.mostrarPlazasLibres();
-                        teclado.nextLine();
+                        PlazaVO.mostrarPlazasLibres();  
+                        
                         System.out.println("Introduzca matricula");
                         String matricula = teclado.nextLine();
 

@@ -13,6 +13,7 @@ import daw.parking.javdan.modelo.PlazaDAO;
 import daw.parking.javdan.modelo.PlazaVO;
 import daw.parking.javdan.modelo.TicketDAO;
 import daw.parking.javdan.modelo.TicketVO;
+import daw.parking.javdan.modelo.Vista;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;

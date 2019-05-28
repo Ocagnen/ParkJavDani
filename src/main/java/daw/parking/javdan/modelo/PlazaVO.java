@@ -60,11 +60,12 @@ public class PlazaVO {
     }
 
     public static void mostrarPlazasLibres() {
-
-        PlazaDAO daoPlaza = new PlazaDAO();
+        
+        PlazaDAO daoPlaza = new PlazaDAO();        
         int contadorTuris = 0;
         int contadorMoto = 0;
         int contadorCarav = 0;
+        
 
         try {
             ArrayList<PlazaVO> lista = (ArrayList<PlazaVO>) daoPlaza.getAll();
