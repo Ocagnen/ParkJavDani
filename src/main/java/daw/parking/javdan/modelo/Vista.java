@@ -1,6 +1,10 @@
 package daw.parking.javdan.modelo;
 
 import daw.parking.javdan.modelo.AbonadoVO;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -227,6 +231,7 @@ public class Vista {
         System.out.println("2-->Facturación");
         System.out.println("3-->Abonos");
         System.out.println("4 --> Caducidad de abonos");
+        System.out.println("5 --> Copias de seguridad");
         int seleccionAccion = teclado.nextInt();
 
         while (seleccionAccion > 4 || seleccionAccion < 1) {
@@ -620,9 +625,92 @@ public class Vista {
                         DetalleAbonadoVO.abonosCaducanDiezDias();
                         break;
                 }
+            case 5:
+                System.out.println("COPIAS DE SEGURIDAD");
+                System.out.println("Introduzca orden");
+                System.out.println("1 - Crear copia de seguridad");
+                System.out.println("2 - Restaurar copia de seguridad");
 
         }
 
+    }
+    
+    public static void escribirCopiaSeg(){
+        
+        PlazaDAO daoPlaza = new PlazaDAO();
+        AbonadoDAO daoAbonado = new AbonadoDAO();
+        DetalleAbonadoDAO daoDetAbo = new DetalleAbonadoDAO();
+        TicketDAO daoTicket = new TicketDAO();
+        
+        try{
+        ArrayList<PlazaVO> listaPla = (ArrayList<PlazaVO>) daoPlaza.getAll();
+        ArrayList<AbonadoVO> listaAbo = (ArrayList<AbonadoVO>) daoAbonado.getAll();
+        ArrayList<DetalleAbonadoVO> listaDetAbo = (ArrayList<DetalleAbonadoVO>) daoDetAbo.getAll();
+        ArrayList<TicketVO> listaTicket = (ArrayList<TicketVO>) daoTicket.getAll();
+        
+        } catch (SQLException sqle) {
+            System.out.println("No se ha podido realizar la operación:");
+            System.out.println(sqle.getMessage());
+        }
+        
+        
+        
+    }
+    
+    public static void escribePlaza(PlazaVO plaza, String fichero){
+        
+         try (ObjectOutputStream flujo = new ObjectOutputStream(new FileOutputStream(fichero))) {
+
+            flujo.writeObject(plaza);
+
+        } catch (FileNotFoundException e) {
+            System.out.println("El fichero no existe");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        
+    }
+    
+    public static void escribeTicket(TicketVO ticket, String fichero){
+        
+         try (ObjectOutputStream flujo = new ObjectOutputStream(new FileOutputStream(fichero))) {
+
+            flujo.writeObject(ticket);
+
+        } catch (FileNotFoundException e) {
+            System.out.println("El fichero no existe");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        
+    }
+    
+    public static void escribeDetalleAbo(DetalleAbonadoVO detAbo, String fichero){
+        
+         try (ObjectOutputStream flujo = new ObjectOutputStream(new FileOutputStream(fichero))) {
+
+            flujo.writeObject(detAbo);
+
+        } catch (FileNotFoundException e) {
+            System.out.println("El fichero no existe");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        
+    }
+    
+    public static void escribeAbonado(AbonadoVO abonado, String fichero){
+        
+         try (ObjectOutputStream flujo = new ObjectOutputStream(new FileOutputStream(fichero))) {
+
+            flujo.writeObject(abonado);
+
+        } catch (FileNotFoundException e) {
+            System.out.println("El fichero no existe");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        
     }
 
 }
