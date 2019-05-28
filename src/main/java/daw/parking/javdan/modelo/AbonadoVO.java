@@ -53,13 +53,12 @@ public class AbonadoVO {
 
     public static void modificarAbonado(AbonadoVO abonado) {
 
-        AbonadoDAO daoAbonado = new AbonadoDAO();      
-        
+        AbonadoDAO daoAbonado = new AbonadoDAO();
+
         try {
-            
-            
+
             daoAbonado.updateAbonado(abonado.getMatricula(), abonado);
-            
+
         } catch (SQLException sqle) {
             System.out.println("No se ha podido realizar la operación:");
             System.out.println(sqle.getMessage());
@@ -112,6 +111,14 @@ public class AbonadoVO {
         }
 
         return false;
+
+    }
+
+    public static AbonadoVO obtenerAbonado(String matricula) throws SQLException {
+
+        AbonadoDAO daoAbonado = new AbonadoDAO();
+
+        return daoAbonado.findByCod(matricula);
 
     }
 
