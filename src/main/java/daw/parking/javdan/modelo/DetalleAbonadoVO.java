@@ -150,6 +150,59 @@ public class DetalleAbonadoVO {
         }
         
     }
+    
+    public static DetalleAbonadoVO insertaNuevoDetalleAbonado(int tipoAbono, int tipoVehi, String matricula){
+        
+        DetalleAbonadoDAO daoDetAbo = new DetalleAbonadoDAO();
+        DetalleAbonadoVO detAb = new DetalleAbonadoVO();
+        
+        PlazaDAO daoPlaza = new PlazaDAO();
+        PlazaVO plazaAux = new PlazaVO();
+        
+        AbonadoDAO daoAbonado = new AbonadoDAO();
+        AbonadoVO abonadoAux = new AbonadoVO();      
+        
+        
+        int pkPlaza = PlazaVO.obtenerPlazaLibre(tipoVehi);
+        
+        try{
+        abonadoAux = daoAbonado.findByCod(matricula);
+        plazaAux = daoPlaza.findByCod(pkPlaza);
+        
+        } catch (SQLException sqle) {
+            System.out.println("No se ha podido realizar la operación:");
+            System.out.println(sqle.getMessage());
+        }
+        
+        detAb.setCodPlaza(pkPlaza);
+        detAb.setFecFinAbono(LocalDate.now());
+        detAb.setMatricula(matricula);
+        detAb.setTipoAbono(tipoAbono);
+        
+        
+        
+        
+        
+        
+        
+        
+    }
+    
+    public static LocalDate generarFechaFinAbono(int tipoAbo){
+        
+        switch(tipoAbo){
+            case 0:
+                return LocalDate.now().plusMonths(1);
+            case 1:
+                return LocalDate.now().plusMonths(3);
+            case 2:
+                return LocalDate.now().plusMonths(6);
+            default:
+                return LocalDate.now().plusYears(1);           
+            
+        }
+        
+    }
 
     public String getMatricula() {
         return matricula;
