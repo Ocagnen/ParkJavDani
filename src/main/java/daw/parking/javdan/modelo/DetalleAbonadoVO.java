@@ -121,17 +121,20 @@ public class DetalleAbonadoVO {
     public static void muestraCobroAbonados(ArrayList<DetalleAbonadoVO> lista){
         
         System.out.println("COBROS ABONADOS");
+        int cobroTotal = 0;
         
         for (DetalleAbonadoVO detalleAbonadoVO : lista) {
             
-            System.out.println(detalleAbonadoVO);
-            
-            
+            System.out.println(detalleAbonadoVO.calcularAbonos()+ "€");  
+            cobroTotal = cobroTotal + detalleAbonadoVO.calcularAbonos();            
         }
+        
+        System.out.println("COBRO TOTAL ABONADOS");
+        System.out.println(cobroTotal + "€");
         
     }
     
-    public double calcularAbonos(){
+    public int calcularAbonos(){
         
         switch(this.tipoAbono){
             
