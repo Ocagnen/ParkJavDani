@@ -133,7 +133,7 @@ public class Vista {
 
                     case 1:
                         PlazaVO.mostrarPlazasLibres();  
-                        
+                        teclado.nextLine();
                         System.out.println("Introduzca matricula");
                         String matricula = teclado.nextLine();
 
@@ -162,9 +162,12 @@ public class Vista {
                             System.out.println("Lo siento, no hay plazas libres");
                         } else {
                             System.out.println("Operación realizada con éxito");
+                            int codPlazaAux =PlazaVO.obtenerPlazaLibre(tipoVehi) ;
+                            
                             System.out.println("Su plaza es la número "
-                                    + PlazaVO.obtenerPlazaLibre(tipoVehi));
-                            TicketVO tickaux = TicketVO.generarTicket(matricula, tipoVehi, PlazaVO.obtenerPlazaLibre(tipoVehi));
+                                    + codPlazaAux);
+                            TicketVO tickaux = TicketVO.generarTicket(matricula, tipoVehi, codPlazaAux);
+                            
                             System.out.println("");
                             System.out.println("INFORMACIÓN DEL TICKET");
                             tickaux.toStringParaClientes();
