@@ -187,7 +187,7 @@ public class TicketVO {
 
     }
 
-    public ArrayList<TicketVO> obtenerTicketsFechas(LocalDate finIni, LocalDate fecFin) {
+    public static ArrayList<TicketVO> obtenerTicketsFechas(LocalDate finIni, LocalDate fecFin) {
 
         TicketDAO daoTicket = new TicketDAO();
 
@@ -217,7 +217,7 @@ public class TicketVO {
         return listaDevolver;
     }
     
-    public void mostrarCobros(ArrayList<TicketVO> lista){
+    public static void mostrarCobros(ArrayList<TicketVO> lista){
         
         System.out.println("COBROS");
         double costeEst = 0;
