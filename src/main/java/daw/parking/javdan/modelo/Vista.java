@@ -172,7 +172,7 @@ public class Vista {
                             System.out.println("");
                             System.out.println("INFORMACIÓN DEL TICKET");
                             System.out.println(tickaux.toStringParaClientes());
-                            
+
                         }
 
                         break;
@@ -374,6 +374,32 @@ public class Vista {
                                     System.out.println("4 - Anual (200€)");
                                     tipoAbono = teclado.nextInt();
                                 }
+
+                                System.out.println("Introduce el tipo de vehiculo");
+                                System.out.println("0 - Turismo");
+                                System.out.println("1 - Motocicleta");
+                                System.out.println("2 - Caravana");
+                                int tipoVe = teclado.nextInt();
+                                while (tipoVe > 2 || tipoVe < 0) {
+                                    System.out.println("Opcion incorrecta, seleccione una de las siguientes:");
+                                    System.out.println("0 - Turismo");
+                                    System.out.println("1 - Motocicleta");
+                                    System.out.println("2 - Caravana");
+                                    tipoVe = teclado.nextInt();
+                                }             
+                        
+                                System.out.println("Introduce tu matricula");
+                                String matrAbo = teclado.nextLine();
+                                while (matrAbo.length() != 8)  {
+                                    System.out.println("Matricula erronea, introduzca en formato 1111-XXX");
+                                    matrAbo = teclado.nextLine();
+                                }
+                                
+                                
+                                
+                                
+                                
+                                
                                 
                                 
                                 

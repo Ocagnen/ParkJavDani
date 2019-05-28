@@ -178,13 +178,18 @@ public class DetalleAbonadoVO {
         detAb.setFecFinAbono(LocalDate.now());
         detAb.setMatricula(matricula);
         detAb.setTipoAbono(tipoAbono);
+        detAb.setFecFinAbono(DetalleAbonadoVO.generarFechaFinAbono(tipoAbono));
         
+        try {
+            
+            daoDetAbo.insertDetAb(detAb);
+            
+        } catch (SQLException sqle) {
+            System.out.println("No se ha podido realizar la operación:");
+            System.out.println(sqle.getMessage());
+        }      
         
-        
-        
-        
-        
-        
+        return detAb;    
         
     }
     

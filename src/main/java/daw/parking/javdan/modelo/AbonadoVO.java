@@ -36,6 +36,22 @@ public class AbonadoVO {
     public AbonadoVO() {
     }   
     
+    public static void insertarAbonado(AbonadoVO abonado){
+        
+        AbonadoDAO daoAbonado = new AbonadoDAO();
+        
+        try {
+            
+            daoAbonado.insertAbonado(abonado);
+            
+        } catch (SQLException sqle) {
+            System.out.println("No se ha podido realizar la operación:");
+            System.out.println(sqle.getMessage());
+        }  
+        
+        
+    }
+    
     public static boolean comprobarPin(int pin, String matricula){
         
         AbonadoDAO daoAbonado = new AbonadoDAO();
