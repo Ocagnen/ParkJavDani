@@ -193,6 +193,26 @@ public class DetalleAbonadoVO {
         
     }
     
+    public static DetalleAbonadoVO obtenerDetallesAbonoActivo(String matricula) throws SQLException{
+        
+        DetalleAbonadoDAO daoDetAbo = new DetalleAbonadoDAO();
+        ArrayList<DetalleAbonadoVO> lista = new ArrayList<>();
+        DetalleAbonadoVO detAuxi = new DetalleAbonadoVO();
+        
+        lista = (ArrayList<DetalleAbonadoVO>) daoDetAbo.getAll();
+        
+        for (DetalleAbonadoVO detalleAbonadoVO : lista) {
+            
+            if(detalleAbonadoVO.getMatricula().equals(matricula)
+                    && detalleAbonadoVO.getFecFinAbono().isAfter(LocalDate.now())){
+                detAuxi = detalleAbonadoVO;
+            }
+            
+        }       
+        
+        return detAuxi;
+    }
+    
     public static LocalDate generarFechaFinAbono(int tipoAbo){
         
         switch(tipoAbo){
