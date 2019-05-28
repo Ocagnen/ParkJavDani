@@ -253,6 +253,37 @@ public class DetalleAbonadoVO {
         }
 
     }
+    
+    public static void renovarAbono(DetalleAbonadoVO detAb, int tipoAbo){
+        
+        switch(tipoAbo){
+            case 0:
+                detAb.setFecFinAbono(detAb.getFecFinAbono().plusMonths(1));
+                break;
+            case 1:
+                detAb.setFecFinAbono(detAb.getFecFinAbono().plusMonths(3));
+                break;
+            case 2:
+                detAb.setFecFinAbono(detAb.getFecFinAbono().plusMonths(6));
+                break;
+            case 3:
+                detAb.setFecFinAbono(detAb.getFecFinAbono().plusYears(1));
+                break;          
+            
+        }
+        
+        DetalleAbonadoDAO daoDetAbo = new DetalleAbonadoDAO();
+        
+        try{
+            
+            daoDetAbo.updateDetAb(detAb.getMatricula(), detAb.getCodPlaza(), detAb.getFecIniAbono(), detAb);
+            
+        }catch (SQLException sqle) {
+            System.out.println("No se ha podido realizar la operación:");
+            System.out.println(sqle.getMessage());
+        }       
+        
+    }
 
     public String getMatricula() {
         return matricula;
