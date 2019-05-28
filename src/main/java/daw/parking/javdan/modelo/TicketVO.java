@@ -11,7 +11,7 @@ import java.util.Random;
 
 public class TicketVO {
 
-    private static int contadorTickets;
+   
 
     private int codTicket;
     private int tipoVehi;
@@ -25,8 +25,8 @@ public class TicketVO {
     private double costeEstancia;
 
     public TicketVO(int codTicket, int tipoVehi, String matricula, int codPlaza, LocalDate fecIngreso, LocalDate fecSalida, LocalTime horaIngreso, LocalTime horaSalida, int pin, double costeEstancia) {
-        contadorTickets++;
-        this.codTicket = contadorTickets;
+        
+        this.codTicket = codTicket;
         this.tipoVehi = tipoVehi;
         this.matricula = matricula;
         this.codPlaza = codPlaza;
@@ -39,14 +39,14 @@ public class TicketVO {
     }
 
     public TicketVO() {
-        contadorTickets++;
-        this.codTicket = contadorTickets;
+        
     }
 
     public static TicketVO generarTicket(String matricula, int tipoVehi, int codPlaz) {
 
         TicketVO tick = new TicketVO();
 
+        tick.setCodTicket(generarPKTick());
         tick.setCodPlaza(codPlaz);
         tick.setCosteEstancia(0);
         tick.setFecIngreso(LocalDate.now());
@@ -70,6 +70,30 @@ public class TicketVO {
 
         return tick;
 
+    }
+    
+    public static int generarPKTick(){
+        
+        TicketDAO daoTicket = new TicketDAO();
+         ArrayList<TicketVO> tickAux = new ArrayList<>();
+         int contador = 0;
+        
+        try{
+            
+        tickAux = (ArrayList<TicketVO>) daoTicket.getAll();
+        
+        }catch (SQLException sqle) {
+            System.out.println("No se ha podido realizar la operación:");
+            System.out.println(sqle.getMessage());
+        }
+        
+        for (TicketVO ticketVO : tickAux) {
+            contador++;
+        }
+        
+        return contador+1;
+
+        
     }
 
     public static int generarPin() {
