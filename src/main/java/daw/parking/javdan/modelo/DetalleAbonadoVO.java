@@ -213,6 +213,7 @@ public class DetalleAbonadoVO {
 
             if (detalleAbonadoVO.getMatricula().equals(matricula)
                     && detalleAbonadoVO.getFecFinAbono().isAfter(LocalDate.now())) {
+                System.out.println("Lo devuelvo");
                 detAuxi = detalleAbonadoVO;
             }
 
@@ -292,16 +293,16 @@ public class DetalleAbonadoVO {
     public static void renovarAbono(DetalleAbonadoVO detAb, int tipoAbo) {
 
         switch (tipoAbo) {
-            case 0:
+            case 1:
                 detAb.setFecFinAbono(detAb.getFecFinAbono().plusMonths(1));
                 break;
-            case 1:
+            case 2:
                 detAb.setFecFinAbono(detAb.getFecFinAbono().plusMonths(3));
                 break;
-            case 2:
+            case 3:
                 detAb.setFecFinAbono(detAb.getFecFinAbono().plusMonths(6));
                 break;
-            case 3:
+            case 4:
                 detAb.setFecFinAbono(detAb.getFecFinAbono().plusYears(1));
                 break;
 
