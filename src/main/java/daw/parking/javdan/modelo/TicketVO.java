@@ -200,7 +200,7 @@ public class TicketVO {
                 numMin = (int) minutosEnMismoDia;
                 break;
             case 1:
-                minutosEnMismoDia = ChronoUnit.MINUTES.between(this.horaIngreso, LocalTime.MIDNIGHT);
+                minutosEnMismoDia = ChronoUnit.MINUTES.between(this.horaIngreso, LocalTime.of(23, 59, 59));
                 minutosDiaDespues = ChronoUnit.MINUTES.between(LocalTime.MIDNIGHT, this.horaSalida);
                 numMin = (int) minutosEnMismoDia + (int) minutosDiaDespues;
                 break;
