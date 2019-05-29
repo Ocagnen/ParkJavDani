@@ -222,7 +222,7 @@ public class Vista {
 
                         auxTick.actualizarTicketSalida();
 
-                        System.out.println("El importe a pagar será de " + auxTick.getCosteEstancia());
+                        System.out.println("El importe a pagar será de " + auxTick.getCosteEstancia()+"€");
 
                         break;
 

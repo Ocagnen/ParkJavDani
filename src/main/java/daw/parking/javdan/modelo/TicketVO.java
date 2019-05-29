@@ -164,11 +164,20 @@ public class TicketVO {
         this.fecSalida = LocalDate.now();
         this.horaSalida = LocalTime.now();
         this.costeEstancia = this.calcularTarifa();
+        
+        PlazaDAO daoPlaza = new PlazaDAO();
+        PlazaVO plazaAux = new PlazaVO();
+        
+        
 
         TicketDAO daoTicket = new TicketDAO();
 
         try {
-
+            
+            plazaAux = daoPlaza.findByCod(this.codPlaza);
+            
+            PlazaVO.cambiarEstadoPlaza(plazaAux, 0);
+            
             daoTicket.updateTicket(this.getCodTicket(), this);
 
         } catch (SQLException sqle) {
@@ -205,7 +214,7 @@ public class TicketVO {
                 numMin = (int) minutosEnMismoDia + (int) minutosDiaDespues;
                 break;
             default:
-                minutosEnMismoDia = ChronoUnit.MINUTES.between(this.horaIngreso, LocalTime.MIDNIGHT);
+                minutosEnMismoDia = ChronoUnit.MINUTES.between(this.horaIngreso, LocalTime.of(23, 59, 59));
                 minutosDiaDespues = ChronoUnit.MINUTES.between(LocalTime.MIDNIGHT, this.horaSalida);
                 numMin = (int) minutosEnMismoDia + (int) minutosDiaDespues + ((dias - 1) * 1440);
                 break;
