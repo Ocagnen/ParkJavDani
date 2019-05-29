@@ -295,15 +295,19 @@ public class DetalleAbonadoVO {
         switch (tipoAbo) {
             case 1:
                 detAb.setFecFinAbono(detAb.getFecFinAbono().plusMonths(1));
+                detAb.setTipoAbono(1);                
                 break;
             case 2:
                 detAb.setFecFinAbono(detAb.getFecFinAbono().plusMonths(3));
+                detAb.setTipoAbono(2);
                 break;
             case 3:
                 detAb.setFecFinAbono(detAb.getFecFinAbono().plusMonths(6));
+                detAb.setTipoAbono(3);
                 break;
             case 4:
                 detAb.setFecFinAbono(detAb.getFecFinAbono().plusYears(1));
+                detAb.setTipoAbono(4);
                 break;
 
         }
@@ -311,7 +315,8 @@ public class DetalleAbonadoVO {
         DetalleAbonadoDAO daoDetAbo = new DetalleAbonadoDAO();
 
         try {
-
+            
+            
             daoDetAbo.updateDetAb(detAb.getMatricula(), detAb.getCodPlaza(), detAb.getFecIniAbono(), detAb);
 
         } catch (SQLException sqle) {
@@ -352,9 +357,11 @@ public class DetalleAbonadoVO {
 
                 System.out.println(detalleAbonadoVO.toString());
 
-            }
+            } 
 
         }
+        
+        System.out.println(" - ");
 
     }
 

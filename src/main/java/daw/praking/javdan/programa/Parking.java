@@ -28,7 +28,8 @@ import java.util.List;
  */
 public class Parking {
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException {       
+
         int opcion = 0;
         do {
             opcion = Vista.menu();
