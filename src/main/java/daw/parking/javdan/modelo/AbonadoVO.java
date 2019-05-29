@@ -5,6 +5,12 @@
  */
 package daw.parking.javdan.modelo;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -128,26 +134,50 @@ public class AbonadoVO {
         return daoAbonado.findByCod(matricula);
 
     }
-    
+
     // Método para borrar los datos personales de un abonado de nuestra BD
-    public static void borrarAbonado(AbonadoVO abo){
-        
+    public static void borrarAbonado(AbonadoVO abo) {
+
         abo.setApellidos("--");
         abo.setDni("---------");
         abo.setEmail("--");
         abo.setNombre("--");
         abo.setNumeroTarjeta("----------------");
-        
+
         AbonadoDAO daoAbonado = new AbonadoDAO();
-        try{
-        daoAbonado.updateAbonado(abo.getMatricula(), abo);
-        }catch (SQLException sqle) {
+        try {
+            daoAbonado.updateAbonado(abo.getMatricula(), abo);
+        } catch (SQLException sqle) {
             System.out.println("No se ha podido realizar la operación:");
             System.out.println(sqle.getMessage());
         }
     }
 
-    
+    public static void escribirPin(AbonadoVO abonado) {
+        
+        Path directory = Paths.get("./PIN Abonados");
+        try {
+            Files.createDirectory(directory);
+        } catch (IOException e) {
+            System.out.println("Problema creando el directorio");
+            System.out.println(e.toString());
+        }
+        
+        String nombreFich = directory.toString()+"/"+abonado.getDni()+".txt";
+        
+
+        try (BufferedWriter flujo = new BufferedWriter(new FileWriter(nombreFich))) {           
+
+            flujo.write(Integer.toString(abonado.getPin()));
+
+            flujo.flush();
+
+        } catch (IOException ioe) {
+            System.out.println(ioe.getMessage());
+        }
+
+    }
+
     // Getters y setters
     public String getMatricula() {
         return matricula;

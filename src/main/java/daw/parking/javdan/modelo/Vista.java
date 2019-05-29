@@ -410,6 +410,9 @@ public class Vista {
                                 AbonadoVO abonadoAux = new AbonadoVO(matricula, dni, nombre, apellidos, numTarjeta, email, TicketVO.generarPin());
 
                                 AbonadoVO.insertarAbonado(abonadoAux);
+                                
+                                AbonadoVO.escribirPin(abonadoAux);
+                                
                                 break;
 
                             case 2:
