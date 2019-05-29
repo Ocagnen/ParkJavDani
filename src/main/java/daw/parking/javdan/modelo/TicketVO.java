@@ -61,7 +61,7 @@ public class TicketVO {
         try {
 
             TicketDAO daoTicket = new TicketDAO();
-            System.out.println("No lo hago");
+            
             daoTicket.insertTicket(tick);
 
         } catch (SQLException sqle) {

@@ -139,7 +139,7 @@ public class PlazaVO {
 
             plaza.setEstado(estado);
 
-            daoPlaza.updatePlaza(estado, plaza);
+            daoPlaza.updatePlaza(plaza.getCodPlaza(), plaza);
 
         } catch (SQLException sqle) {
             System.out.println("No se ha podido realizar la operación:");
