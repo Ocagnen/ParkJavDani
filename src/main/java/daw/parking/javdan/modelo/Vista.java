@@ -298,15 +298,15 @@ public class Vista {
 
                         System.out.println("FECHA FINAL");
                         System.out.println("Introduce el año (formato YYYY)");
-                        anio = teclado.nextInt();
+                        int anio2 = teclado.nextInt();
                         System.out.println("Introduce el mes (formato MM)");
-                        mes = teclado.nextInt();
+                        int mes2 = teclado.nextInt();
                         System.out.println("Introduce el dia (formato dd)");
-                        dia = teclado.nextInt();
-                        LocalDate fecFin = LocalDate.of(anio, mes, dia);
+                        int dia2 = teclado.nextInt();
+                        LocalDate fecFin = LocalDate.of(anio2, mes2, dia2);
 
                         System.out.println("HORA INICIAL");
-                        System.out.println("Introduce la hora (formato 00)");
+                        System.out.println("Introduce la hora ");
                         int hora = teclado.nextInt();
                         System.out.println("Introduce los minutos (formato 00)");
                         int minuto = teclado.nextInt();
@@ -316,12 +316,12 @@ public class Vista {
 
                         System.out.println("HORA FINAL");
                         System.out.println("Introduce la hora (formato 00)");
-                        hora = teclado.nextInt();
+                        int hora2 = teclado.nextInt();
                         System.out.println("Introduce los minutos (formato 00)");
-                        minuto = teclado.nextInt();
+                        int minuto2 = teclado.nextInt();
                         System.out.println("Introduce los segundos (formato 00)");
-                        segundo = teclado.nextInt();
-                        LocalTime horaFin = LocalTime.of(hora, minuto, segundo);
+                        int segundo2 = teclado.nextInt();
+                        LocalTime horaFin = LocalTime.of(hora2, minuto2, segundo2);
 
                         ArrayList<TicketVO> listTickAux = TicketVO.obtenerTicketsFechas(fecIni, fecFin);
                         ArrayList<TicketVO> listTickAux2 = TicketVO.obtenerTicketHoras(listTickAux, horaIni, horaFin);

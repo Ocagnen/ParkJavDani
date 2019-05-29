@@ -260,10 +260,12 @@ public class TicketVO {
         }
 
         for (TicketVO ticketVO : listaAux) {
-
+            System.out.println("Entro en bucle fecha");
             if (ticketVO.getFecSalida().isAfter(finIni)
-                    && ticketVO.getFecSalida().isBefore(fecFin)) {
-
+                    && ticketVO.getFecSalida().isBefore(fecFin) 
+                    || ticketVO.getFecSalida().isEqual(fecFin)
+                    || ticketVO.getFecSalida().isEqual(finIni)) {
+                System.out.println("Añado ticket fecha");
                 listaDevolver.add(ticketVO);
 
             }
@@ -279,10 +281,10 @@ public class TicketVO {
         ArrayList<TicketVO> listaDevolver = new ArrayList<>();
 
         for (TicketVO ticketVO : lista) {
-
-            if (ticketVO.getHoraIngreso().isAfter(horaIni)
+            System.out.println("Entro en bucle hora");
+            if (ticketVO.getHoraSalida().isAfter(horaIni)
                     && ticketVO.getHoraSalida().isBefore(horaFin)) {
-
+                System.out.println("Añado ticket hora");
                 listaDevolver.add(ticketVO);
 
             }
