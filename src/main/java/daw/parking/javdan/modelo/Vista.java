@@ -119,6 +119,7 @@ public class Vista {
                         break;
                     case 2:
                         System.out.println("Introduce la matricula de tu vehiculo");
+                        teclado.nextLine();
                         matricula = teclado.nextLine();
                         System.out.println("Introduce el nº de plaza");
                         int plaza = teclado.nextInt();

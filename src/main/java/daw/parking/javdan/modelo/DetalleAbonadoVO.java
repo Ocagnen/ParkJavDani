@@ -61,14 +61,15 @@ public class DetalleAbonadoVO {
             ArrayList<DetalleAbonadoVO> lista = (ArrayList<DetalleAbonadoVO>) daoDetalleAbonado.getAll();
             for (DetalleAbonadoVO detAbonado : lista) {
 
-                if (matricula.equals(detAbonado.matricula) && detAbonado.codPlaza == plaza
-                        && AbonadoVO.comprobarPin(pin, matricula) && detAbonado.fecFinAbono.isAfter(LocalDate.now())) {
-
+                if (matricula.equals(detAbonado.getMatricula()) && detAbonado.getCodPlaza() == plaza
+                        && AbonadoVO.comprobarPin(pin, matricula) && detAbonado.getFecFinAbono().isAfter(LocalDate.now())) {
+                    
                     PlazaDAO daoPlaza = new PlazaDAO();
                     try {
                         PlazaVO plazaTempo = daoPlaza.findByCod(DetalleAbonadoVO.obtenerPlaza(matricula));
-                        plazaTempo.setEstado(3);
-                        daoPlaza.updatePlaza(DetalleAbonadoVO.obtenerPlaza(matricula), plazaTempo);
+                        PlazaVO.cambiarEstadoPlaza(plazaTempo, 3);
+                        //plazaTempo.setEstado(3);
+                        //daoPlaza.updatePlaza(DetalleAbonadoVO.obtenerPlaza(matricula), plazaTempo);
                     } catch (SQLException sqle) {
                         System.out.println("No se ha podido realizar la operación:");
                         System.out.println(sqle.getMessage());
@@ -109,8 +110,8 @@ public class DetalleAbonadoVO {
 
         for (DetalleAbonadoVO detalleAbonadoVO : listaAux) {
 
-            if (detalleAbonadoVO.getFecFinAbono().isAfter(LocalDate.of(anioActual, 1, 1))
-                    && detalleAbonadoVO.getFecFinAbono().isBefore(LocalDate.of(anioActual, 12, 31))) {
+            if (detalleAbonadoVO.getFecIniAbono().isAfter(LocalDate.of(anioActual, 1, 1))
+                    && detalleAbonadoVO.getFecIniAbono().isBefore(LocalDate.of(anioActual, 12, 31))) {
 
                 listaDev.add(detalleAbonadoVO);
 
