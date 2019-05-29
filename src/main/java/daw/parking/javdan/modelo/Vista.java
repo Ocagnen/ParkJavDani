@@ -184,7 +184,6 @@ public class Vista {
                             System.out.println("Lo siento, no hay plazas libres");
                         } else {
                             System.out.println("Operación realizada con éxito");
-                            
 
                             System.out.println("Su plaza es la número "
                                     + codPlazaAux);
@@ -223,7 +222,7 @@ public class Vista {
 
                         auxTick.actualizarTicketSalida();
 
-                        System.out.println("El importe a pagar será de " + auxTick.getCosteEstancia()+"€");
+                        System.out.println("El importe a pagar será de " + auxTick.getCosteEstancia() + "€");
 
                         break;
 
@@ -241,7 +240,7 @@ public class Vista {
         System.out.println("1-->Estado de Parking");
         System.out.println("2-->Facturación");
         System.out.println("3-->Abonos");
-        System.out.println("4 --> Caducidad de abonos");      
+        System.out.println("4 --> Caducidad de abonos");
         int seleccionAccion = teclado.nextInt();
 
         while (seleccionAccion > 4 || seleccionAccion < 1) {
@@ -606,9 +605,12 @@ public class Vista {
 
                         AbonadoVO.borrarAbonado(AbonadoVO.obtenerAbonado(mat));
 
-                        DetalleAbonadoVO detAux = DetalleAbonadoVO.obtenerDetallesAbonoActivo(mat);
+                        if (DetalleAbonadoVO.compruebaAbonoActivo(mat)) {
 
-                        PlazaVO.cambiarEstadoPlaza(PlazaVO.obtenerPlazaConId(detAux.getCodPlaza()), 0);
+                            DetalleAbonadoVO detAux = DetalleAbonadoVO.obtenerDetallesAbonoActivo(mat);
+
+                            PlazaVO.cambiarEstadoPlaza(PlazaVO.obtenerPlazaConId(detAux.getCodPlaza()), 0);
+                        }
                         break;
 
                 }

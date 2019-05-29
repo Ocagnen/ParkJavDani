@@ -63,7 +63,7 @@ public class DetalleAbonadoVO {
 
                 if (matricula.equals(detAbonado.getMatricula()) && detAbonado.getCodPlaza() == plaza
                         && AbonadoVO.comprobarPin(pin, matricula) && detAbonado.getFecFinAbono().isAfter(LocalDate.now())) {
-                    
+
                     PlazaDAO daoPlaza = new PlazaDAO();
                     try {
                         PlazaVO plazaTempo = daoPlaza.findByCod(DetalleAbonadoVO.obtenerPlaza(matricula));
@@ -221,6 +221,28 @@ public class DetalleAbonadoVO {
         return detAuxi;
     }
 
+    // Método para comprobar si hay abono activo
+    public static boolean determinarAbonoActivo(String matricula) throws SQLException {
+
+        DetalleAbonadoDAO daoDetAbo = new DetalleAbonadoDAO();
+        ArrayList<DetalleAbonadoVO> lista = new ArrayList<>();
+        DetalleAbonadoVO detAuxi = new DetalleAbonadoVO();
+
+        lista = (ArrayList<DetalleAbonadoVO>) daoDetAbo.getAll();
+
+        for (DetalleAbonadoVO detalleAbonadoVO : lista) {
+
+            if (detalleAbonadoVO.getMatricula().equals(matricula)
+                    && detalleAbonadoVO.getFecFinAbono().isAfter(LocalDate.now())) {
+                return true;
+            }
+
+        }
+
+        return false;
+
+    }
+
     // Comprobar si un abonado tiene un abono activo
     public static boolean compruebaAbonoActivo(String matricula) {
 
@@ -321,19 +343,18 @@ public class DetalleAbonadoVO {
     public static void abonosCaducanDiezDias() {
 
         ArrayList<DetalleAbonadoVO> lista = DetalleAbonadoVO.obtenerAbonosAnuales();
-        
+
         for (DetalleAbonadoVO detalleAbonadoVO : lista) {
-            
-            if((detalleAbonadoVO.getFecFinAbono().isAfter(LocalDate.now())
-                    && detalleAbonadoVO.getFecFinAbono().isBefore(LocalDate.now().plusDays(10)))){
-                
+
+            if ((detalleAbonadoVO.getFecFinAbono().isAfter(LocalDate.now())
+                    && detalleAbonadoVO.getFecFinAbono().isBefore(LocalDate.now().plusDays(10)))) {
+
                 System.out.println(detalleAbonadoVO.toString());
-                
+
             }
-            
-                
+
         }
-        
+
     }
 
     // Getters y setters
