@@ -169,7 +169,7 @@ public class DetalleAbonadoVO {
         AbonadoDAO daoAbonado = new AbonadoDAO();
         AbonadoVO abonadoAux = new AbonadoVO();
 
-        int pkPlaza = PlazaVO.obtenerPlazaLibre(tipoVehi);
+        int pkPlaza = PlazaVO.obtenerPlazaLibreAbo(tipoVehi);
 
         try {
             abonadoAux = daoAbonado.findByCod(matricula);
@@ -181,7 +181,7 @@ public class DetalleAbonadoVO {
         }
 
         detAb.setCodPlaza(pkPlaza);
-        detAb.setFecFinAbono(LocalDate.now());
+        detAb.setFecIniAbono(LocalDate.now());
         detAb.setMatricula(matricula);
         detAb.setTipoAbono(tipoAbono);
         detAb.setFecFinAbono(DetalleAbonadoVO.generarFechaFinAbono(tipoAbono));

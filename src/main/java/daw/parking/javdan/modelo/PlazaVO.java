@@ -129,6 +129,32 @@ public class PlazaVO {
         return 0;
 
     }
+    
+    public static int obtenerPlazaLibreAbo(int tipoVehi) {
+
+        PlazaDAO daoPlaza = new PlazaDAO();
+
+        try {
+            ArrayList<PlazaVO> lista = (ArrayList<PlazaVO>) daoPlaza.getAll();
+            for (PlazaVO plaza : lista) {
+
+                if (plaza.getEstado() == 0 && plaza.getTipoPlaza() == tipoVehi) {
+                    
+                    PlazaVO.cambiarEstadoPlaza(plaza, 3);
+                    return plaza.getCodPlaza();
+
+                }
+
+            }
+
+        } catch (SQLException sqle) {
+            System.out.println("No se ha podido realizar la operación:");
+            System.out.println(sqle.getMessage());
+        }
+
+        return 0;
+
+    }
 
     // Método para cambiar el estado de una plaza concreta
     public static void cambiarEstadoPlaza(PlazaVO plaza, int estado) {
