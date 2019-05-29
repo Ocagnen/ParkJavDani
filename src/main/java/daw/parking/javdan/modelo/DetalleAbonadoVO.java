@@ -130,7 +130,8 @@ public class DetalleAbonadoVO {
         int cobroTotal = 0;
 
         for (DetalleAbonadoVO detalleAbonadoVO : lista) {
-
+            
+            System.out.println(detalleAbonadoVO.toString());
             System.out.println(detalleAbonadoVO.calcularAbonos() + "€");
             cobroTotal = cobroTotal + detalleAbonadoVO.calcularAbonos();
         }
