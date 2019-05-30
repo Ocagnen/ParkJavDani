@@ -161,9 +161,11 @@ public class TicketVO {
     // Método para actualizar el ticket al salir el coche
     public void actualizarTicketSalida() {
 
-        this.fecSalida = LocalDate.now();
+        this.fecSalida = LocalDate.now().minusDays(1);
         this.horaSalida = LocalTime.now();
         this.costeEstancia = this.calcularTarifa();
+       
+        System.out.println(this.costeEstancia);
         
         PlazaDAO daoPlaza = new PlazaDAO();
         PlazaVO plazaAux = new PlazaVO();
@@ -238,7 +240,7 @@ public class TicketVO {
             System.out.println(sqle.getMessage());
         }
 
-        return calcularMinutos(calcularDias()) * plazaAux.getCoste();
+        return this.calcularMinutos(this.calcularDias()) * plazaAux.getCoste();
 
     }
 
